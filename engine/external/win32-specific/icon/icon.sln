@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CMakePredefinedTargets", "CMakePredefinedTargets", "{35EF185A-BA66-32E4-BFC0-A7BF4E71BA6A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALL_BUILD", "ALL_BUILD.vcxproj", "{7DECE4CD-3134-34C4-A4A9-30B7FD8A266D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		MinSizeRel|Win32 = MinSizeRel|Win32
+		RelWithDebInfo|Win32 = RelWithDebInfo|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DECE4CD-3134-34C4-A4A9-30B7FD8A266D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7DECE4CD-3134-34C4-A4A9-30B7FD8A266D}.Release|Win32.ActiveCfg = Release|Win32
+		{7DECE4CD-3134-34C4-A4A9-30B7FD8A266D}.MinSizeRel|Win32.ActiveCfg = MinSizeRel|Win32
+		{7DECE4CD-3134-34C4-A4A9-30B7FD8A266D}.RelWithDebInfo|Win32.ActiveCfg = RelWithDebInfo|Win32
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7DECE4CD-3134-34C4-A4A9-30B7FD8A266D} = {35EF185A-BA66-32E4-BFC0-A7BF4E71BA6A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5B046AA-D1BB-3A01-B887-8E81F105EB56}
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

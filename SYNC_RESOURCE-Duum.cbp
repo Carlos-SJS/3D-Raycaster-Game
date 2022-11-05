@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SYNC_RESOURCE-Duum" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="./Debug/SYNC_RESOURCE-Duum" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Win32/Debug/SYNC_RESOURCE-Duum/" />
+				<Option deps_output="./Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after='setlocal&#x0A;&quot;C:\Program Files\CMake\bin\cmake.exe&quot; -E echo &quot;    copying to G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\bin\Duum\Debug\Resources&quot;&#x0A;if %errorlevel% neq 0 goto :cmEnd&#x0A;C:\Python27\python.exe &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\cocos2d\cmake\scripts\sync_folder.py&quot; -s &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources&quot; -d &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\bin\Duum\Debug\Resources&quot;&#x0A;if %errorlevel% neq 0 goto :cmEnd&#x0A;:cmEnd&#x0A;endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone&#x0A;:cmErrorLevel&#x0A;exit \b %1&#x0A;:cmDone&#x0A;if %errorlevel% neq 0 goto :VCEnd' />
+				</ExtraCommands>
+			</Target>
+			<Target title="MinSizeRel Win32">
+				<Option output="./MinSizeRel/SYNC_RESOURCE-Duum" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Win32/MinSizeRel/SYNC_RESOURCE-Duum/" />
+				<Option deps_output="./MinSizeRel/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<ExtraCommands>
+					<Add after='setlocal&#x0A;&quot;C:\Program Files\CMake\bin\cmake.exe&quot; -E echo &quot;    copying to G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\bin\Duum\MinSizeRel\Resources&quot;&#x0A;if %errorlevel% neq 0 goto :cmEnd&#x0A;C:\Python27\python.exe &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\cocos2d\cmake\scripts\sync_folder.py&quot; -s &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources&quot; -d &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\bin\Duum\MinSizeRel\Resources&quot;&#x0A;if %errorlevel% neq 0 goto :cmEnd&#x0A;:cmEnd&#x0A;endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone&#x0A;:cmErrorLevel&#x0A;exit \b %1&#x0A;:cmDone&#x0A;if %errorlevel% neq 0 goto :VCEnd' />
+				</ExtraCommands>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="./Release/SYNC_RESOURCE-Duum" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Win32/Release/SYNC_RESOURCE-Duum/" />
+				<Option deps_output="./Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<ExtraCommands>
+					<Add after='setlocal&#x0A;&quot;C:\Program Files\CMake\bin\cmake.exe&quot; -E echo &quot;    copying to G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\bin\Duum\Release\Resources&quot;&#x0A;if %errorlevel% neq 0 goto :cmEnd&#x0A;C:\Python27\python.exe &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\cocos2d\cmake\scripts\sync_folder.py&quot; -s &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources&quot; -d &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\bin\Duum\Release\Resources&quot;&#x0A;if %errorlevel% neq 0 goto :cmEnd&#x0A;:cmEnd&#x0A;endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone&#x0A;:cmErrorLevel&#x0A;exit \b %1&#x0A;:cmDone&#x0A;if %errorlevel% neq 0 goto :VCEnd' />
+				</ExtraCommands>
+			</Target>
+			<Target title="RelWithDebInfo Win32">
+				<Option output="./RelWithDebInfo/SYNC_RESOURCE-Duum" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Win32/RelWithDebInfo/SYNC_RESOURCE-Duum/" />
+				<Option deps_output="./RelWithDebInfo/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<ExtraCommands>
+					<Add after='setlocal&#x0A;&quot;C:\Program Files\CMake\bin\cmake.exe&quot; -E echo &quot;    copying to G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\bin\Duum\RelWithDebInfo\Resources&quot;&#x0A;if %errorlevel% neq 0 goto :cmEnd&#x0A;C:\Python27\python.exe &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\cocos2d\cmake\scripts\sync_folder.py&quot; -s &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources&quot; -d &quot;G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\bin\Duum\RelWithDebInfo\Resources&quot;&#x0A;if %errorlevel% neq 0 goto :cmEnd&#x0A;:cmEnd&#x0A;endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone&#x0A;:cmErrorLevel&#x0A;exit \b %1&#x0A;:cmDone&#x0A;if %errorlevel% neq 0 goto :VCEnd' />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Unit filename="CMakeFiles/SYNC_RESOURCE-Duum" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
