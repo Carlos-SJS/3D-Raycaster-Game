@@ -1,8 +1,15 @@
 #pragma once
+
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+
 #include <cmath>
 #include <string>
 #include <sstream>
 #include <algorithm>
+
+#include <windows.h>
 
 #include "cocos2d.h"
 
@@ -16,6 +23,8 @@
 #define DOWN_ARROW_KEY 1
 #define LEFT_ARROW_KEY 2
 #define RIGHT_ARROW_KEY 3
+#define Q_KEY 4
+#define E_KEY 5
 
 
 struct player {
@@ -35,21 +44,25 @@ private:
 	int world_map[10][10] = {{1,1,1,1,1,1,1,1,1,1},
 							 {1,0,0,1,0,0,0,0,0,1},
 							 {1,0,0,1,0,0,0,0,0,1},
+							 {1,0,0,1,0,0,0,0,0,1},
+							 {1,0,1,1,0,0,1,1,0,1},
+							 {1,0,0,0,0,0,1,1,0,1},
 							 {1,0,0,0,0,0,0,0,0,1},
-							 {1,0,0,0,0,0,0,0,0,1},
-							 {1,0,0,0,0,0,0,0,0,1},
-							 {1,0,0,0,0,0,0,0,0,1},
-							 {1,0,0,0,0,0,0,0,0,1},
-							 {1,0,0,0,0,0,0,0,0,1},
+							 {1,0,0,1,1,1,1,0,0,1},
+							 {1,0,0,0,0,0,1,0,0,1},
 							 {1,1,1,1,1,1,1,1,1,1}
 							};
 
-	bool key_states[4];
+	bool key_states[6];
+	float delta_mouse = 0.0;
 
 	const int MAP_HEIGHT = 10;
 	const int MAP_WIDTH = 10;
 
 	const int WALL_SIZE = 64;
+
+	int SCREEN_HEIGHT;
+	int SCREEN_WIDTH;
 
 	//In angle (radians) (100 deg)
 	float fov = 1.39626;
@@ -62,6 +75,10 @@ private:
 
 	std::string to_string(float);
 
+	void handle_input(float);
+
+
+
 public:
 	static cocos2d::Scene* createScene();
 
@@ -73,6 +90,7 @@ public:
 
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode, cocos2d::Event*);
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode, cocos2d::Event*);
+	void onMouseMove(cocos2d::EventMouse*);
 
 	CREATE_FUNC(TestScene);
 };

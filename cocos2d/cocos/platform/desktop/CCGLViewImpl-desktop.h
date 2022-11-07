@@ -110,6 +110,15 @@ public:
      * Hide or Show the mouse cursor if there is one.
      */
     virtual void setCursorVisible(bool isVisible) override;
+
+    /**
+    * Lock or Unlock the system cursor
+    */
+    void setCursorLock(const bool isLocked);
+
+
+    void set_raw_input(const bool s);
+
     /** Retina support is disabled by default
      *  @note This method is only available on Mac.
      */
@@ -169,6 +178,13 @@ protected:
 
     float _mouseX;
     float _mouseY;
+
+    bool _cursorLocked;
+    bool _rawInput;
+
+    double last_mouseX;
+    double last_mouseY;
+
 
     friend class GLFWEventHandler;
     

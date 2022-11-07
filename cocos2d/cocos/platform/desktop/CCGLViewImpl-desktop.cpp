@@ -209,6 +209,8 @@ GLViewImpl::GLViewImpl(bool initglfw)
 , _monitor(nullptr)
 , _mouseX(0.0f)
 , _mouseY(0.0f)
+, _cursorLocked(false)
+,_rawInput(false)
 {
     _viewName = "cocos2dx";
     g_keyCodeMap.clear();
@@ -340,6 +342,13 @@ bool GLViewImpl::initWithRect(const std::string& viewName, Rect rect, float fram
     {
         rect.size.height = realH / _frameZoomFactor;
     }
+
+    
+    if (glfwRawMouseMotionSupported()) {
+        glfwSetInputMode(_mainWindow, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+        log("Siu");
+    }
+    else log("Noppers");
 
     glfwMakeContextCurrent(_mainWindow);
 
@@ -523,6 +532,58 @@ void GLViewImpl::setCursorVisible( bool isVisible )
         glfwSetInputMode(_mainWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     else
         glfwSetInputMode(_mainWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+}
+
+void GLViewImpl::setCursorLock(bool isLocked)
+{
+    // Return if window is null
+    if (_mainWindow == NULL)
+        return;
+
+    _cursorLocked = isLocked;
+    if (isLocked)
+    {
+        // Client rect area. This excludes border, caption, etc. Only gets the inner window area.
+        RECT clientRect;
+        GetClientRect(glfwGetWin32Window(_mainWindow), &clientRect);
+
+        // Rect to points.
+        POINT leftTop, rightBottomn;
+        leftTop.x = clientRect.left+(clientRect.right - clientRect.left)/2;
+        leftTop.y = clientRect.top + (clientRect.bottom-clientRect.top)/2;
+        rightBottomn.x = leftTop.x;
+        rightBottomn.y = leftTop.y;
+
+        // Since clientRect starts at (0, 0), we need to convert points to screen position.
+        HWND hwnd = glfwGetWin32Window(_mainWindow);
+        ClientToScreen(hwnd, &leftTop);
+        ClientToScreen(hwnd, &rightBottomn);
+
+        /*
+        // Note: Uncomment this block to include title bar to clien rect. This will let user move around window while Windowed mode.
+        if (!isFullscreen())
+        {
+            // Get caption height and apply to point
+            int captionHeight = (GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CYCAPTION) +
+                GetSystemMetrics(SM_CXPADDEDBORDER));
+            leftTop.y -= captionHeight;
+        }
+        */
+
+        // Set client Rect to screen point.
+        clientRect.left = leftTop.x;
+        clientRect.top = leftTop.y;
+        clientRect.right = rightBottomn.x;
+        clientRect.bottom = rightBottomn.y;
+
+        // Lock cursor in this area
+        ClipCursor(&clientRect);
+    }
+    else
+    {
+        // Disable lock
+        ClipCursor(NULL);
+    }
 }
 
 void GLViewImpl::setFrameZoomFactor(float zoomFactor)
@@ -753,8 +814,41 @@ void GLViewImpl::onGLFWMouseCallBack(GLFWwindow* /*window*/, int button, int act
     }
 }
 
+std::string to_string(double f) {
+    std::ostringstream s;
+    s << f;
+    return s.str().c_str();
+}
+
+void GLViewImpl::set_raw_input(bool s) {
+    if (s && !_rawInput) {
+        _rawInput = true;
+        glfwSetInputMode(_mainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+        glfwGetCursorPos(_mainWindow, &last_mouseX, &last_mouseY);
+    }
+    else if (!s && _rawInput) {
+        _rawInput = false;
+        glfwSetInputMode(_mainWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    }
+}
+
 void GLViewImpl::onGLFWMouseMoveCallBack(GLFWwindow* window, double x, double y)
-{
+{   
+    double yin, xin;
+    glfwGetCursorPos(_mainWindow, &xin, &yin);
+    log(to_string(xin).c_str());
+
+    if (_rawInput) {
+        EventMouse event(EventMouse::MouseEventType::MOUSE_MOVE);
+        
+        event.setCursorPosition(x-last_mouseX, y-last_mouseY);
+        last_mouseX = x, last_mouseY = y;
+
+        Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
+        return;
+    }
+
     _mouseX = (float)x;
     _mouseY = (float)y;
 
@@ -869,6 +963,12 @@ void GLViewImpl::onGLFWCharCallback(GLFWwindow* /*window*/, unsigned int charact
 void GLViewImpl::onGLFWWindowPosCallback(GLFWwindow* /*window*/, int /*x*/, int /*y*/)
 {
     Director::getInstance()->setViewport();
+
+    if (_cursorLocked)
+    {
+        // Reset cursor lock when window move. 
+        setCursorLock(true);
+    }
 }
 
 void GLViewImpl::onGLFWframebuffersize(GLFWwindow* window, int w, int h)
@@ -898,6 +998,12 @@ void GLViewImpl::onGLFWframebuffersize(GLFWwindow* window, int w, int h)
         _retinaFactor = 1;
         glfwSetWindowSize(window, static_cast<int>(frameSizeW * _retinaFactor * _frameZoomFactor), static_cast<int>(frameSizeH * _retinaFactor * _frameZoomFactor));
     }
+
+    if (_cursorLocked)
+    {
+        // Reset cursor lock when frame buffer size changes
+        setCursorLock(true);
+    }
 }
 
 void GLViewImpl::onGLFWWindowSizeFunCallback(GLFWwindow* /*window*/, int width, int height)
@@ -913,6 +1019,12 @@ void GLViewImpl::onGLFWWindowSizeFunCallback(GLFWwindow* /*window*/, int width, 
         setDesignResolutionSize(baseDesignSize.width, baseDesignSize.height, baseResolutionPolicy);
         Director::getInstance()->setViewport();
         Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(GLViewImpl::EVENT_WINDOW_RESIZED, nullptr);
+
+        if (_cursorLocked)
+        {
+            // Reset cursor lock when window size changes
+            setCursorLock(true);
+        }
     }
 }
 
@@ -933,6 +1045,12 @@ void GLViewImpl::onGLFWWindowFocusCallback(GLFWwindow* /*window*/, int focused)
     if (focused == GL_TRUE)
     {
         Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(GLViewImpl::EVENT_WINDOW_FOCUSED, nullptr);
+
+        // Reset cursor lock when window gets focused back.
+        if (_cursorLocked)
+        {
+            setCursorLock(true);
+        }
     }
     else
     {

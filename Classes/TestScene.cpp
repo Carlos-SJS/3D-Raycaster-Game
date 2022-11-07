@@ -1,6 +1,14 @@
 #include "TestScene.h"
 
+/*#ifndef HID_USAGE_PAGE_GENERIC
+#define HID_USAGE_PAGE_GENERIC         ((USHORT) 0x01)
+#endif
+#ifndef HID_USAGE_GENERIC_MOUSE
+#define HID_USAGE_GENERIC_MOUSE        ((USHORT) 0x02)
+#endif*/
+
 USING_NS_CC;
+
 
 Scene* TestScene::createScene(){
 	return TestScene::create();
@@ -9,7 +17,28 @@ Scene* TestScene::createScene(){
 bool TestScene::init() {
 	if (!Scene::init()) return false;
 
+	/*RAWINPUTDEVICE Rid[1];
+	Rid[0].usUsagePage = HID_USAGE_PAGE_GENERIC;
+	Rid[0].usUsage = HID_USAGE_GENERIC_MOUSE;
+	Rid[0].dwFlags = RIDEV_INPUTSINK;
+	Rid[0].hwndTarget = Director::getInstance()->getOpenGLView()->getWin32Window();
+	RegisterRawInputDevices(Rid, 1, sizeof(Rid[0]));
+
+	SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
+	SCREEN_WIDTH = GetSystemMetrics(SM_CXSCREEN);
+
+	MSG msg;
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}*/
+
+
 	auto screen_size = Director::getInstance()->getVisibleSize();
+
+	GLViewImpl* gl_view = (GLViewImpl*)Director::getInstance()->getOpenGLView();
+	gl_view->set_raw_input(true);
 
 	//auto label = Label::createWithTTF("Cocos GOD", "fonts/Marker Felt.ttf", 24);
 	//label->setPosition(Vec2(screen_size.width/2-label->getContentSize().width/2, screen_size.height / 2 - label->getContentSize().height/2));
@@ -18,6 +47,7 @@ bool TestScene::init() {
 	dNode = DrawNode::create();
 	this->addChild(dNode, 0);
 
+	//Director::getInstance() -> getOpenGLView() -> setCursorLock(1);
 
 	player_data.x = 5;
 	player_data.y = 5;
@@ -31,6 +61,14 @@ bool TestScene::init() {
 	listener->onKeyReleased = CC_CALLBACK_2(TestScene::onKeyReleased, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	
+	auto _mouseListener = EventListenerMouse::create();
+	_mouseListener->onMouseMove = CC_CALLBACK_1(TestScene::onMouseMove, this);
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
+
+
 
 	this->scheduleUpdate();
 
@@ -56,6 +94,12 @@ void TestScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event){
 		case EventKeyboard::KeyCode::KEY_D:
 			key_states[RIGHT_ARROW_KEY] = 1;
 			break;
+		case EventKeyboard::KeyCode::KEY_Q:
+			key_states[Q_KEY] = 1;
+			break;
+		case EventKeyboard::KeyCode::KEY_E:
+			key_states[E_KEY] = 1;
+			break;
 	}
 }
 
@@ -78,7 +122,17 @@ void TestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	case EventKeyboard::KeyCode::KEY_D:
 		key_states[RIGHT_ARROW_KEY] = 0;
 		break;
+	case EventKeyboard::KeyCode::KEY_Q:
+		key_states[Q_KEY] = 0;
+		break;
+	case EventKeyboard::KeyCode::KEY_E:
+		key_states[E_KEY] = 0;
+		break;
 	}
+}
+
+void TestScene::onMouseMove(EventMouse* e){
+	delta_mouse -= e->getCursorX();
 }
 
 std::string TestScene::to_string(float f) {
@@ -140,6 +194,9 @@ void TestScene::draw_world() {
 	float w_width = (float)screen_size.width / (float)ray_count;
 
 	for (int r = 0; r < ray_count; r++) {
+
+		if (cangle < 0.0) cangle += 2 * PI;
+		if (cangle >= 2 * PI) cangle -= 2 * PI;
 
 		float at = tan(cangle);
 		float dx, dy, cx, cy;
@@ -229,7 +286,7 @@ void TestScene::draw_world() {
 		}
 
 		//Draw better
-		float distV, distH;
+		float distV = 0, distH = 0;
 
 		if (vc_f) {
 			dx = player_data.x - vc.x;
@@ -263,29 +320,121 @@ void TestScene::draw_world() {
 
 			float w_height = (screen_size.height) / (distH * cos(cangle - player_data.angle));
 
-			draw_rect(r * w_width, screen_size.height / 2 + w_height / 2, w_width, w_height, Color4F(0.7, 0, 0, 1));
+			draw_rect(r * w_width, screen_size.height / 2 + w_height / 2, w_width, w_height, Color4F(0.6, 0, 0, 1));
 		}
 
-		/*log("-- Data ----------- ");
+		/*log(("-- Data ----------- (" + to_string((float)r) + ")").c_str());
 		log(("Current Angle: " + to_string(cangle)).c_str());
 		log(("Player Position: " + to_string(player_data.x) + ", " + to_string(player_data.y)).c_str());
-		log(("Horizontal colition: " + to_string(hz.x) + ", " + to_string(hz.y)).c_str());
-		log(("Vertical colition: " + to_string(vc.x) + ", " + to_string(vc.y)).c_str());*/
+		log(("Horizontal colition ( " + to_string(distH) + "): " + to_string(hz.x) + ", " + to_string(hz.y)).c_str());
+		log(("Vertical colition (" + to_string(distV) + "): " + to_string(vc.x) + ", " + to_string(vc.y)).c_str());*/
 
 		cangle -= step;
 	}
 	//log("Done");
 }
 
+void TestScene::handle_input(float dt) {
+	if (key_states[UP_ARROW_KEY]) {
+		float c = cos(player_data.angle);
+		float s = sin(player_data.angle);
+
+		float dx = c * player_data.speed * dt;
+		float dy = s * player_data.speed * dt;
+
+		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * .1)] == 0) player_data.x += dx;
+		if (world_map[(int)(player_data.y - dy - s * .1)][(int)player_data.x] == 0) player_data.y -= dy;
+	}
+	if (key_states[DOWN_ARROW_KEY]) {
+		float c = cos(player_data.angle);
+		float s = sin(player_data.angle);
+
+		float dx = c * player_data.speed * dt;
+		float dy = s * player_data.speed * dt;
+
+		if (world_map[(int)player_data.y][(int)(player_data.x - dx - c * .1)] == 0) player_data.x -= dx;
+		if (world_map[(int)(player_data.y + dy + s * .1)][(int)player_data.x] == 0) player_data.y += dy;
+	}
+	if (key_states[RIGHT_ARROW_KEY]) {
+		float c = cos(player_data.angle - P2);
+		float s = sin(player_data.angle - P2);
+
+		float dx = c * player_data.speed * dt;
+		float dy = s * player_data.speed * dt;
+
+		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * .1)] == 0) player_data.x += dx;
+		if (world_map[(int)(player_data.y - dy - s * .1)][(int)player_data.x] == 0) player_data.y -= dy;
+	}
+	if (key_states[LEFT_ARROW_KEY]) {
+		float c = cos(player_data.angle + P2);
+		float s = sin(player_data.angle + P2);
+
+		float dx = c * player_data.speed * dt;
+		float dy = s * player_data.speed * dt;
+
+		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * .1)] == 0)player_data.x += dx;
+		if (world_map[(int)(player_data.y - dy - s * .1)][(int)player_data.x] == 0)player_data.y -= dy;
+	}
+
+	/*if (key_states[Q_KEY]) {
+		player_data.angle += 1 * dt;
+		if (player_data.angle >= 2 * PI) player_data.angle -= 2 * PI;
+	}
+	if (key_states[E_KEY]) {
+		player_data.angle -= 1 * dt;
+		if (player_data.angle < 0.0) player_data.angle += 2 * PI;
+	}*/
+
+	if (delta_mouse != 0.0) {
+		player_data.angle += 0.001 * delta_mouse;
+		delta_mouse = 0;
+
+		if (player_data.angle >= 2 * PI) player_data.angle -= 2 * PI;
+		if (player_data.angle < 0.0) player_data.angle += 2 * PI;
+	}
+}
+
 void TestScene::update(float dt) {
 	//Player movement
-	if (key_states[UP_ARROW_KEY]) player_data.y -= player_data.speed * dt, player_data.y = std::max(float(0), player_data.y);
-	if (key_states[DOWN_ARROW_KEY]) player_data.y += player_data.speed * dt, player_data.y = std::min(float(10), player_data.y);
-	if (key_states[RIGHT_ARROW_KEY]) player_data.x += player_data.speed * dt, player_data.y = std::max(float(0), player_data.y);
-	if (key_states[LEFT_ARROW_KEY]) player_data.x -= player_data.speed * dt, player_data.y = std::min(float(10), player_data.y);
+	handle_input(dt);
 
+	//Reset draw node
 	dNode->clear();
 
-	//log("UwU");
+	//Draw world
 	draw_world();
 }
+
+
+
+
+
+
+/*LRESULT CALLBACK targetWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg)
+	{
+		// print out the values that I need
+	case WM_INPUT: {
+		UINT dataSize;
+		GetRawInputData(reinterpret_cast<HRAWINPUT>(lParam), RID_INPUT, NULL, &dataSize, sizeof(RAWINPUTHEADER)); //Need to populate data size first
+		//std::cout << GET_RAWINPUT_CODE_WPARAM(wParam) << " code thing\n";
+		if (dataSize > 0)
+		{
+			std::vector<BYTE> rawdata(dataSize);
+
+			if (GetRawInputData(reinterpret_cast<HRAWINPUT>(lParam), RID_INPUT, rawdata.data(), &dataSize, sizeof(RAWINPUTHEADER)) == dataSize)
+			{
+				RAWINPUT* raw = reinterpret_cast<RAWINPUT*>(rawdata.data());
+				if (raw->header.dwType == RIM_TYPEMOUSE)
+				{
+					log(raw->data.mouse.lLastX);
+				}
+			}
+		}
+		return 0;
+	}
+	}
+
+	return DefWindowProc(hWnd, uMsg, wParam, lParam);
+}*/
