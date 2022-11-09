@@ -1,11 +1,7 @@
 #include "TestScene.h"
 
-/*#ifndef HID_USAGE_PAGE_GENERIC
-#define HID_USAGE_PAGE_GENERIC         ((USHORT) 0x01)
-#endif
-#ifndef HID_USAGE_GENERIC_MOUSE
-#define HID_USAGE_GENERIC_MOUSE        ((USHORT) 0x02)
-#endif*/
+//Textures
+#include "Textures/wall_1.h"
 
 USING_NS_CC;
 
@@ -17,25 +13,9 @@ Scene* TestScene::createScene(){
 bool TestScene::init() {
 	if (!Scene::init()) return false;
 
-	/*RAWINPUTDEVICE Rid[1];
-	Rid[0].usUsagePage = HID_USAGE_PAGE_GENERIC;
-	Rid[0].usUsage = HID_USAGE_GENERIC_MOUSE;
-	Rid[0].dwFlags = RIDEV_INPUTSINK;
-	Rid[0].hwndTarget = Director::getInstance()->getOpenGLView()->getWin32Window();
-	RegisterRawInputDevices(Rid, 1, sizeof(Rid[0]));
-
-	SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
-	SCREEN_WIDTH = GetSystemMetrics(SM_CXSCREEN);
-
-	MSG msg;
-	while (GetMessage(&msg, NULL, 0, 0))
-	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}*/
-
-
 	auto screen_size = Director::getInstance()->getVisibleSize();
+	ray_count = screen_size.width;
+
 
 	GLViewImpl* gl_view = (GLViewImpl*)Director::getInstance()->getOpenGLView();
 	gl_view->set_raw_input(true);
@@ -47,10 +27,8 @@ bool TestScene::init() {
 	dNode = DrawNode::create();
 	this->addChild(dNode, 0);
 
-	//Director::getInstance() -> getOpenGLView() -> setCursorLock(1);
-
-	player_data.x = 5;
-	player_data.y = 5;
+	player_data.x = 1;
+	player_data.y = 1;
 	player_data.angle = P2;
 	player_data.speed = 1.0;
 
@@ -76,7 +54,6 @@ bool TestScene::init() {
 }
 
 void TestScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event){
-	//log("Key with keycode %d pressed", keyCode);
 	switch (keyCode) {
 		case EventKeyboard::KeyCode::KEY_UP_ARROW:
 		case EventKeyboard::KeyCode::KEY_W:
@@ -149,40 +126,15 @@ void TestScene::draw_rect(float x, float y, float width, float height, Color4F c
 	rectangle[2] = Vec2((int)(x + width), (int)(y - height));
 	rectangle[3] = Vec2((int)x, (int)(y - height));
 
-	/*std::ostringstream xs, ys;
-	xs << rectangle[0].x;
-	ys << rectangle[0].y;
-
-	log(("(" + xs.str() + ", " + ys.str() + ")").c_str());
-
-	xs.str(""); ys.str("");
-	xs.clear(); ys.clear();
-	xs << rectangle[1].x;
-	ys << rectangle[1].y;
-
-	log(("(" + xs.str() + ", " + ys.str() + ")").c_str());
-
-	xs.str(""); ys.str("");
-	xs.clear(); ys.clear();
-	xs << rectangle[2].x;
-	ys << rectangle[2].y;
-
-	log(("(" + xs.str() + ", " + ys.str() + ")").c_str());
-
-	xs.str(""); ys.str("");
-	xs.clear(); ys.clear();
-	xs << rectangle[3].x;
-	ys << rectangle[3].y;
-
-	log(("(" + xs.str() + ", " + ys.str() + ")").c_str());
-
-	log("------------------------");*/
-
 	dNode->drawPolygon(rectangle, 4, color, 1, color);
 }
 
 bool TestScene::inside(float x, float y) {
 	return x >= 0 && y >= 0 && x < MAP_WIDTH&& y < MAP_HEIGHT;
+}
+
+int min(int x, int y) {
+	return x < y ? x : y;
 }
 
 void TestScene::draw_world() {
@@ -289,15 +241,17 @@ void TestScene::draw_world() {
 		float distV = 0, distH = 0;
 
 		if (vc_f) {
-			dx = player_data.x - vc.x;
-			dy = player_data.y - vc.y;
-			distV = sqrt(dx * dx + dy * dy);
+			//dx = player_data.x - vc.x;
+			//dy = player_data.y - vc.y;
+			//distV = sqrt(dx * dx + dy * dy);
+			distV = cos(cangle)*(vc.x-player_data.x) - sin(cangle)*(vc.y-player_data.y);
 		}
 
 		if (hz_f) {
-			dx = player_data.x - hz.x;
-			dy = player_data.y - hz.y;
-			distH = sqrt(dx * dx + dy * dy);
+			//dx = player_data.x - hz.x;
+			//dy = player_data.y - hz.y;
+			//distH = sqrt(dx * dx + dy * dy);
+			distH = cos(cangle) * (hz.x - player_data.x) - sin(cangle) * (hz.y - player_data.y);
 		}
 
 		if (vc_f && hz_f) {
@@ -307,20 +261,65 @@ void TestScene::draw_world() {
 
 		//Draw the vertical wall
 		if (vc_f) {
-			//log("Drawing vertical");
+			int w_height = (screen_size.height) / (distV * cos(player_data.angle - cangle));
 
-			float w_height = (float)(screen_size.height) / (distV * cos(cangle-player_data.angle));
-			
-			draw_rect(r * w_width, screen_size.height/2 + w_height/2, w_width, w_height, Color4F(0.9,0,0,1));
+			float shading = .6;
+			int texture_x = (int)((vc.y - (int)vc.y) * 64);
+			float texture_y = 0;
+			float texture_y_step = (63.0 / w_height);
+
+			if (w_height > screen_size.height) {
+				texture_y = (float)(w_height - screen_size.height) / 2.0 * texture_y_step;
+				w_height = screen_size.height;
+			}
+
+			int x = r, y = screen_size.height / 2 + w_height / 2;
+
+			Vec2 points[2000];
+			Color4F colors[2000];
+
+			for (int h = 0; h < w_height; h++) {
+				points[h] = Vec2(x, y - h);
+				colors[h] = Color4F((float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3] / 256.0 * shading, (float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3 + 1] / 256.0 * shading, (float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3 + 2] / 256.0 * shading, 1);
+
+				texture_y += texture_y_step;
+			}
+
+			dNode->drawPoints(points, w_height, colors);
+
+			//draw_rect(r * w_width, screen_size.height/2 + w_height/2, w_width, w_height, Color4F(0.9,0,0,1));
 		}
 
 		//Draw the horizontal wall
 		if (hz_f) {
-			//log("Drawing horizontal");
+			int w_height = (screen_size.height) / (distH * cos(player_data.angle - cangle));
 
-			float w_height = (screen_size.height) / (distH * cos(cangle - player_data.angle));
+			float shading = 1;
+			int texture_x = (int)((hz.x - (int)hz.x) * 64);
+			float texture_y = 0;
+			float texture_y_step = (63.0 / w_height);
 
-			draw_rect(r * w_width, screen_size.height / 2 + w_height / 2, w_width, w_height, Color4F(0.6, 0, 0, 1));
+			if (w_height > screen_size.height) {
+				texture_y = (float)(w_height - screen_size.height) / 2.0 * texture_y_step;
+				w_height = screen_size.height;
+			}
+			
+
+			int x = r, y = screen_size.height / 2 + w_height / 2;
+
+			Vec2 points[2000];
+			Color4F colors[2000];
+
+			for (int h = 0; h < w_height; h++) {
+				points[h] = Vec2(x, y - h);
+				colors[h] = Color4F((float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3]/256.0 * shading, (float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3 + 1]/256.0 * shading, (float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3 + 2]/256.0 * shading, 1);
+
+				texture_y += texture_y_step;
+			}
+
+			dNode->drawPoints(points, w_height, colors);
+				
+			//draw_rect(r * w_width, screen_size.height / 2 + w_height / 2, w_width, w_height, Color4F(0.6, 0, 0, 1));
 		}
 
 		/*log(("-- Data ----------- (" + to_string((float)r) + ")").c_str());
@@ -404,37 +403,3 @@ void TestScene::update(float dt) {
 	//Draw world
 	draw_world();
 }
-
-
-
-
-
-
-/*LRESULT CALLBACK targetWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-	switch (uMsg)
-	{
-		// print out the values that I need
-	case WM_INPUT: {
-		UINT dataSize;
-		GetRawInputData(reinterpret_cast<HRAWINPUT>(lParam), RID_INPUT, NULL, &dataSize, sizeof(RAWINPUTHEADER)); //Need to populate data size first
-		//std::cout << GET_RAWINPUT_CODE_WPARAM(wParam) << " code thing\n";
-		if (dataSize > 0)
-		{
-			std::vector<BYTE> rawdata(dataSize);
-
-			if (GetRawInputData(reinterpret_cast<HRAWINPUT>(lParam), RID_INPUT, rawdata.data(), &dataSize, sizeof(RAWINPUTHEADER)) == dataSize)
-			{
-				RAWINPUT* raw = reinterpret_cast<RAWINPUT*>(rawdata.data());
-				if (raw->header.dwType == RIM_TYPEMOUSE)
-				{
-					log(raw->data.mouse.lLastX);
-				}
-			}
-		}
-		return 0;
-	}
-	}
-
-	return DefWindowProc(hWnd, uMsg, wParam, lParam);
-}*/

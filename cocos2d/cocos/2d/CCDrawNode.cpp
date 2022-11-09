@@ -296,6 +296,21 @@ void DrawNode::drawPoints(const Vec2 *position, unsigned int numberOfPoints, con
     _customCommandGLPoint.setVertexDrawInfo(0, _bufferCountGLPoint);
 }
 
+void DrawNode::drawPoints(const Vec2* position, unsigned int numberOfPoints, const Color4F* colors) {
+    ensureCapacityGLPoint(numberOfPoints);
+
+    V2F_C4B_T2F* point = _bufferGLPoint + _bufferCountGLPoint;
+    for (unsigned int i = 0; i < numberOfPoints; i++)
+    {
+        *(point + i) = { position[i], Color4B(*(colors + i)), Tex2F(1.0,0) };
+    }
+
+    _customCommandGLPoint.updateVertexBuffer(point, _bufferCountGLPoint * sizeof(V2F_C4B_T2F), numberOfPoints * sizeof(V2F_C4B_T2F));
+    _bufferCountGLPoint += numberOfPoints;
+    _dirtyGLPoint = true;
+    _customCommandGLPoint.setVertexDrawInfo(0, _bufferCountGLPoint);
+}
+
 void DrawNode::drawLine(const Vec2 &origin, const Vec2 &destination, const Color4F &color)
 {
     ensureCapacityGLLine(2);

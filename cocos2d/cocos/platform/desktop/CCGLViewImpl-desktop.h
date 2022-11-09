@@ -182,9 +182,6 @@ protected:
     bool _cursorLocked;
     bool _rawInput;
 
-    double last_mouseX;
-    double last_mouseY;
-
 
     friend class GLFWEventHandler;
     

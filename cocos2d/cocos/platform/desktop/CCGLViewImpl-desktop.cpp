@@ -344,11 +344,7 @@ bool GLViewImpl::initWithRect(const std::string& viewName, Rect rect, float fram
     }
 
     
-    if (glfwRawMouseMotionSupported()) {
-        glfwSetInputMode(_mainWindow, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
-        log("Siu");
-    }
-    else log("Noppers");
+    if (glfwRawMouseMotionSupported()) glfwSetInputMode(_mainWindow, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
 
     glfwMakeContextCurrent(_mainWindow);
 
@@ -814,18 +810,10 @@ void GLViewImpl::onGLFWMouseCallBack(GLFWwindow* /*window*/, int button, int act
     }
 }
 
-std::string to_string(double f) {
-    std::ostringstream s;
-    s << f;
-    return s.str().c_str();
-}
-
 void GLViewImpl::set_raw_input(bool s) {
     if (s && !_rawInput) {
         _rawInput = true;
         glfwSetInputMode(_mainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-        glfwGetCursorPos(_mainWindow, &last_mouseX, &last_mouseY);
     }
     else if (!s && _rawInput) {
         _rawInput = false;
@@ -837,13 +825,13 @@ void GLViewImpl::onGLFWMouseMoveCallBack(GLFWwindow* window, double x, double y)
 {   
     double yin, xin;
     glfwGetCursorPos(_mainWindow, &xin, &yin);
-    log(to_string(xin).c_str());
 
     if (_rawInput) {
         EventMouse event(EventMouse::MouseEventType::MOUSE_MOVE);
         
-        event.setCursorPosition(x-last_mouseX, y-last_mouseY);
-        last_mouseX = x, last_mouseY = y;
+        event.setCursorPosition(x, y);
+
+        glfwSetCursorPos(_mainWindow, 0.0, 0.0);
 
         Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
         return;

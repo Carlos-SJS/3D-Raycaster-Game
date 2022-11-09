@@ -4,14 +4,14 @@
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
+    <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\HelloWorldScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\proj.win32\main.cpp">
       <Filter>Source Files\proj.win32</Filter>
     </ClCompile>
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\cocos2d\cocos\precheader.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\HelloWorldScene.cpp">
-      <Filter>Source Files\Classes</Filter>
     </ClCompile>
     <ClCompile Include="Classes\TestScene.cpp">
       <Filter>Source Files\Classes</Filter>
@@ -19,6 +19,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\HelloWorldScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\proj.win32\main.h">
@@ -44,9 +47,6 @@
     </ClInclude>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\res\.gitkeep">
       <Filter>Resources\res</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\HelloWorldScene.h">
-      <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="Classes\TestScene.h">
       <Filter>Source Files\Classes</Filter>
@@ -79,5 +79,13 @@
     <Filter Include="Source Files\proj.win32">
       <UniqueIdentifier>{9385A07B-BB2C-3D65-B43D-9EB342E73857}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classes\Textures">
+      <UniqueIdentifier>{cab74007-dd9c-4490-872a-11e9ec364a2b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Textures\wall_1.ppm">
+      <Filter>Resources</Filter>
+    </None>
   </ItemGroup>
 </Project>
