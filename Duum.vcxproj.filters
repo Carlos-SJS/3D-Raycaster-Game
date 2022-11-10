@@ -51,6 +51,12 @@
     <ClInclude Include="Classes\TestScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Textures\wall_1.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\floor_2.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\CMakeLists.txt" />

@@ -2,6 +2,9 @@
 
 //Textures
 #include "Textures/wall_1.h"
+#include "Textures/floor_1.h"
+#include "Textures/floor_2.h"
+
 
 USING_NS_CC;
 
@@ -259,9 +262,17 @@ void TestScene::draw_world() {
 			else vc_f = 0;
 		}
 
+
+		
+		int w_height = 0;
+
+		Vec2 points[2000];
+		Color4F colors[2000];
+
 		//Draw the vertical wall
 		if (vc_f) {
-			int w_height = (screen_size.height) / (distV * cos(player_data.angle - cangle));
+			w_height = (screen_size.height) / (distV * cos(player_data.angle - cangle));
+
 
 			float shading = .6;
 			int texture_x = (int)((vc.y - (int)vc.y) * 64);
@@ -275,24 +286,25 @@ void TestScene::draw_world() {
 
 			int x = r, y = screen_size.height / 2 + w_height / 2;
 
-			Vec2 points[2000];
-			Color4F colors[2000];
-
 			for (int h = 0; h < w_height; h++) {
 				points[h] = Vec2(x, y - h);
-				colors[h] = Color4F((float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3] / 256.0 * shading, (float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3 + 1] / 256.0 * shading, (float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3 + 2] / 256.0 * shading, 1);
+
+				int t_index;
+
+				if (cangle < P2 || cangle > P3) t_index = (int)texture_y * 64 * 3 + texture_x * 3;
+				else t_index = (int)texture_y * 64 * 3 + 63 * 3 - texture_x * 3;
+
+				colors[h] = Color4F((float)wall_1[t_index] / 256.0 * shading, (float)wall_1[t_index] / 256.0 * shading, (float)wall_1[t_index] / 256.0 * shading, 1);
 
 				texture_y += texture_y_step;
 			}
-
-			dNode->drawPoints(points, w_height, colors);
 
 			//draw_rect(r * w_width, screen_size.height/2 + w_height/2, w_width, w_height, Color4F(0.9,0,0,1));
 		}
 
 		//Draw the horizontal wall
 		if (hz_f) {
-			int w_height = (screen_size.height) / (distH * cos(player_data.angle - cangle));
+			w_height = (screen_size.height) / (distH * cos(player_data.angle - cangle));
 
 			float shading = 1;
 			int texture_x = (int)((hz.x - (int)hz.x) * 64);
@@ -307,20 +319,65 @@ void TestScene::draw_world() {
 
 			int x = r, y = screen_size.height / 2 + w_height / 2;
 
-			Vec2 points[2000];
-			Color4F colors[2000];
-
 			for (int h = 0; h < w_height; h++) {
 				points[h] = Vec2(x, y - h);
-				colors[h] = Color4F((float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3]/256.0 * shading, (float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3 + 1]/256.0 * shading, (float)wall_1[(int)texture_y * 64 * 3 + texture_x * 3 + 2]/256.0 * shading, 1);
+				
+				int t_index;
+
+				if (cangle > 0 && cangle < PI) t_index = (int)texture_y * 64 * 3 + texture_x * 3;
+				else t_index = (int)texture_y * 64 * 3 + 63*3 - texture_x * 3;
+
+				colors[h] = Color4F((float)wall_1[t_index] / 256.0 * shading, (float)wall_1[t_index] / 256.0 * shading, (float)wall_1[t_index] / 256.0 * shading, 1);
 
 				texture_y += texture_y_step;
 			}
 
-			dNode->drawPoints(points, w_height, colors);
+			vc.x = hz.x;
+			vc.y = hz.y;
 				
 			//draw_rect(r * w_width, screen_size.height / 2 + w_height / 2, w_width, w_height, Color4F(0.6, 0, 0, 1));
 		}
+
+
+		//Draw floor
+		int fx = vc.x;
+
+		float sina = sin(cangle);
+		float cosa = cos(cangle);
+		float a = player_data.angle - cangle;
+		if (a < 0) a += 2 * PI;
+		if (a > 2 * PI) a -= 2 * PI;
+		float cospa = cos(a);
+
+		int c = 0;
+
+		for (int y = screen_size.height / 2.0 - w_height / 2.0 - 1; y >= 0; y--, c+=2) {
+			/*float dy = screen_size.height - (float)y - 640/2.0;
+			int tx = (int)(player_data.x*64.0 + (cosa*158.0*64.0/dy/cospa ));
+			int ty = (int)(player_data.y*64.0 - (sina*158.0*64.0/dy/cospa ));
+
+			tx &= 63;
+			ty &= 63;
+
+			int texture_index = ty * 64 * 3 + tx * 3;*/
+
+			float dy = screen_size.height / (2.0 * (screen_size.height - y) - screen_size.height);
+			int tx = (int)(player_data.x * 64.0 + cosa * dy * 64.0 / cospa);
+			int ty = (int)(player_data.y * 64.0 - sina * dy * 64.0 / cospa);
+
+			tx &= 63;
+			ty &= 63;
+
+			int texture_index = ty * 64 * 3 + tx * 3;
+
+			points[w_height + c] = Vec2(r, y);
+			colors[w_height + c] = Color4F(((float)floor_1[texture_index]) / 255.0, ((float)floor_1[texture_index + 1]) / 255.0, ((float)floor_1[texture_index + 2]) / 255.0, 1.0);
+
+			points[w_height + c + 1] = Vec2(r, screen_size.height - y);
+			colors[w_height + c + 1] = Color4F(((float)floor_2[texture_index]) / 255.0, ((float)floor_2[texture_index + 1]) / 255.0, ((float)floor_2[texture_index + 2]) / 255.0, 1.0);
+		}
+
+		dNode->drawPoints(points, screen_size.height, colors);
 
 		/*log(("-- Data ----------- (" + to_string((float)r) + ")").c_str());
 		log(("Current Angle: " + to_string(cangle)).c_str());

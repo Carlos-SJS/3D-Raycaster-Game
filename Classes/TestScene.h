@@ -12,9 +12,9 @@
 #include "cocos2d.h"
 
 
-#define PI 3.14159265
-#define P2 1.570796325
-#define P3 4.712388975
+#define PI 3.14159265    //Aprox. value of PI     (180°)
+#define P2 1.570796325   //Aprox. value of PI/2   ( 90°)
+#define P3 4.712388975   //Aprox. value of PI/3   (270°)
 
 #define eps .0000001
 
@@ -41,8 +41,8 @@ private:
 
 
 	int world_map[10][10] = {{1,1,1,1,1,1,1,1,1,1},
-							 {1,0,0,0,0,0,0,0,0,1},
-							 {1,0,0,0,0,0,0,0,0,1},
+							 {1,0,0,0,1,0,0,0,0,1},
+							 {1,0,0,1,1,0,0,0,0,1},
 							 {1,0,0,0,1,1,0,0,0,1},
 							 {1,0,0,0,1,1,0,0,0,1},
 							 {1,0,0,0,1,1,0,0,0,1},
@@ -66,7 +66,7 @@ private:
 	//In angle (radians) (100 deg)
 	float fov = 1.39626;
 
-	int ray_count = 100;
+	int ray_count;
 
 	bool inside(float, float);
 
