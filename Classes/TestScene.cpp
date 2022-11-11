@@ -1,9 +1,7 @@
 #include "TestScene.h"
 
 //Textures
-#include "Textures/wall_1.h"
-#include "Textures/floor_1.h"
-#include "Textures/floor_2.h"
+#include "Textures/textures.h"
 
 
 USING_NS_CC;
@@ -43,7 +41,7 @@ bool TestScene::init() {
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-	
+
 	auto _mouseListener = EventListenerMouse::create();
 	_mouseListener->onMouseMove = CC_CALLBACK_1(TestScene::onMouseMove, this);
 
@@ -263,7 +261,7 @@ void TestScene::draw_world() {
 		}
 
 
-		
+
 		int w_height = 0;
 
 		Vec2 points[2000];
@@ -285,6 +283,8 @@ void TestScene::draw_world() {
 			}
 
 			int x = r, y = screen_size.height / 2 + w_height / 2;
+			
+			int t = world_map[(int)vc.y][(int)vc.x] - 1;
 
 			for (int h = 0; h < w_height; h++) {
 				points[h] = Vec2(x, y - h);
@@ -294,7 +294,7 @@ void TestScene::draw_world() {
 				if (cangle < P2 || cangle > P3) t_index = (int)texture_y * 64 * 3 + texture_x * 3;
 				else t_index = (int)texture_y * 64 * 3 + 63 * 3 - texture_x * 3;
 
-				colors[h] = Color4F((float)wall_1[t_index] / 256.0 * shading, (float)wall_1[t_index] / 256.0 * shading, (float)wall_1[t_index] / 256.0 * shading, 1);
+				colors[h] = Color4F((float)textures[t][t_index] / 256.0 * shading, (float)textures[t][t_index + 1] / 256.0 * shading, (float)textures[t][t_index + 2] / 256.0 * shading, 1);
 
 				texture_y += texture_y_step;
 			}
@@ -315,33 +315,36 @@ void TestScene::draw_world() {
 				texture_y = (float)(w_height - screen_size.height) / 2.0 * texture_y_step;
 				w_height = screen_size.height;
 			}
-			
+
 
 			int x = r, y = screen_size.height / 2 + w_height / 2;
 
+			int t = world_map[(int)hz.y][(int)hz.x] - 1;
+
 			for (int h = 0; h < w_height; h++) {
 				points[h] = Vec2(x, y - h);
-				
+
 				int t_index;
 
 				if (cangle > 0 && cangle < PI) t_index = (int)texture_y * 64 * 3 + texture_x * 3;
 				else t_index = (int)texture_y * 64 * 3 + 63*3 - texture_x * 3;
 
-				colors[h] = Color4F((float)wall_1[t_index] / 256.0 * shading, (float)wall_1[t_index] / 256.0 * shading, (float)wall_1[t_index] / 256.0 * shading, 1);
+				colors[h] = Color4F((float)textures[t][t_index] / 256.0 * shading, (float)textures[t][t_index + 1] / 256.0 * shading, (float)textures[t][t_index + 2] / 256.0 * shading, 1);
 
 				texture_y += texture_y_step;
 			}
 
 			vc.x = hz.x;
 			vc.y = hz.y;
-				
+
 			//draw_rect(r * w_width, screen_size.height / 2 + w_height / 2, w_width, w_height, Color4F(0.6, 0, 0, 1));
 		}
 
 
-		//Draw floor
+		//Draw floor and ceiling
 		int fx = vc.x;
 
+		//Precalculate stuff
 		float sina = sin(cangle);
 		float cosa = cos(cangle);
 		float a = player_data.angle - cangle;
@@ -352,29 +355,31 @@ void TestScene::draw_world() {
 		int c = 0;
 
 		for (int y = screen_size.height / 2.0 - w_height / 2.0 - 1; y >= 0; y--, c+=2) {
-			/*float dy = screen_size.height - (float)y - 640/2.0;
-			int tx = (int)(player_data.x*64.0 + (cosa*158.0*64.0/dy/cospa ));
-			int ty = (int)(player_data.y*64.0 - (sina*158.0*64.0/dy/cospa ));
+			//Calculate texture indexes
+			float dy = screen_size.height / (2.0 * ( - y) + screen_size.height);
+			float ftx = (player_data.x + cosa * dy / cospa);
+			float fty = (player_data.y - sina * dy / cospa);
 
-			tx &= 63;
-			ty &= 63;
+			int ft = floor_map[(int)fty][(int)ftx] - 1;
+			int ct = ceiling_map[(int)fty][(int)ftx] - 1;
 
-			int texture_index = ty * 64 * 3 + tx * 3;*/
+			int tx = (int) (64.0*ftx);
+			int ty = (int) (64.0*fty);
 
-			float dy = screen_size.height / (2.0 * (screen_size.height - y) - screen_size.height);
-			int tx = (int)(player_data.x * 64.0 + cosa * dy * 64.0 / cospa);
-			int ty = (int)(player_data.y * 64.0 - sina * dy * 64.0 / cospa);
+
 
 			tx &= 63;
 			ty &= 63;
 
 			int texture_index = ty * 64 * 3 + tx * 3;
 
+			//Draw floor
 			points[w_height + c] = Vec2(r, y);
-			colors[w_height + c] = Color4F(((float)floor_1[texture_index]) / 255.0, ((float)floor_1[texture_index + 1]) / 255.0, ((float)floor_1[texture_index + 2]) / 255.0, 1.0);
+			colors[w_height + c] = Color4F(((float)textures[ft][texture_index]) / 255.0, ((float)textures[ft][texture_index + 1]) / 255.0, ((float)textures[ft][texture_index + 2]) / 255.0, 1.0);
 
+			//Draw ceiling
 			points[w_height + c + 1] = Vec2(r, screen_size.height - y);
-			colors[w_height + c + 1] = Color4F(((float)floor_2[texture_index]) / 255.0, ((float)floor_2[texture_index + 1]) / 255.0, ((float)floor_2[texture_index + 2]) / 255.0, 1.0);
+			colors[w_height + c + 1] = Color4F(((float)textures[ct][texture_index]) / 255.0, ((float)textures[ct][texture_index + 1]) / 255.0, ((float)textures[ct][texture_index + 2]) / 255.0, 1.0);
 		}
 
 		dNode->drawPoints(points, screen_size.height, colors);
@@ -391,6 +396,8 @@ void TestScene::draw_world() {
 }
 
 void TestScene::handle_input(float dt) {
+    float wdist = .5;
+
 	if (key_states[UP_ARROW_KEY]) {
 		float c = cos(player_data.angle);
 		float s = sin(player_data.angle);
@@ -398,8 +405,8 @@ void TestScene::handle_input(float dt) {
 		float dx = c * player_data.speed * dt;
 		float dy = s * player_data.speed * dt;
 
-		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * .1)] == 0) player_data.x += dx;
-		if (world_map[(int)(player_data.y - dy - s * .1)][(int)player_data.x] == 0) player_data.y -= dy;
+		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * wdist)] == 0) player_data.x += dx;
+		if (world_map[(int)(player_data.y - dy - s * wdist)][(int)player_data.x] == 0) player_data.y -= dy;
 	}
 	if (key_states[DOWN_ARROW_KEY]) {
 		float c = cos(player_data.angle);
@@ -408,8 +415,8 @@ void TestScene::handle_input(float dt) {
 		float dx = c * player_data.speed * dt;
 		float dy = s * player_data.speed * dt;
 
-		if (world_map[(int)player_data.y][(int)(player_data.x - dx - c * .1)] == 0) player_data.x -= dx;
-		if (world_map[(int)(player_data.y + dy + s * .1)][(int)player_data.x] == 0) player_data.y += dy;
+		if (world_map[(int)player_data.y][(int)(player_data.x - dx - c * wdist)] == 0) player_data.x -= dx;
+		if (world_map[(int)(player_data.y + dy + s * wdist)][(int)player_data.x] == 0) player_data.y += dy;
 	}
 	if (key_states[RIGHT_ARROW_KEY]) {
 		float c = cos(player_data.angle - P2);
@@ -418,8 +425,8 @@ void TestScene::handle_input(float dt) {
 		float dx = c * player_data.speed * dt;
 		float dy = s * player_data.speed * dt;
 
-		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * .1)] == 0) player_data.x += dx;
-		if (world_map[(int)(player_data.y - dy - s * .1)][(int)player_data.x] == 0) player_data.y -= dy;
+		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * wdist)] == 0) player_data.x += dx;
+		if (world_map[(int)(player_data.y - dy - s * wdist)][(int)player_data.x] == 0) player_data.y -= dy;
 	}
 	if (key_states[LEFT_ARROW_KEY]) {
 		float c = cos(player_data.angle + P2);
@@ -428,8 +435,8 @@ void TestScene::handle_input(float dt) {
 		float dx = c * player_data.speed * dt;
 		float dy = s * player_data.speed * dt;
 
-		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * .1)] == 0)player_data.x += dx;
-		if (world_map[(int)(player_data.y - dy - s * .1)][(int)player_data.x] == 0)player_data.y -= dy;
+		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * wdist)] == 0)player_data.x += dx;
+		if (world_map[(int)(player_data.y - dy - s * wdist)][(int)player_data.x] == 0)player_data.y -= dy;
 	}
 
 	/*if (key_states[Q_KEY]) {

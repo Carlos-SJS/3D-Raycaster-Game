@@ -4,14 +4,14 @@
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
-    <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\HelloWorldScene.cpp">
-      <Filter>Source Files\Classes</Filter>
-    </ClCompile>
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\proj.win32\main.cpp">
       <Filter>Source Files\proj.win32</Filter>
     </ClCompile>
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\cocos2d\cocos\precheader.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\HelloWorldScene.cpp">
+      <Filter>Source Files\Classes</Filter>
     </ClCompile>
     <ClCompile Include="Classes\TestScene.cpp">
       <Filter>Source Files\Classes</Filter>
@@ -19,9 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\HelloWorldScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\proj.win32\main.h">
@@ -48,13 +45,295 @@
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\res\.gitkeep">
       <Filter>Resources\res</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\HelloWorldScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
     <ClInclude Include="Classes\TestScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Textures\wall_1.h">
+    <ClInclude Include="Classes\Textures\textures.h">
       <Filter>Source Files\Classes\Textures</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Textures\floor_2.h">
+    <ClInclude Include="Classes\Textures\texture_1.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_2.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_3.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_4.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_5.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_6.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_7.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_8.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_9.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_10.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_11.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_12.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_13.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_14.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_15.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_16.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_17.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_18.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_19.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_20.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_21.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_22.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_23.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_24.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_25.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_26.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_27.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_28.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_29.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_30.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_31.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_32.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_33.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_34.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_35.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_36.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_37.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_38.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_39.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_40.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_41.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_42.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_43.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_44.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_45.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_46.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_47.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_48.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_49.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_50.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_51.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_52.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_53.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_54.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_55.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_56.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_57.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_58.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_59.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_60.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_61.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_62.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_63.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_64.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_65.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_66.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_67.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_68.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_69.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_70.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_71.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_72.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_73.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_74.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_75.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_76.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_77.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_78.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_79.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_80.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_81.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_82.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_83.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_84.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_85.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_86.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_87.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_88.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_89.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_90.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_91.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_92.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_93.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_94.h">
       <Filter>Source Files\Classes\Textures</Filter>
     </ClInclude>
   </ItemGroup>

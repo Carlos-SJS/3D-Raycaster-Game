@@ -1,6 +1,5 @@
-#ifndef t_wall_1
-#define t_wall_1
-int wall_1[] = {
+#pragma once
+int texture_29[] = {
 0,
 0,
 0,
@@ -12290,4 +12289,3 @@ int wall_1[] = {
 20,
 19
 };
-#endif
