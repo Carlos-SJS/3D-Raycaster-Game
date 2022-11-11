@@ -148,6 +148,11 @@ void TestScene::draw_world() {
 
 	for (int r = 0; r < ray_count; r++) {
 
+		float player_ray_angle = player_data.angle - cangle;
+		if (player_ray_angle < 0) player_ray_angle += 2 * PI;
+		if (player_ray_angle > 2 * PI) player_ray_angle -= 2 * PI;
+		float cospa = cos(player_ray_angle);
+
 		if (cangle < 0.0) cangle += 2 * PI;
 		if (cangle >= 2 * PI) cangle -= 2 * PI;
 
@@ -183,7 +188,7 @@ void TestScene::draw_world() {
 
 		if (cangle != PI && cangle != 0) {
 			while (inside(cx, cy)) {
-				if (world_map[(int)cy][(int)cx] != 0) {
+				if (world_map[(int)cy][(int)cx] > 0) {
 					vc = Vec2(cx, cy);
 
 					vc_f = 1;
@@ -226,7 +231,7 @@ void TestScene::draw_world() {
 
 		if (cangle != P2 && cangle != P3) {
 			while (inside(cx, cy)) {
-				if (world_map[(int)cy][(int)cx] != 0) {
+				if (world_map[(int)cy][(int)cx] > 0) {
 					hz = Vec2(cx, cy);
 
 					hz_f = 1;
@@ -269,7 +274,7 @@ void TestScene::draw_world() {
 
 		//Draw the vertical wall
 		if (vc_f) {
-			w_height = (screen_size.height) / (distV * cos(player_data.angle - cangle));
+			w_height = (screen_size.height) / (distV * cospa);
 
 
 			float shading = .6;
@@ -304,7 +309,7 @@ void TestScene::draw_world() {
 
 		//Draw the horizontal wall
 		if (hz_f) {
-			w_height = (screen_size.height) / (distH * cos(player_data.angle - cangle));
+			w_height = (screen_size.height) / (distH * cospa);
 
 			float shading = 1;
 			int texture_x = (int)((hz.x - (int)hz.x) * 64);
@@ -347,10 +352,6 @@ void TestScene::draw_world() {
 		//Precalculate stuff
 		float sina = sin(cangle);
 		float cosa = cos(cangle);
-		float a = player_data.angle - cangle;
-		if (a < 0) a += 2 * PI;
-		if (a > 2 * PI) a -= 2 * PI;
-		float cospa = cos(a);
 
 		int c = 0;
 
@@ -396,7 +397,7 @@ void TestScene::draw_world() {
 }
 
 void TestScene::handle_input(float dt) {
-    float wdist = .5;
+    float wdist = .2;
 
 	if (key_states[UP_ARROW_KEY]) {
 		float c = cos(player_data.angle);
@@ -405,8 +406,8 @@ void TestScene::handle_input(float dt) {
 		float dx = c * player_data.speed * dt;
 		float dy = s * player_data.speed * dt;
 
-		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * wdist)] == 0) player_data.x += dx;
-		if (world_map[(int)(player_data.y - dy - s * wdist)][(int)player_data.x] == 0) player_data.y -= dy;
+		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * .4)] == 0) player_data.x += dx;
+		if (world_map[(int)(player_data.y - dy - s * .4)][(int)player_data.x] == 0) player_data.y -= dy;
 	}
 	if (key_states[DOWN_ARROW_KEY]) {
 		float c = cos(player_data.angle);

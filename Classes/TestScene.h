@@ -41,7 +41,7 @@ private:
 
 	// 0 -> void
 	// 1 - texture_count -> texture index
-	// value not included above -> Invisible in render, active colision
+	// -1 -> invisible barrier
 
 	int world_map[10][10] = {{ 1, 1, 7,21,13,12,13, 7, 1, 1},
 							 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
