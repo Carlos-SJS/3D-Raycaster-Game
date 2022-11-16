@@ -139,10 +139,6 @@ bool TestScene::inside(float x, float y) {
 	return x >= 0 && y >= 0 && x < MAP_WIDTH&& y < MAP_HEIGHT;
 }
 
-int min(int x, int y) {
-	return x < y ? x : y;
-}
-
 void TestScene::draw_world() {
 	auto screen_size = Director::getInstance()->getVisibleSize();
 
@@ -499,7 +495,13 @@ void TestScene::draw_sprite(better_sprite* sprite) {
 	Color4F color_buffer[2000];
 	int point_count = 0;
 
-	float x = ((pa)-a)/(fov/ray_count) - swidth/2.0;
+	//if (a > pa) a -= 2*PI;
+	float x = min(((pa)-a), ((pa)-(a - 2.0 * PI))) / (fov / ray_count) - swidth / 2.0;
+
+	if(abs((pa)-a) < abs((pa)-a + 2.0*PI)) x = ((pa)-a) / (fov / ray_count) - swidth / 2.0;
+	else x = ((pa)-(a - 2.0 * PI)) / (fov / ray_count) - swidth / 2.0;
+
+
 	float xoffset = 0;
 
 	if (x < 0 && x + swidth >= 0) {

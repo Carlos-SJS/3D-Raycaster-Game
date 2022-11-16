@@ -22,6 +22,8 @@
 
 #define eps .0000001
 
+#define min(a,b) (a<b?a:b)
+
 #define UP_ARROW_KEY 0
 #define DOWN_ARROW_KEY 1
 #define LEFT_ARROW_KEY 2
