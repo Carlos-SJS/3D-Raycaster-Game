@@ -2,6 +2,7 @@
 
 //Textures
 #include "Textures/textures.h"
+#include "Sprites/sprites.h"
 
 
 USING_NS_CC;
@@ -28,12 +29,13 @@ bool TestScene::init() {
 	dNode = DrawNode::create();
 	this->addChild(dNode, 0);
 
+	dNodeS = DrawNode::create();
+	this->addChild(dNodeS, 1);
+
 	player_data.x = 1;
 	player_data.y = 1;
 	player_data.angle = P2;
 	player_data.speed = 1.0;
-
-	log("This is a test log!");
 
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(TestScene::onKeyPressed, this);
@@ -47,6 +49,9 @@ bool TestScene::init() {
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
 
+	test_sprite = better_sprite::create(sprite_1, 36, 36, .6, .6, 1.5, 1.5, 0);
+
+	depth_map.resize(screen_size.width);
 
 
 	this->scheduleUpdate();
@@ -251,6 +256,7 @@ void TestScene::draw_world() {
 			//dy = player_data.y - vc.y;
 			//distV = sqrt(dx * dx + dy * dy);
 			distV = cos(cangle)*(vc.x-player_data.x) - sin(cangle)*(vc.y-player_data.y);
+
 		}
 
 		if (hz_f) {
@@ -274,6 +280,8 @@ void TestScene::draw_world() {
 
 		//Draw the vertical wall
 		if (vc_f) {
+			depth_map[r] = distV;
+
 			w_height = (screen_size.height) / (distV * cospa);
 
 
@@ -283,7 +291,7 @@ void TestScene::draw_world() {
 			float texture_y_step = (63.0 / w_height);
 
 			if (w_height > screen_size.height) {
-				texture_y = (float)(w_height - screen_size.height) / 2.0 * texture_y_step;
+				texture_y = (float)((w_height - screen_size.height) / 2.0) * texture_y_step;
 				w_height = screen_size.height;
 			}
 
@@ -309,6 +317,8 @@ void TestScene::draw_world() {
 
 		//Draw the horizontal wall
 		if (hz_f) {
+			depth_map[r] = distH;
+
 			w_height = (screen_size.height) / (distH * cospa);
 
 			float shading = 1;
@@ -458,12 +468,97 @@ void TestScene::handle_input(float dt) {
 	}
 }
 
+float fix(float a) {
+	if (a < 0) return a + 2*PI;
+	if (a > 2 * PI) return a - 2 * PI;
+	return a;
+}
+
+void TestScene::draw_sprite(better_sprite* sprite) {
+	auto screen_size = Director::getInstance()->getWinSize();
+
+	Vec2 pos = sprite->get_position();
+
+	float dx = (pos.x - player_data.x);
+	float dy = (player_data.y - pos.y);
+	float a = angle_util::get_angle(dx, dy);
+
+
+	float pa = player_data.angle + fov / 2;
+	pa = angle_util::fix(pa);
+
+	float cospa = cos(angle_util::fix(player_data.angle - a));
+
+	float dist = cos(a) * (pos.x - player_data.x) - sin(a) * (pos.y - player_data.y);
+	float unit_size = (screen_size.height) / (dist * cospa);
+
+	float swidth = min(sprite->get_sx() * unit_size, screen_size.width);
+	float sheight = min(sprite->get_sy() * unit_size, screen_size.height);
+
+	Vec2 point_buffer[2000];
+	Color4F color_buffer[2000];
+	int point_count = 0;
+
+	float x = ((pa)-a)/(fov/ray_count) - swidth/2.0;
+	float xoffset = 0;
+
+	if (x < 0 && x + swidth >= 0) {
+		xoffset = -x;
+	}
+
+	float ground = screen_size.height/2 - unit_size/2;
+	float y = ground + sprite->get_z()*unit_size;
+	float yoffset = 0;
+	
+	if (y < 0 && y + sheight >= 0) {
+		yoffset = -y;
+	}
+	
+	int* texture = sprite->get_texture();
+	
+	int tsx = sprite->get_tsize().x;
+	int tsy = sprite->get_tsize().y;
+
+	float xstep = (float)(tsx-1)/swidth;
+	float ystep = (float)(tsy-1)/sheight;
+
+	int tindex;
+
+	if (x < screen_size.width && x+xoffset >= 0) {
+		for (int i = (int)xoffset; i < swidth && x + i < screen_size.width; i+=1.0) {
+			if (depth_map[(int)(x + i)] >= dist) {
+				depth_map[(int)(x + i)] = dist;
+
+				for (int j = yoffset; j < sheight && y + j < screen_size.height; j+=1.0) {
+					tindex = (int)((float)(tsy-1) - ystep * (float)j) * tsx * 3 + (int)((float)i * xstep) * 3;
+
+					if (texture[tindex] != 0 || texture[tindex + 1] != 255 || texture[tindex + 2] != 255) {
+						point_buffer[point_count] = Vec2((int)(x + i), (int)(y + j));
+						color_buffer[point_count] = Color4F((float)texture[tindex] / 255.0, (float)texture[tindex + 1] / 255.0, (float)texture[tindex + 2] / 255.0, 1);
+						point_count++;
+					}
+				}
+				if (point_count > 2000 - screen_size.height) {
+					dNodeS->drawPoints(point_buffer, point_count, color_buffer);
+					point_count = 0;
+				}
+			}
+		}
+
+		if (point_count > 0) dNodeS->drawPoints(point_buffer, point_count, color_buffer);
+	}
+}
+
 void TestScene::update(float dt) {
 	//Player movement
 	handle_input(dt);
 
 	//Reset draw node
 	dNode->clear();
+	dNodeS->clear();
+
+	draw_sprite(test_sprite);
+	
 
 	//Draw world
 	draw_world();

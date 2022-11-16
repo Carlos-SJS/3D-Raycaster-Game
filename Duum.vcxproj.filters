@@ -4,13 +4,19 @@
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
+    <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\HelloWorldScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\proj.win32\main.cpp">
       <Filter>Source Files\proj.win32</Filter>
     </ClCompile>
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\cocos2d\cocos\precheader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\HelloWorldScene.cpp">
+    <ClCompile Include="Classes\AngleUtil.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\BetterSprite.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
     <ClCompile Include="Classes\TestScene.cpp">
@@ -19,6 +25,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\HelloWorldScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\proj.win32\main.h">
@@ -36,6 +45,12 @@
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\HelloWorld.png">
       <Filter>Resources</Filter>
     </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\Textures\wall_1.h">
+      <Filter>Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\Textures\wall_1.ppm">
+      <Filter>Resources\Textures</Filter>
+    </ClInclude>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\fonts\Marker Felt.ttf">
       <Filter>Resources\fonts</Filter>
     </ClInclude>
@@ -45,14 +60,20 @@
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\res\.gitkeep">
       <Filter>Resources\res</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\HelloWorldScene.h">
+    <ClInclude Include="Classes\AngleUtil.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\BetterSprite.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="Classes\TestScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Textures\textures.h">
-      <Filter>Source Files\Classes\Textures</Filter>
+    <ClInclude Include="Classes\Sprites\sprite_1.h">
+      <Filter>Source Files\Classes\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\sprites.h">
+      <Filter>Source Files\Classes\Sprites</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Textures\texture_1.h">
       <Filter>Source Files\Classes\Textures</Filter>
@@ -336,6 +357,9 @@
     <ClInclude Include="Classes\Textures\texture_94.h">
       <Filter>Source Files\Classes\Textures</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Textures\textures.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\CMakeLists.txt" />
@@ -348,6 +372,9 @@
   <ItemGroup>
     <Filter Include="Resources">
       <UniqueIdentifier>{1D3C3FB8-AFF4-3CB5-952F-F6D2C2DF8C67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures">
+      <UniqueIdentifier>{DF988C41-2302-3EE1-B7F1-2DB68680BA31}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\fonts">
       <UniqueIdentifier>{AE823B50-E4FA-3569-A7F7-7BB927AB5E44}</UniqueIdentifier>
@@ -365,12 +392,10 @@
       <UniqueIdentifier>{9385A07B-BB2C-3D65-B43D-9EB342E73857}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Classes\Textures">
-      <UniqueIdentifier>{cab74007-dd9c-4490-872a-11e9ec364a2b}</UniqueIdentifier>
+      <UniqueIdentifier>{925beaa2-903f-4d62-bdf3-4f1a9c6fd35b}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Textures\wall_1.ppm">
-      <Filter>Resources</Filter>
-    </None>
+    <Filter Include="Source Files\Classes\Sprites">
+      <UniqueIdentifier>{eec31d7b-9616-449d-b61c-89f198056b98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

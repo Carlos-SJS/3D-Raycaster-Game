@@ -8,8 +8,12 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <vector>
 
 #include "cocos2d.h"
+
+#include "BetterSprite.h"
+#include "AngleUtil.h"
 
 
 #define PI 3.14159265    //Aprox. value of PI     (180°)
@@ -36,6 +40,7 @@ struct player {
 class TestScene : public cocos2d::Scene{
 private:
 	cocos2d::DrawNode* dNode;
+	cocos2d::DrawNode* dNodeS;
 
 	player player_data;
 
@@ -81,6 +86,10 @@ private:
 							 {83,83,83,83,83,83,83,83,83,83},
 							};
 
+	std::vector<float> depth_map;
+
+	better_sprite* test_sprite;
+
 	bool key_states[6];
 	float delta_mouse = 0.0;
 
@@ -104,6 +113,8 @@ private:
 	std::string to_string(float);
 
 	void handle_input(float);
+
+	void draw_sprite(better_sprite*);
 
 
 
