@@ -31,4 +31,5 @@ public:
 	int* get_texture();
 
 	void set_position(float, float);
+	void set_texture(int* t);
 };

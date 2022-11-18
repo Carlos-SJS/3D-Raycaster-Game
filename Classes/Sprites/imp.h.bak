@@ -1,0 +1,22 @@
+#pragma once
+
+
+namespace monster_imp {
+	#include "imp/walk1.h"
+	#include "imp/walk2.h"
+	#include "imp/walk3.h"
+	#include "imp/walk4.h"
+
+	#include "imp/aim.h"
+	#include "imp/shoot.h"
+
+	int* imp[] = {
+		walk1,
+		walk2,
+		walk3,
+		walk4,
+
+		aim,
+		shoot
+	};
+}

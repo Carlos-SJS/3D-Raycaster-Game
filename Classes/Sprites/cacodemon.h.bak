@@ -1,0 +1,17 @@
+#pragma once
+
+namespace cacodemon{
+	#include "cacodemon/normal.h"
+	
+	#include "cacodemon/shoot1.h"
+	#include "cacodemon/shoot2.h"
+	#include "cacodemon/shoot3.h"
+	
+	int* normal[] = {
+		normal,
+
+		shoot1,
+		shoot2,
+		shoot3
+	};
+}

@@ -1,9 +1,5 @@
 #pragma once
 
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-
 #include <cmath>
 #include <string>
 #include <sstream>
@@ -14,7 +10,9 @@
 
 #include "BetterSprite.h"
 #include "AngleUtil.h"
+#include "player.h"
 
+#include "Sprites/entities.h"
 
 #define PI 3.14159265    //Aprox. value of PI     (180°)
 #define P2 1.570796325   //Aprox. value of PI/2   ( 90°)
@@ -31,14 +29,6 @@
 #define Q_KEY 4
 #define E_KEY 5
 
-
-struct player {
-	float x;
-	float y;
-	float angle;
-	float speed;
-};
-
 class TestScene : public cocos2d::Scene{
 private:
 	cocos2d::DrawNode* dNode;
@@ -50,17 +40,6 @@ private:
 	// 1 - texture_count -> texture index
 	// -1 -> invisible barrier
 
-	int world_map[10][10] = {{ 1, 1, 7,21,13,12,13, 7, 1, 1},
-							 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-							 { 1, 0, 0, 1, 1, 0, 0, 0, 0, 1},
-							 { 3, 0, 0, 0, 1, 1, 0, 0, 0, 1},
-							 { 1, 0, 0, 0, 1, 1, 0, 0, 0, 1},
-							 { 1, 0, 0, 0, 1, 1, 0, 0, 0, 1},
-							 { 1, 0, 1, 1, 1, 1, 1, 0, 0, 1},
-							 { 1, 0, 1, 1, 0, 1, 1, 0, 0, 1},
-							 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-							 { 1, 1, 2, 1, 4, 1, 1, 1, 4, 1}
-							};
 
 
 	//Floor and ceiling have balues between 0 and amount of textures -1 only
@@ -90,7 +69,13 @@ private:
 
 	std::vector<float> depth_map;
 
+	//Sprites
 	better_sprite* test_sprite;
+	better_sprite* test_sprite2;
+
+	zombie* zombie1;
+	cacodemon* cdemon1;
+	imp* imp1;
 
 	bool key_states[6];
 	float delta_mouse = 0.0;
@@ -121,6 +106,20 @@ private:
 
 
 public:
+	std::vector<std::vector<int>> world_map 
+					   { { 1, 1, 7,21,13,12,13, 7, 1, 1},
+						 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+						 { 1, 0, 0, 1, 1, 0, 0, 0, 0, 1},
+						 { 3, 0, 0, 0, 1, 1, 0, 0, 0, 1},
+						 { 1, 0, 0, 0, 1, 1, 0, 0, 0, 1},
+						 { 1, 0, 0, 0, 1, 1, 0, 0, 0, 1},
+						 { 1, 0, 1, 1, 1, 1, 1, 0, 0, 1},
+						 { 1, 0, 1, 1, 0, 1, 1, 0, 0, 1},
+						 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+						 { 1, 1, 2, 1, 4, 1, 1, 1, 4, 1}
+	};
+
+
 	static cocos2d::Scene* createScene();
 
 	virtual bool init();

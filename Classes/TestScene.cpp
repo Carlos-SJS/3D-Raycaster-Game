@@ -32,8 +32,8 @@ bool TestScene::init() {
 	dNodeS = DrawNode::create();
 	this->addChild(dNodeS, 1);
 
-	player_data.x = 1;
-	player_data.y = 1;
+	player_data.x = 2.3;
+	player_data.y = 4;
 	player_data.angle = P2;
 	player_data.speed = 1.0;
 
@@ -49,7 +49,13 @@ bool TestScene::init() {
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
 
+
+	//Sprites
 	test_sprite = better_sprite::create(sprite_1, 36, 36, .6, .6, 1.5, 1.5, 0);
+	
+	cdemon1 = cacodemon::create(8.5, 8.5, .15);
+	zombie1 = zombie::create(1.5, 8.5);
+	imp1 = imp::create(6.5, 3.5);
 
 	depth_map.resize(screen_size.width);
 
@@ -486,6 +492,9 @@ void TestScene::draw_sprite(better_sprite* sprite) {
 	float cospa = cos(angle_util::fix(player_data.angle - a));
 
 	float dist = cos(a) * (pos.x - player_data.x) - sin(a) * (pos.y - player_data.y);
+
+	//if (dist < .74) return;
+
 	float unit_size = (screen_size.height) / (dist * cospa);
 
 	float swidth = min(sprite->get_sx() * unit_size, screen_size.width);
@@ -496,10 +505,10 @@ void TestScene::draw_sprite(better_sprite* sprite) {
 	int point_count = 0;
 
 	//if (a > pa) a -= 2*PI;
-	float x = min(((pa)-a), ((pa)-(a - 2.0 * PI))) / (fov / ray_count) - swidth / 2.0;
+	float x;
 
 	if(abs((pa)-a) < abs((pa)-a + 2.0*PI)) x = ((pa)-a) / (fov / ray_count) - swidth / 2.0;
-	else x = ((pa)-(a - 2.0 * PI)) / (fov / ray_count) - swidth / 2.0;
+	else x = ((pa)-(a - 2.0 * PI))  / (fov / ray_count) - swidth / 2.0;
 
 
 	float xoffset = 0;
@@ -555,12 +564,20 @@ void TestScene::update(float dt) {
 	//Player movement
 	handle_input(dt);
 
+	//Update entities
+	zombie1->update(dt, &player_data, world_map);
+	cdemon1->update(dt, &player_data);
+	imp1->update(dt, &player_data);
+
 	//Reset draw node
 	dNode->clear();
 	dNodeS->clear();
 
 	draw_sprite(test_sprite);
-	
+
+	draw_sprite(cdemon1->get_sprite());
+	draw_sprite(zombie1->get_sprite());
+	draw_sprite(imp1->get_sprite());
 
 	//Draw world
 	draw_world();

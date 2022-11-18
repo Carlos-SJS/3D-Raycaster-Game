@@ -1,0 +1,25 @@
+#pragma once
+
+namespace zombie{
+	#include "zombie/walk1.h"
+	#include "zombie/walk2.h"
+	#include "zombie/walk3.h"
+	#include "zombie/walk4.h"
+
+	#include "zombie/aim.h"
+	#include "zombie/shoot.h"
+
+	#include "zombie/hurt.h"
+
+	int* normal[] = {
+		walk1,
+		walk2,
+		walk3,
+		walk4,
+
+		aim,
+		shoot,
+
+		hurt
+	};
+}

@@ -22,6 +22,15 @@
     <ClCompile Include="Classes\TestScene.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Sprites\zombie\zombie.cpp">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Sprites\imp\imp.cpp">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Sprites\cacodemon\cacodemon.cpp">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.h">
@@ -360,6 +369,72 @@
     <ClInclude Include="Classes\Textures\textures.h">
       <Filter>Source Files\Classes\Textures</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\shoot.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\walk1.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\walk2.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\walk3.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\walk4.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\aim.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\hurt.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\aim.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\shoot.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk1.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk2.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk3.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk4.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\normal.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\shoot1.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\shoot2.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\shoot3.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\zombie.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\player.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\imp.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\cacodemon.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\entities.h">
+      <Filter>Source Files\Classes\Sprites</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\CMakeLists.txt" />
@@ -396,6 +471,15 @@
     </Filter>
     <Filter Include="Source Files\Classes\Sprites">
       <UniqueIdentifier>{eec31d7b-9616-449d-b61c-89f198056b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\Sprites\zombie">
+      <UniqueIdentifier>{b37859f5-ed76-41ad-b481-009fc5a4eec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\Sprites\imp">
+      <UniqueIdentifier>{c65e5874-bfd2-4e7b-bf41-d09928a92c83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\Sprites\cacodemon">
+      <UniqueIdentifier>{b471f023-fb0c-483e-a194-b6885b5bdff0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
