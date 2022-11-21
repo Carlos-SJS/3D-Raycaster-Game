@@ -19,9 +19,6 @@
     <ClCompile Include="Classes\BetterSprite.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\TestScene.cpp">
-      <Filter>Source Files\Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Sprites\zombie\zombie.cpp">
       <Filter>Source Files\Classes\Sprites\zombie</Filter>
     </ClCompile>
@@ -30,6 +27,12 @@
     </ClCompile>
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon.cpp">
       <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Sprites\imp\imp_projectile.cpp">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\TestScene.cpp">
+      <Filter>Source Files\Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,9 +76,6 @@
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="Classes\BetterSprite.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\TestScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Sprites\sprite_1.h">
@@ -434,6 +434,27 @@
     </ClInclude>
     <ClInclude Include="Classes\Sprites\entities.h">
       <Filter>Source Files\Classes\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\imp_projectile.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\explode1.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\explode2.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\explode3.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\TestScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\projectile1.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\projectile2.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

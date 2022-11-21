@@ -5,6 +5,7 @@
 #include <sstream>
 #include <algorithm>
 #include <vector>
+#include <queue>
 
 #include "cocos2d.h"
 
@@ -77,6 +78,8 @@ private:
 	cacodemon* cdemon1;
 	imp* imp1;
 
+	imp_projectile* impp1;
+
 	bool key_states[6];
 	float delta_mouse = 0.0;
 
@@ -101,9 +104,11 @@ private:
 
 	void handle_input(float);
 
-	void draw_sprite(better_sprite*);
+	void schedule_sprite(better_sprite* sprite);
+	void draw_sprite(float dist, float a, better_sprite* sprite);
+	void draw_sprites();
 
-
+	std::priority_queue<buffered_sprite > sprite_queue;
 
 public:
 	std::vector<std::vector<int>> world_map 

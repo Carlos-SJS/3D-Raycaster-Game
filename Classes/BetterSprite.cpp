@@ -53,3 +53,22 @@ int* better_sprite::get_texture() {
 cocos2d::Vec2 better_sprite::get_tsize() {
 	return cocos2d::Vec2(t_width, t_height);
 }
+
+
+//Buffered sprite struct stuff
+
+buffered_sprite::buffered_sprite(float d, float a, better_sprite* s) {
+	this->dist = d;
+	this->angle = a;
+	this->sprite = s;
+}
+
+void buffered_sprite::set(float d, float a, better_sprite* s) {
+	this->dist = d;
+	this->angle = a;
+	this->sprite = s;
+}
+
+bool operator<(const buffered_sprite& s1, const buffered_sprite& s2){
+	return s1.dist < s2.dist;
+}

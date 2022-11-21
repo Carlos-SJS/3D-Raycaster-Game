@@ -33,3 +33,17 @@ public:
 	void set_position(float, float);
 	void set_texture(int* t);
 };
+
+struct buffered_sprite {
+	float dist;
+	float angle;
+
+	better_sprite* sprite;
+
+	buffered_sprite(float d, float a, better_sprite* s);
+
+	void set(float d, float a, better_sprite* s);
+
+};
+
+bool operator<(const buffered_sprite& s1, const buffered_sprite& s2);

@@ -56,6 +56,7 @@ bool TestScene::init() {
 	cdemon1 = cacodemon::create(8.5, 8.5, .15);
 	zombie1 = zombie::create(1.5, 8.5);
 	imp1 = imp::create(6.5, 3.5);
+	impp1 = imp_projectile::create(1.5, 8.5, .5, P2);
 
 	depth_map.resize(screen_size.width);
 
@@ -476,22 +477,32 @@ float fix(float a) {
 	return a;
 }
 
-void TestScene::draw_sprite(better_sprite* sprite) {
-	auto screen_size = Director::getInstance()->getWinSize();
-
+void TestScene::schedule_sprite(better_sprite* sprite) {
 	Vec2 pos = sprite->get_position();
 
 	float dx = (pos.x - player_data.x);
 	float dy = (player_data.y - pos.y);
 	float a = angle_util::get_angle(dx, dy);
 
+	float dist = cos(a) * (pos.x - player_data.x) - sin(a) * (pos.y - player_data.y);
+
+	sprite_queue.push(buffered_sprite(dist, a, sprite));
+}
+
+void TestScene::draw_sprites() {
+	while (!sprite_queue.empty()) {
+		draw_sprite(sprite_queue.top().dist, sprite_queue.top().angle, sprite_queue.top().sprite);
+		sprite_queue.pop();
+	}
+}
+
+void TestScene::draw_sprite(float dist, float a, better_sprite* sprite) {
+	auto screen_size = Director::getInstance()->getWinSize();	
 
 	float pa = player_data.angle + fov / 2;
 	pa = angle_util::fix(pa);
 
 	float cospa = cos(angle_util::fix(player_data.angle - a));
-
-	float dist = cos(a) * (pos.x - player_data.x) - sin(a) * (pos.y - player_data.y);
 
 	//if (dist < .74) return;
 
@@ -538,7 +549,7 @@ void TestScene::draw_sprite(better_sprite* sprite) {
 	if (x < screen_size.width && x+xoffset >= 0) {
 		for (int i = (int)xoffset; i < swidth && x + i < screen_size.width; i+=1.0) {
 			if (depth_map[(int)(x + i)] >= dist) {
-				depth_map[(int)(x + i)] = dist;
+				//depth_map[(int)(x + i)] = dist;
 
 				for (int j = yoffset; j < sheight && y + j < screen_size.height; j+=1.0) {
 					tindex = (int)((float)(tsy-1) - ystep * (float)j) * tsx * 3 + (int)((float)i * xstep) * 3;
@@ -573,11 +584,15 @@ void TestScene::update(float dt) {
 	dNode->clear();
 	dNodeS->clear();
 
-	draw_sprite(test_sprite);
+	schedule_sprite(test_sprite);
 
-	draw_sprite(cdemon1->get_sprite());
-	draw_sprite(zombie1->get_sprite());
-	draw_sprite(imp1->get_sprite());
+	schedule_sprite(cdemon1->get_sprite());
+	//schedule_sprite(zombie1->get_sprite());
+	schedule_sprite(imp1->get_sprite());
+	if(impp1->update(dt, world_map)) schedule_sprite(impp1->get_sprite());
+
+
+	draw_sprites();
 
 	//Draw world
 	draw_world();
