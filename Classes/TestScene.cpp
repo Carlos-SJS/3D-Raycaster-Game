@@ -51,12 +51,25 @@ bool TestScene::init() {
 
 
 	//Sprites
-	test_sprite = better_sprite::create(sprite_1, 36, 36, .6, .6, 1.5, 1.5, 0);
-	
+	barrel1 = ebarrel::create(1.5, 1.5);
+
 	cdemon1 = cacodemon::create(8.5, 8.5, .15);
 	zombie1 = zombie::create(1.5, 8.5);
 	imp1 = imp::create(6.5, 3.5);
 	impp1 = imp_projectile::create(1.5, 8.5, .5, P2);
+
+	draw_list.push_back((draw_obj*)barrel1);
+	draw_list.push_back((draw_obj*)cdemon1);
+	draw_list.push_back((draw_obj*)zombie1);
+	draw_list.push_back((draw_obj*)imp1);
+	draw_list.push_back((draw_obj*)impp1);
+
+	update_list.push_back((entity*)barrel1);
+	update_list.push_back((entity*)cdemon1);
+	update_list.push_back((entity*)zombie1);
+	update_list.push_back((entity*)imp1);
+	update_list.push_back((entity*)impp1);
+
 
 	depth_map.resize(screen_size.width);
 
@@ -571,25 +584,29 @@ void TestScene::draw_sprite(float dist, float a, better_sprite* sprite) {
 	}
 }
 
+void TestScene::handle_sprites() {
+
+}
+
 void TestScene::update(float dt) {
 	//Player movement
 	handle_input(dt);
 
 	//Update entities
-	zombie1->update(dt, &player_data, world_map);
-	cdemon1->update(dt, &player_data);
-	imp1->update(dt, &player_data);
+	for (auto sp = update_list.begin(); sp != update_list.end(); sp++) {
+		if (!(*sp)->update(dt, &player_data, world_map)) {
+			sp = update_list.erase(sp)-1;
+		}
+	}
 
 	//Reset draw node
 	dNode->clear();
 	dNodeS->clear();
 
-	schedule_sprite(test_sprite);
-
-	schedule_sprite(cdemon1->get_sprite());
-	//schedule_sprite(zombie1->get_sprite());
-	schedule_sprite(imp1->get_sprite());
-	if(impp1->update(dt, world_map)) schedule_sprite(impp1->get_sprite());
+	for (auto sp = draw_list.begin(); sp != draw_list.end(); sp++) {
+		if((*sp)->is_alive()) schedule_sprite((*sp)->get_sprite());
+		else sp = draw_list.erase(sp) - 1;
+	}
 
 
 	draw_sprites();

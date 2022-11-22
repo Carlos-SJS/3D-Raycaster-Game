@@ -34,7 +34,9 @@ zombie* zombie::create(float x, float y) {
 	return new zombie(x, y);
 }
 
-void zombie::update(float dt, player* pdata, std::vector<std::vector<int>> &map) {
+bool zombie::update(float dt, player* pdata, std::vector<std::vector<int>> &map){
+	if (!alive) return 0;
+
 	float dx = x - pdata->x ;
 	float dy = y - pdata->y;
 
@@ -49,6 +51,8 @@ void zombie::update(float dt, player* pdata, std::vector<std::vector<int>> &map)
 
 	animator_timer += dt;
 	this->animator();
+
+	return 1;
 }
 
 void zombie::animator() {
@@ -74,4 +78,16 @@ void zombie::animator() {
 
 better_sprite* zombie::get_sprite() {
 	return this->sprite;
+}
+
+cocos2d::Vec4 zombie::get_pos() {
+	return cocos2d::Vec4(this->x, this->y, 0, .6);
+}
+
+void zombie::handle_collision(float damage) {
+
+}
+
+bool zombie::is_alive() {
+	return true;
 }

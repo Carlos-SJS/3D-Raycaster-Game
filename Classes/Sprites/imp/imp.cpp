@@ -23,11 +23,22 @@ imp* imp::create(float x, float y) {
 	return new imp(x, y);
 }
 
-void imp::update(float dt, player* pdata) {
-
+bool imp::update(float dt, player* padta, std::vector<std::vector<int>>& map) {
+	return 1;
 }
 
 better_sprite* imp::get_sprite() {
 	return this->sprite;
 }
 
+void imp::handle_collision(float damage){
+	
+}
+
+cocos2d::Vec4 imp::get_pos() {
+	return cocos2d::Vec4(this->x, this->y, 0, .7);
+}
+
+bool imp::is_alive() {
+	return 1;
+}

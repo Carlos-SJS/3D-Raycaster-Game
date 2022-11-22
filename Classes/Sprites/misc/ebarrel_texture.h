@@ -1,6 +1,6 @@
 #pragma once
 
-int sprite_1[] = {
+int ebarrel[] = {
 0,
 255,
 255,

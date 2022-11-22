@@ -6,7 +6,7 @@
 #include "../../BetterSprite.h"
 #include "../../player.h"
 
-class imp_projectile {
+class imp_projectile : public entity, draw_obj {
 private:
 	float x, y, z;
 	float angle;
@@ -30,7 +30,9 @@ public:
 	imp_projectile(float x, float y, float z, float angle);
 	static imp_projectile* create(float x, float y, float z, float angle);
 
-	bool update(float dt, std::vector<std::vector<int>>& map);
+	bool update(float dt, player* padta, std::vector<std::vector<int>>& map);
 
 	better_sprite* get_sprite();
+
+	bool is_alive();
 };

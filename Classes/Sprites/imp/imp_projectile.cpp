@@ -34,7 +34,7 @@ imp_projectile* imp_projectile::create(float x, float y, float z, float angle) {
 }
 
 //Returns 0 if projectile exploded
-bool imp_projectile::update(float dt, std::vector<std::vector<int>>& map) {
+bool imp_projectile::update(float dt, player* padta, std::vector<std::vector<int>>& map) {
 	if (this->state == 0) {
 		if (map[y - dt*dy][x + dt*dx] == 0) {
 			this->x += dt*this->dx;
@@ -81,4 +81,8 @@ void imp_projectile::handle_explotion(float dt) {
 better_sprite* imp_projectile::get_sprite() {
 	if (this->state == 0) return this->sprite;
 	else return this->e_sprite;
+}
+
+bool imp_projectile::is_alive() {
+	return state != 2;
 }

@@ -31,6 +31,9 @@
     <ClCompile Include="Classes\Sprites\imp\imp_projectile.cpp">
       <Filter>Source Files\Classes\Sprites\imp</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Sprites\misc\ebarrel.cpp">
+      <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClCompile>
     <ClCompile Include="Classes\TestScene.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
@@ -77,9 +80,6 @@
     </ClInclude>
     <ClInclude Include="Classes\BetterSprite.h">
       <Filter>Source Files\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\sprite_1.h">
-      <Filter>Source Files\Classes\Sprites</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Sprites\sprites.h">
       <Filter>Source Files\Classes\Sprites</Filter>
@@ -447,14 +447,29 @@
     <ClInclude Include="Classes\Sprites\imp\explode3.h">
       <Filter>Source Files\Classes\Sprites\imp</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\TestScene.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Sprites\imp\projectile1.h">
       <Filter>Source Files\Classes\Sprites\imp</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Sprites\imp\projectile2.h">
       <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\misc\ebarrel.h">
+      <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\misc\ebarrel_texture.h">
+      <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\misc\eb_explosion1.h">
+      <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\misc\eb_explosion2.h">
+      <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\misc\eb_explosion3.h">
+      <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\TestScene.h">
+      <Filter>Source Files\Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -501,6 +516,9 @@
     </Filter>
     <Filter Include="Source Files\Classes\Sprites\cacodemon">
       <UniqueIdentifier>{b471f023-fb0c-483e-a194-b6885b5bdff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\Sprites\misc">
+      <UniqueIdentifier>{3b60a83b-c479-49ca-896f-9e1345977b41}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

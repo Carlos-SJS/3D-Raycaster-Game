@@ -22,10 +22,23 @@ cacodemon* cacodemon::create(float x, float y, float z) {
 	return new cacodemon(x, y, z);
 }
 
-void cacodemon::update(float dt, player* pdata) {
+bool cacodemon::update(float dt, player* padta, std::vector<std::vector<int>>& map) {
 
+	return 1;
 }
 
 better_sprite* cacodemon::get_sprite() {
 	return this->sprite;
+}
+
+void cacodemon::handle_collision(float damge) {
+
+}
+
+cocos2d::Vec4 cacodemon::get_pos() {
+	return cocos2d::Vec4(this->x, this->y, this->z, .6);
+}
+
+bool cacodemon::is_alive() {
+	return 1;
 }

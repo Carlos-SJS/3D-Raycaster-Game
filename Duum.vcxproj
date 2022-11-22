@@ -831,8 +831,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="Classes\Sprites\imp\walk2.h" />
     <ClInclude Include="Classes\Sprites\imp\walk3.h" />
     <ClInclude Include="Classes\Sprites\imp\walk4.h" />
+    <ClInclude Include="Classes\Sprites\misc\ebarrel.h" />
+    <ClInclude Include="Classes\Sprites\misc\ebarrel_texture.h" />
+    <ClInclude Include="Classes\Sprites\misc\eb_explosion1.h" />
+    <ClInclude Include="Classes\Sprites\misc\eb_explosion2.h" />
+    <ClInclude Include="Classes\Sprites\misc\eb_explosion3.h" />
     <ClInclude Include="Classes\Sprites\sprites.h" />
-    <ClInclude Include="Classes\Sprites\sprite_1.h" />
     <ClInclude Include="Classes\Sprites\zombie\aim.h" />
     <ClInclude Include="Classes\Sprites\zombie\hurt.h" />
     <ClInclude Include="Classes\Sprites\zombie\shoot.h" />
@@ -946,6 +950,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon.cpp" />
     <ClCompile Include="Classes\Sprites\imp\imp.cpp" />
     <ClCompile Include="Classes\Sprites\imp\imp_projectile.cpp" />
+    <ClCompile Include="Classes\Sprites\misc\ebarrel.cpp" />
     <ClCompile Include="Classes\Sprites\zombie\zombie.cpp" />
     <ClCompile Include="Classes\TestScene.cpp" />
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.cpp" />

@@ -71,12 +71,13 @@ private:
 	std::vector<float> depth_map;
 
 	//Sprites
-	better_sprite* test_sprite;
-	better_sprite* test_sprite2;
-
+	ebarrel* barrel1;
 	zombie* zombie1;
 	cacodemon* cdemon1;
 	imp* imp1;
+
+	std::vector<draw_obj*> draw_list;
+	std::vector<entity*> update_list;
 
 	imp_projectile* impp1;
 
@@ -107,6 +108,7 @@ private:
 	void schedule_sprite(better_sprite* sprite);
 	void draw_sprite(float dist, float a, better_sprite* sprite);
 	void draw_sprites();
+	void handle_sprites();
 
 	std::priority_queue<buffered_sprite > sprite_queue;
 
