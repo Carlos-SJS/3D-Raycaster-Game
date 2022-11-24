@@ -26,6 +26,8 @@
 #include "HelloWorldScene.h"
 #include "TestScene.h"
 
+#include "GameData.h"
+
 // #define USE_AUDIO_ENGINE 1
 
 #if USE_AUDIO_ENGINE
@@ -36,7 +38,7 @@ using namespace cocos2d::experimental;
 USING_NS_CC;
 
 //static cocos2d::Size designResolutionSize = cocos2d::Size(480, 320);
-static cocos2d::Size designResolutionSize = cocos2d::Size(576, 384);
+static cocos2d::Size designResolutionSize = cocos2d::Size(SCREEN_WIDTH, SCREEN_HEIGHT);
 static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
 static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);
 static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);

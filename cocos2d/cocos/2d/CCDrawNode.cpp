@@ -296,7 +296,7 @@ void DrawNode::drawPoints(const Vec2 *position, unsigned int numberOfPoints, con
     _customCommandGLPoint.setVertexDrawInfo(0, _bufferCountGLPoint);
 }
 
-void DrawNode::drawPoints(const Vec2* position, unsigned int numberOfPoints, const Color4F* colors) {
+void DrawNode::drawPoints(Vec2* position, unsigned int numberOfPoints, const Color4F* colors) {
     ensureCapacityGLPoint(numberOfPoints);
 
     V2F_C4B_T2F* point = _bufferGLPoint + _bufferCountGLPoint;
@@ -305,6 +305,24 @@ void DrawNode::drawPoints(const Vec2* position, unsigned int numberOfPoints, con
         *(point + i) = { position[i], Color4B(*(colors + i)), Tex2F(1.0,0) };
     }
 
+    _customCommandGLPoint.updateVertexBuffer(point, _bufferCountGLPoint * sizeof(V2F_C4B_T2F), numberOfPoints * sizeof(V2F_C4B_T2F));
+    _bufferCountGLPoint += numberOfPoints;
+    _dirtyGLPoint = true;
+    _customCommandGLPoint.setVertexDrawInfo(0, _bufferCountGLPoint);
+}
+
+void DrawNode::drawPoints(Vec2* position, unsigned int numberOfPoints, const int pointSize, const Color4F* colors) {
+    ensureCapacityGLPoint(numberOfPoints);
+
+    V2F_C4B_T2F* point = _bufferGLPoint + _bufferCountGLPoint;
+    for (unsigned int i = 0; i < numberOfPoints; i++)
+    {
+        position[i].x *= pointSize;
+        position[i].y *= pointSize;
+
+        *(point + i) = { position[i], Color4B(*(colors + i)), Tex2F(pointSize,0) };
+    }
+        
     _customCommandGLPoint.updateVertexBuffer(point, _bufferCountGLPoint * sizeof(V2F_C4B_T2F), numberOfPoints * sizeof(V2F_C4B_T2F));
     _bufferCountGLPoint += numberOfPoints;
     _dirtyGLPoint = true;

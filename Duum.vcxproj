@@ -811,6 +811,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClInclude Include="Classes\AngleUtil.h" />
     <ClInclude Include="Classes\BetterSprite.h" />
+    <ClInclude Include="Classes\GameData.h" />
     <ClInclude Include="Classes\player.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\cacodemon.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\normal.h" />
@@ -1028,6 +1029,15 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{E4E66D9E-103B-3065-BCB6-C644F526A8DA}</Project>
       <Name>external</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\faces\100f.png" />
+    <Image Include="Resources\faces\100l.png" />
+    <Image Include="Resources\faces\100r.png" />
+    <Image Include="Resources\ui_main_bar.png" />
+    <Image Include="Resources\weapons\pistol\pistol1.png" />
+    <Image Include="Resources\weapons\pistol\shoot1.png" />
+    <Image Include="Resources\weapons\pistol\shoot2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

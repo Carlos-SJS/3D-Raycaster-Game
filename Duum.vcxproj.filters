@@ -471,6 +471,9 @@
     <ClInclude Include="Classes\TestScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\GameData.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\CMakeLists.txt" />
@@ -520,5 +523,37 @@
     <Filter Include="Source Files\Classes\Sprites\misc">
       <UniqueIdentifier>{3b60a83b-c479-49ca-896f-9e1345977b41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\weapons">
+      <UniqueIdentifier>{18e17070-849d-4ef0-b9c8-66a38f63944f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\weapons\pistol">
+      <UniqueIdentifier>{d4a4e007-486c-404a-85d3-8a7201f88fa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\faces">
+      <UniqueIdentifier>{4f49136a-f2c1-4753-af11-a446af9e67a0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\ui_main_bar.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\weapons\pistol\pistol1.png">
+      <Filter>Resources\weapons\pistol</Filter>
+    </Image>
+    <Image Include="Resources\weapons\pistol\shoot1.png">
+      <Filter>Resources\weapons\pistol</Filter>
+    </Image>
+    <Image Include="Resources\weapons\pistol\shoot2.png">
+      <Filter>Resources\weapons\pistol</Filter>
+    </Image>
+    <Image Include="Resources\faces\100f.png">
+      <Filter>Resources\faces</Filter>
+    </Image>
+    <Image Include="Resources\faces\100l.png">
+      <Filter>Resources\faces</Filter>
+    </Image>
+    <Image Include="Resources\faces\100r.png">
+      <Filter>Resources\faces</Filter>
+    </Image>
   </ItemGroup>
 </Project>

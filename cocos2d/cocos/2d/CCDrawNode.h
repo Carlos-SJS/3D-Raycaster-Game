@@ -89,7 +89,8 @@ public:
      */
     void drawPoints(const Vec2 *position, unsigned int numberOfPoints, const float pointSize, const Color4F &color);
 
-    void drawPoints(const Vec2* position, unsigned int numberOfPoints, const Color4F* colors);
+    void drawPoints(Vec2* position, unsigned int numberOfPoints, const Color4F* colors);
+    void drawPoints(Vec2* position, unsigned int numberOfPoints, const int pointSize, const Color4F* colors);
     
     /** Draw an line from origin to destination with color. 
      * 

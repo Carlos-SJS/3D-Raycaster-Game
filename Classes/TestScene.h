@@ -76,6 +76,9 @@ private:
 	cacodemon* cdemon1;
 	imp* imp1;
 
+	cocos2d::Sprite* weapon_s;
+	cocos2d::Sprite* face_s;
+
 	std::vector<draw_obj*> draw_list;
 	std::vector<entity*> update_list;
 
@@ -88,9 +91,6 @@ private:
 	const int MAP_WIDTH = 10;
 
 	const int WALL_SIZE = 64;
-
-	int SCREEN_HEIGHT;
-	int SCREEN_WIDTH;
 
 	//In angle (radians) (100 deg)
 	float fov = 1.39626;
@@ -111,6 +111,8 @@ private:
 	void handle_sprites();
 
 	std::priority_queue<buffered_sprite > sprite_queue;
+
+	float face_cooldown=0;
 
 public:
 	std::vector<std::vector<int>> world_map 

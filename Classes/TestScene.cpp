@@ -3,6 +3,7 @@
 //Textures
 #include "Textures/textures.h"
 #include "Sprites/sprites.h"
+#include "GameData.h"
 
 
 USING_NS_CC;
@@ -16,7 +17,7 @@ bool TestScene::init() {
 	if (!Scene::init()) return false;
 
 	auto screen_size = Director::getInstance()->getVisibleSize();
-	ray_count = screen_size.width;
+	ray_count = screen_size.width/PIXEL_SIZE;
 
 
 	GLViewImpl* gl_view = (GLViewImpl*)Director::getInstance()->getOpenGLView();
@@ -71,8 +72,30 @@ bool TestScene::init() {
 	update_list.push_back((entity*)impp1);
 
 
-	depth_map.resize(screen_size.width);
+	depth_map.resize(screen_size.width/PIXEL_SIZE);
 
+	//UI Shit
+	Sprite* ui_main = Sprite::create("ui_main_bar.png");
+
+	float sX = UI_WIDTH / ui_main->getContentSize().width;
+	float sY = UI_HEIGHT / ui_main->getContentSize().height;
+	
+	ui_main->setScale(sX, sY);
+	ui_main->setAnchorPoint(Vec2(0,0));
+	ui_main->setPosition(Vec2(0, 0));
+	this->addChild(ui_main, 15);
+
+	weapon_s = Sprite::create("weapons/pistol/pistol1.png");
+	weapon_s->setScale(0.2*(float)SCREEN_WIDTH / weapon_s->getContentSize().width, 0.2 * (float)SCREEN_HEIGHT / weapon_s->getContentSize().height);
+	weapon_s->setAnchorPoint(Vec2(.5, 0));
+	weapon_s->setPosition(Vec2(SCREEN_WIDTH/2.0, UI_HEIGHT));
+	this->addChild(weapon_s, 10);
+
+	face_s = Sprite::create("faces/100f.png");
+	face_s->setScale(sX, sY);
+	face_s->setAnchorPoint(Vec2(0, 0));
+	face_s->setPosition(Vec2(0.63 * SCREEN_WIDTH, 0.025*UI_HEIGHT));
+	this->addChild(face_s, 15);
 
 	this->scheduleUpdate();
 
@@ -161,6 +184,9 @@ bool TestScene::inside(float x, float y) {
 
 void TestScene::draw_world() {
 	auto screen_size = Director::getInstance()->getVisibleSize();
+	screen_size.height = GAME_HEIGHT;
+	screen_size.height /= PIXEL_SIZE;
+	screen_size.width /= PIXEL_SIZE;
 
 	float cangle = player_data.angle + fov/2 + 0.0000001;
 	float step = fov/ray_count;
@@ -316,7 +342,7 @@ void TestScene::draw_world() {
 			int t = world_map[(int)vc.y][(int)vc.x] - 1;
 
 			for (int h = 0; h < w_height; h++) {
-				points[h] = Vec2(x, y - h);
+				points[h] = Vec2(x, SCREEN_DIFF + y - h);
 
 				int t_index;
 
@@ -353,7 +379,7 @@ void TestScene::draw_world() {
 			int t = world_map[(int)hz.y][(int)hz.x] - 1;
 
 			for (int h = 0; h < w_height; h++) {
-				points[h] = Vec2(x, y - h);
+				points[h] = Vec2(x, SCREEN_DIFF + y - h);
 
 				int t_index;
 
@@ -401,15 +427,15 @@ void TestScene::draw_world() {
 			int texture_index = ty * 64 * 3 + tx * 3;
 
 			//Draw floor
-			points[w_height + c] = Vec2(r, y);
+			points[w_height + c] = Vec2(r, SCREEN_DIFF + y);
 			colors[w_height + c] = Color4F(((float)textures[ft][texture_index]) / 255.0, ((float)textures[ft][texture_index + 1]) / 255.0, ((float)textures[ft][texture_index + 2]) / 255.0, 1.0);
 
 			//Draw ceiling
-			points[w_height + c + 1] = Vec2(r, screen_size.height - y);
+			points[w_height + c + 1] = Vec2(r, SCREEN_DIFF + screen_size.height - y);
 			colors[w_height + c + 1] = Color4F(((float)textures[ct][texture_index]) / 255.0, ((float)textures[ct][texture_index + 1]) / 255.0, ((float)textures[ct][texture_index + 2]) / 255.0, 1.0);
 		}
 
-		dNode->drawPoints(points, screen_size.height, colors);
+		dNode->drawPoints(points, screen_size.height, PIXEL_SIZE, colors);
 
 		/*log(("-- Data ----------- (" + to_string((float)r) + ")").c_str());
 		log(("Current Angle: " + to_string(cangle)).c_str());
@@ -475,8 +501,18 @@ void TestScene::handle_input(float dt) {
 		if (player_data.angle < 0.0) player_data.angle += 2 * PI;
 	}*/
 
+	if (abs(delta_mouse) > 7) {
+		if (delta_mouse > 0) face_s->setTexture("faces/100l.png");
+		else face_s->setTexture("faces/100r.png");
+		face_cooldown = .1;
+	}
+	else {
+		if (face_cooldown > 0) face_cooldown -= dt;
+		else face_s->setTexture("faces/100f.png");
+	}
+
 	if (delta_mouse != 0.0) {
-		player_data.angle += 0.001 * delta_mouse;
+				player_data.angle += 0.001 * delta_mouse;
 		delta_mouse = 0;
 
 		if (player_data.angle >= 2 * PI) player_data.angle -= 2 * PI;
@@ -511,6 +547,10 @@ void TestScene::draw_sprites() {
 
 void TestScene::draw_sprite(float dist, float a, better_sprite* sprite) {
 	auto screen_size = Director::getInstance()->getWinSize();	
+
+	screen_size.height = GAME_HEIGHT;
+	screen_size.height /= PIXEL_SIZE;
+	screen_size.width /= PIXEL_SIZE;
 
 	float pa = player_data.angle + fov / 2;
 	pa = angle_util::fix(pa);
@@ -568,19 +608,19 @@ void TestScene::draw_sprite(float dist, float a, better_sprite* sprite) {
 					tindex = (int)((float)(tsy-1) - ystep * (float)j) * tsx * 3 + (int)((float)i * xstep) * 3;
 
 					if (texture[tindex] != 0 || texture[tindex + 1] != 255 || texture[tindex + 2] != 255) {
-						point_buffer[point_count] = Vec2((int)(x + i), (int)(y + j));
+						point_buffer[point_count] = Vec2((int)(x + i), SCREEN_DIFF + (int)(y + j));
 						color_buffer[point_count] = Color4F((float)texture[tindex] / 255.0, (float)texture[tindex + 1] / 255.0, (float)texture[tindex + 2] / 255.0, 1);
 						point_count++;
 					}
 				}
 				if (point_count > 2000 - screen_size.height) {
-					dNodeS->drawPoints(point_buffer, point_count, color_buffer);
+					dNodeS->drawPoints(point_buffer, point_count, (float)PIXEL_SIZE, color_buffer);
 					point_count = 0;
 				}
 			}
 		}
 
-		if (point_count > 0) dNodeS->drawPoints(point_buffer, point_count, color_buffer);
+		if (point_count > 0) dNodeS->drawPoints(point_buffer, point_count, PIXEL_SIZE, color_buffer);
 	}
 }
 
