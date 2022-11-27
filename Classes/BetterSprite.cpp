@@ -26,6 +26,12 @@ void better_sprite::set_position(float x, float y) {
 	this->y = y;
 }
 
+void better_sprite::set_position(float x, float y, float z) {
+	this->x = x;
+	this->y = y;
+	this->z = z;
+}
+
 void better_sprite::set_texture(int* t) {
 	this->texture = t;
 }

@@ -1,10 +1,11 @@
 #include "TestScene.h"
-
+//hi a
 //Textures
 #include "Textures/textures.h"
 #include "Sprites/sprites.h"
 #include "GameData.h"
 
+//	#include "AudioEngine.h"
 
 USING_NS_CC;
 
@@ -15,6 +16,10 @@ Scene* TestScene::createScene(){
 
 bool TestScene::init() {
 	if (!Scene::init()) return false;
+
+	//AudioEngine::uncacheAll();
+	//AudioEngine::preload("audio/music/la_grange.wav");
+	//AudioEngine::play2d("audio/music/la_grange.mp3");
 
 	auto screen_size = Director::getInstance()->getVisibleSize();
 	ray_count = screen_size.width/PIXEL_SIZE;
@@ -35,7 +40,7 @@ bool TestScene::init() {
 
 	player_data.x = 2.3;
 	player_data.y = 4;
-	player_data.angle = P2;
+	player_data.angle = P3;
 	player_data.speed = 1.0;
 
 	auto listener = EventListenerKeyboard::create();
@@ -47,17 +52,18 @@ bool TestScene::init() {
 
 	auto _mouseListener = EventListenerMouse::create();
 	_mouseListener->onMouseMove = CC_CALLBACK_1(TestScene::onMouseMove, this);
+	_mouseListener->onMouseDown = CC_CALLBACK_1(TestScene::onMouseDown, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
 
 
 	//Sprites
-	barrel1 = ebarrel::create(1.5, 1.5);
+	barrel1 = ebarrel::create(1.5, 1.5, (game_manager*)this);
 
 	cdemon1 = cacodemon::create(8.5, 8.5, .15);
 	zombie1 = zombie::create(1.5, 8.5);
 	imp1 = imp::create(6.5, 3.5);
-	impp1 = imp_projectile::create(1.5, 8.5, .5, P2);
+	impp1 = imp_projectile::create(1.5, 8.5, .5, P2, this);
 
 	draw_list.push_back((draw_obj*)barrel1);
 	draw_list.push_back((draw_obj*)cdemon1);
@@ -70,6 +76,13 @@ bool TestScene::init() {
 	update_list.push_back((entity*)zombie1);
 	update_list.push_back((entity*)imp1);
 	update_list.push_back((entity*)impp1);
+
+	//solid_obj_list.push_back((colider*)zombie1);
+	solid_obj_list.push_back((colider*)cdemon1);
+	solid_obj_list.push_back((colider*)imp1);
+	solid_obj_list.push_back((colider*)barrel1);
+	solid_obj_list.push_back((colider*)&player_data);
+
 
 
 	depth_map.resize(screen_size.width/PIXEL_SIZE);
@@ -96,6 +109,10 @@ bool TestScene::init() {
 	face_s->setAnchorPoint(Vec2(0, 0));
 	face_s->setPosition(Vec2(0.63 * SCREEN_WIDTH, 0.025*UI_HEIGHT));
 	this->addChild(face_s, 15);
+
+	crosshair = Sprite::create("crosshair1.png");
+	crosshair->setPosition(Vec2(SCREEN_WIDTH/2, UI_HEIGHT + GAME_HEIGHT/2));
+	this->addChild(crosshair, 10);
 
 	this->scheduleUpdate();
 
@@ -159,6 +176,10 @@ void TestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 
 void TestScene::onMouseMove(EventMouse* e){
 	delta_mouse -= e->getCursorX();
+}
+
+void TestScene::onMouseDown(EventMouse* e) {
+	if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) handle_player_shot();
 }
 
 std::string TestScene::to_string(float f) {
@@ -533,7 +554,7 @@ void TestScene::schedule_sprite(better_sprite* sprite) {
 	float dy = (player_data.y - pos.y);
 	float a = angle_util::get_angle(dx, dy);
 
-	float dist = cos(a) * (pos.x - player_data.x) - sin(a) * (pos.y - player_data.y);
+	float dist = sqrt(dx * dx + dy * dy);
 
 	sprite_queue.push(buffered_sprite(dist, a, sprite));
 }
@@ -555,7 +576,8 @@ void TestScene::draw_sprite(float dist, float a, better_sprite* sprite) {
 	float pa = player_data.angle + fov / 2;
 	pa = angle_util::fix(pa);
 
-	float cospa = cos(angle_util::fix(player_data.angle - a));
+	//float cospa = cos(angle_util::fix(player_data.angle - a));
+	float cospa = cos(angle_util::fix(a-player_data.angle));
 
 	//if (dist < .74) return;
 
@@ -633,19 +655,28 @@ void TestScene::update(float dt) {
 	handle_input(dt);
 
 	//Update entities
-	for (auto sp = update_list.begin(); sp != update_list.end(); sp++) {
+	int inc=1;
+	for (auto sp = update_list.begin(); sp != update_list.end(); sp+=inc) {
+		if (!inc) inc = 1;
 		if (!(*sp)->update(dt, &player_data, world_map)) {
-			sp = update_list.erase(sp)-1;
+			sp = update_list.erase(sp);
+			inc = 0;
 		}
 	}
+
+	targets = get_targets(player_data.x, player_data.y, player_data.angle);
+	
+	player_animator(dt);
 
 	//Reset draw node
 	dNode->clear();
 	dNodeS->clear();
 
-	for (auto sp = draw_list.begin(); sp != draw_list.end(); sp++) {
-		if((*sp)->is_alive()) schedule_sprite((*sp)->get_sprite());
-		else sp = draw_list.erase(sp) - 1;
+	inc = 1;
+	for (auto sp = draw_list.begin(); sp != draw_list.end(); sp+=inc) {
+		if (!inc) inc = 1;
+		if((*sp)->is_visible()) schedule_sprite((*sp)->get_sprite());
+		else sp = draw_list.erase(sp), inc=0;
 	}
 
 
@@ -653,4 +684,194 @@ void TestScene::update(float dt) {
 
 	//Draw world
 	draw_world();
+}
+
+std::priority_queue<target_entity> TestScene::get_targets(float x, float y, float a) {
+	float at = tan(a);
+	float dx, dy, cx, cy, wall_d = 5000000;
+
+	int inc = 1;
+	for (auto it = solid_obj_list.begin(); it != solid_obj_list.end(); it+=inc) {
+		if (!inc) inc = 1;
+		if (!(*it)->is_solid()) it = solid_obj_list.erase(it), inc = 0;
+	}
+
+	cy = y;
+	if (a<P2 || a>P3) {
+		if (x - (int)x > eps) cx = (int)(x + 1);
+		else cx = (int)x;
+
+		cy -= (cx - x) * at;
+
+		dx = 1.0;
+	}
+	if (a > P2 && a < P3) {
+		if ((int)(x) - x > eps) cx = (int)(x - 1) - .000001;
+		else cx = (int)x - .000001;
+
+		cy -= (cx - x) * at;
+
+		dx = -1.0;
+	}
+
+	dy = -at * dx;
+
+	if (a != PI && a != 0) {
+		while (inside(cx, cy)) {
+			if (world_map[(int)cy][(int)cx] > 0) {
+				cx -= x; cy -= y;
+				wall_d = sqrt(cx*cx + cy*cy);
+				break;
+			}
+
+			cx += dx;
+			cy += dy;
+		}
+	}
+
+	cx = x;
+	if (a < PI && a>0) {
+		if ((int)(y - 1) - y > eps) cy = (int)(y - 1) - .000001;
+		else cy = (int)y - .000001;
+
+		cx += (y - cy) / at;
+
+		dy = -1.0;
+	}
+
+	if (a > PI || a < 0) {
+		if (y - int(y) > eps)  cy = (int)(y + 1);
+		else cy = (int)y;
+
+		cx += (y - cy) / at;
+
+		dy = 1.0;
+
+	}
+
+	dx = -dy / at;
+
+	if (a != P2 && a != P3) {
+		while (inside(cx, cy)) {
+			if (world_map[(int)cy][(int)cx] > 0) {
+				cx -= x;cy -= y;
+				wall_d = min(sqrt(cx*cx + cy*cy), wall_d);
+				break;
+			}
+
+			cx += dx;
+			cy += dy;
+		}
+	}
+
+	float dist, size, ewidth, ex, ea, cospa, sinpa;
+	Vec3 pos;
+
+	std::priority_queue<target_entity> target_list;
+
+	for (auto obj : solid_obj_list) {
+		pos = obj->get_pos();
+		dx = pos.x - x, dy = y - pos.y;
+
+		ea = angle_util::get_angle(dx, dy);
+
+		sinpa = sin(angle_util::fix(a - ea));
+		//cospa = cos(angle_util::fix(a - ea));
+		cospa = cos(angle_util::fix(ea-a));
+
+		dist = sqrt(dx * dx + dy * dy);
+
+		size = 1 / (dist * cospa);
+
+		ewidth = obj->get_rect().x * size;
+
+		if (dist > .5 && abs(a-ea)<P2 &&  dist < wall_d && abs(dist * sinpa) < obj->get_rect().x / 2 * .8) {
+			target_list.push(target_entity(obj, dist));
+		}
+	}
+
+	return target_list;
+}
+
+void TestScene::player_animator(float dt) {
+	if (weapon_cooldown) {
+		weapon_anim_timer += dt;
+
+		if (weapon_anim_timer >= weapon_f_time[weapon_id][weapon_frame]) {
+			weapon_anim_timer = 0;
+			weapon_frame++;
+
+			if(weapon_frame == weapon_textures[weapon_id].size()-1) weapon_cooldown = 0;
+
+			weapon_s->setTexture(weapon_textures[weapon_id][weapon_frame]);
+		}
+	}
+
+	if (targets.empty() && crosshair_mode == 1) {
+		crosshair_mode = 0;
+		crosshair->setTexture("crosshair1.png");
+	}
+	else if (!targets.empty() && crosshair_mode == 0) {
+		crosshair_mode = 1;
+		crosshair->setTexture("crosshair2.png");
+	}
+}
+
+void TestScene::handle_player_shot() {
+	if (!weapon_cooldown) {
+		weapon_cooldown = 1;
+		weapon_anim_timer = 0;
+		weapon_frame = 0;
+
+		weapon_s->setTexture(weapon_textures[weapon_id][0]);
+
+		if (targets.empty()) return;
+
+		if (weapon_id == 0) {
+
+		}
+		else if (weapon_id == 1) {
+			targets.top().obj->handle_collision(weapon_damage[weapon_id]);
+		}
+
+	}
+}
+
+std::vector<colider*> TestScene::get_objs(float x, float y, float z, float radius) {
+	int inc = 1;
+	for (auto obj = solid_obj_list.begin(); obj != solid_obj_list.end(); obj += inc) {
+		if (inc == 0) inc = 1;
+		if (!(*obj)->is_solid()) obj = solid_obj_list.erase(obj), inc = 0;
+	}
+
+	float radius2 = radius*radius;
+
+	cocos2d::Vec3 pos;
+	float dx, dy, dist, d;
+
+	std::vector<colider*>  obj_list;
+
+	for (auto obj : solid_obj_list) {
+		pos = obj->get_pos();
+
+		dx = x - pos.x;
+		dy = y - pos.y;
+
+		dist = dx * dx + dy * dy;
+
+		if (dist <= radius) {
+			if (abs(dy) < radius + obj->get_rect().y / 2) {
+				obj_list.push_back(obj);
+			}
+		}
+
+		return obj_list;
+	}
+}
+
+void TestScene::handle_explosion(float x, float y, float z, float radius, int damage) {
+	std::vector<colider*> objs = get_objs(x, y, z, radius);
+	for (auto obj : objs) {
+		obj -> handle_collision(damage);
+	}
 }

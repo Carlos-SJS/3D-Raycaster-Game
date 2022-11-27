@@ -13,13 +13,17 @@ private:
 	float animation_time = 0;
 	int animation_step = 0;
 
+	game_manager* manager;
+
 public:
-	ebarrel(float x, float y);
-	static ebarrel* create(float x, float y);
+	ebarrel(float x, float y, game_manager* manager);
+	static ebarrel* create(float x, float y, game_manager* manager);
 
 	//Colider stuff
 	void handle_collision(float damage);
-	cocos2d::Vec4 get_pos();
+	cocos2d::Vec3 get_pos();
+	cocos2d::Vec2 get_rect();
+
 
 	//Draw stuff
 	better_sprite* get_sprite();
@@ -29,5 +33,6 @@ public:
 
 	void animator(float dt);
 
-	bool is_alive();
+	bool is_solid();
+	bool is_visible();
 };

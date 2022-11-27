@@ -30,7 +30,7 @@
 #define Q_KEY 4
 #define E_KEY 5
 
-class TestScene : public cocos2d::Scene{
+class TestScene : public cocos2d::Scene, game_manager{
 private:
 	cocos2d::DrawNode* dNode;
 	cocos2d::DrawNode* dNodeS;
@@ -78,9 +78,11 @@ private:
 
 	cocos2d::Sprite* weapon_s;
 	cocos2d::Sprite* face_s;
+	cocos2d::Sprite* crosshair;
 
 	std::vector<draw_obj*> draw_list;
 	std::vector<entity*> update_list;
+	std::vector<colider*> solid_obj_list;
 
 	imp_projectile* impp1;
 
@@ -114,6 +116,29 @@ private:
 
 	float face_cooldown=0;
 
+	void handle_player_shot();
+
+	//Anamtion shit
+	void player_animator(float dt);
+	
+	float weapon_anim_timer = 0;
+	bool weapon_cooldown = 0;
+
+	// 0 -> fist?, 1 -> shity gun
+	int weapon_id = 1;
+	int weapon_frame = 2;
+
+	int crosshair_mode = 0;
+
+	std::vector<std::vector<std::string>> weapon_textures{ {}, {"weapons/pistol/shoot1.png", "weapons/pistol/shoot2.png", "weapons/pistol/pistol1.png"}};
+	std::vector<std::vector<float>> weapon_f_time{ {},{.23, .18, 0} };
+
+	std::vector<int> weapon_damage {20, 30};
+
+	
+	std::priority_queue<target_entity> targets;
+
+
 public:
 	std::vector<std::vector<int>> world_map 
 					   { { 1, 1, 7,21,13,12,13, 7, 1, 1},
@@ -140,6 +165,12 @@ public:
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode, cocos2d::Event*);
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode, cocos2d::Event*);
 	void onMouseMove(cocos2d::EventMouse*);
+	void onMouseDown(cocos2d::EventMouse*);
+
+	//Stuff for shots, damage and collisions
+	std::priority_queue<target_entity> get_targets(float x, float y, float a);
+	std::vector<colider*> get_objs(float x, float y, float z, float radius);
+	void handle_explosion(float x, float y, float z, float radius, int damage);
 
 	CREATE_FUNC(TestScene);
 };

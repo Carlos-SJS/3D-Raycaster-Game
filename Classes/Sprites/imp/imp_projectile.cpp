@@ -15,7 +15,7 @@ namespace imp_proj_data {
 	int* explotion[] = { explode1, explode2, explode3 };
 }
 
-imp_projectile::imp_projectile(float x, float y, float z, float angle) {
+imp_projectile::imp_projectile(float x, float y, float z, float angle, game_manager* manager) {
 	this->x = x;
 	this->y = y;
 	this->z = z;
@@ -27,10 +27,12 @@ imp_projectile::imp_projectile(float x, float y, float z, float angle) {
 
 	this->sprite = better_sprite::create(imp_proj_data::projectile1, 15, 15, .3, .3, x, y, z);
 	this->e_sprite = better_sprite::create(imp_proj_data::explode1, 50, 44, .6, .528, 0, 0, z);
+
+	this->manager = manager;
 }
 
-imp_projectile* imp_projectile::create(float x, float y, float z, float angle) {
-	return new imp_projectile(x, y, z, angle);
+imp_projectile* imp_projectile::create(float x, float y, float z, float angle, game_manager* manager) {
+	return new imp_projectile(x, y, z, angle, manager);
 }
 
 //Returns 0 if projectile exploded
@@ -41,6 +43,8 @@ bool imp_projectile::update(float dt, player* padta, std::vector<std::vector<int
 			this->y -= dt*this->dy;
 
 			sprite->set_position(x,y);
+
+			if (!manager->get_objs(x, y, z, .15).empty()) this->handle_explotion(dt);
 		}
 		else {
 			this->handle_explotion(dt);
@@ -75,6 +79,8 @@ void imp_projectile::handle_explotion(float dt) {
 	this->animator_time = -dt;
 	this->state = 1;
 	this->e_sprite->set_position(this->x, this->y);
+
+	manager->handle_explosion(x, y, z, .15, 20);
 }
 
 
@@ -83,6 +89,6 @@ better_sprite* imp_projectile::get_sprite() {
 	else return this->e_sprite;
 }
 
-bool imp_projectile::is_alive() {
+bool imp_projectile::is_visible() {
 	return state != 2;
 }

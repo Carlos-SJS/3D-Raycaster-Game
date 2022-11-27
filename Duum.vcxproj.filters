@@ -34,6 +34,9 @@
     <ClCompile Include="Classes\Sprites\misc\ebarrel.cpp">
       <Filter>Source Files\Classes\Sprites\misc</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\player.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
     <ClCompile Include="Classes\TestScene.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
@@ -462,16 +465,70 @@
     <ClInclude Include="Classes\Sprites\misc\eb_explosion1.h">
       <Filter>Source Files\Classes\Sprites\misc</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\GameData.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
     <ClInclude Include="Classes\Sprites\misc\eb_explosion2.h">
       <Filter>Source Files\Classes\Sprites\misc</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Sprites\misc\eb_explosion3.h">
       <Filter>Source Files\Classes\Sprites\misc</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\TestScene.h">
-      <Filter>Source Files\Classes</Filter>
+    <ClInclude Include="Classes\Sprites\zombie\dying1.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\GameData.h">
+    <ClInclude Include="Classes\Sprites\zombie\dying2.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\dying3.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\dying4.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\dying5.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death1.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death2.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death3.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death4.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death5.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\hurt.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death1.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death2.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death3.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death4.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death5.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death6.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\hurt.h">
+      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\TestScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
   </ItemGroup>
@@ -532,6 +589,12 @@
     <Filter Include="Resources\faces">
       <UniqueIdentifier>{4f49136a-f2c1-4753-af11-a446af9e67a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\audio">
+      <UniqueIdentifier>{fea4be6e-fdca-4e21-a8d6-ca6f0133c262}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\audio\music">
+      <UniqueIdentifier>{4d0d7236-5b35-41a2-9dd4-735e2bb8941f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\ui_main_bar.png">
@@ -555,5 +618,22 @@
     <Image Include="Resources\faces\100r.png">
       <Filter>Resources\faces</Filter>
     </Image>
+    <Image Include="Resources\crosshair1.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\crosshair2.png">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\audio\music\la_grange.mp3">
+      <Filter>Resources\audio\music</Filter>
+    </Media>
+    <Media Include="Resources\audio\music\running_from_evil.mp3">
+      <Filter>Resources\audio\music</Filter>
+    </Media>
+    <Media Include="Resources\audio\music\la_grange.wav">
+      <Filter>Resources\audio\music</Filter>
+    </Media>
   </ItemGroup>
 </Project>

@@ -26,13 +26,15 @@ private:
 
 	void handle_explotion(float dt);
 
+	game_manager* manager;
+
 public:
-	imp_projectile(float x, float y, float z, float angle);
-	static imp_projectile* create(float x, float y, float z, float angle);
+	imp_projectile(float x, float y, float z, float angle, game_manager* manager);
+	static imp_projectile* create(float x, float y, float z, float angle, game_manager* manager);
 
 	bool update(float dt, player* padta, std::vector<std::vector<int>>& map);
 
 	better_sprite* get_sprite();
 
-	bool is_alive();
+	bool is_visible();
 };

@@ -28,12 +28,13 @@
 
 #include "GameData.h"
 
-// #define USE_AUDIO_ENGINE 1
+//#define USE_AUDIO_ENGINE 1
 
 #if USE_AUDIO_ENGINE
 #include "audio/include/AudioEngine.h"
-using namespace cocos2d::experimental;
+//using namespace cocos2d::experimental;
 #endif
+
 
 USING_NS_CC;
 
@@ -125,7 +126,7 @@ void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 
 #if USE_AUDIO_ENGINE
-    AudioEngine::pauseAll();
+    //AudioEngine::pauseAll();
 #endif
 }
 
@@ -134,6 +135,6 @@ void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
 #if USE_AUDIO_ENGINE
-    AudioEngine::resumeAll();
+    //AudioEngine::resumeAll();
 #endif
 }

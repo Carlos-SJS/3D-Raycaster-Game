@@ -6,7 +6,7 @@ namespace angle_util {
 
 		if (dx > 0) a = atan(dy / dx);
 		else if (dx < 0) a = atan(dy / dx) + PI;
-		else a = P2 * (dy / abs(dy));
+		else a = P2 * (dy!=0?dy<0?-1:1:0);
 
 		return fix(a);
 	}

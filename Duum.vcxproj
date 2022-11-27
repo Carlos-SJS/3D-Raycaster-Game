@@ -814,15 +814,28 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="Classes\GameData.h" />
     <ClInclude Include="Classes\player.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\cacodemon.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\death1.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\death2.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\death3.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\death4.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\death5.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\death6.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\hurt.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\normal.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\shoot1.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\shoot2.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\shoot3.h" />
     <ClInclude Include="Classes\Sprites\entities.h" />
     <ClInclude Include="Classes\Sprites\imp\aim.h" />
+    <ClInclude Include="Classes\Sprites\imp\death1.h" />
+    <ClInclude Include="Classes\Sprites\imp\death2.h" />
+    <ClInclude Include="Classes\Sprites\imp\death3.h" />
+    <ClInclude Include="Classes\Sprites\imp\death4.h" />
+    <ClInclude Include="Classes\Sprites\imp\death5.h" />
     <ClInclude Include="Classes\Sprites\imp\explode1.h" />
     <ClInclude Include="Classes\Sprites\imp\explode2.h" />
     <ClInclude Include="Classes\Sprites\imp\explode3.h" />
+    <ClInclude Include="Classes\Sprites\imp\hurt.h" />
     <ClInclude Include="Classes\Sprites\imp\imp.h" />
     <ClInclude Include="Classes\Sprites\imp\imp_projectile.h" />
     <ClInclude Include="Classes\Sprites\imp\projectile1.h" />
@@ -839,6 +852,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="Classes\Sprites\misc\eb_explosion3.h" />
     <ClInclude Include="Classes\Sprites\sprites.h" />
     <ClInclude Include="Classes\Sprites\zombie\aim.h" />
+    <ClInclude Include="Classes\Sprites\zombie\dying1.h" />
+    <ClInclude Include="Classes\Sprites\zombie\dying2.h" />
+    <ClInclude Include="Classes\Sprites\zombie\dying3.h" />
+    <ClInclude Include="Classes\Sprites\zombie\dying4.h" />
+    <ClInclude Include="Classes\Sprites\zombie\dying5.h" />
     <ClInclude Include="Classes\Sprites\zombie\hurt.h" />
     <ClInclude Include="Classes\Sprites\zombie\shoot.h" />
     <ClInclude Include="Classes\Sprites\zombie\walk1.h" />
@@ -948,6 +966,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\proj.win32\resource.h" />
     <ClCompile Include="Classes\AngleUtil.cpp" />
     <ClCompile Include="Classes\BetterSprite.cpp" />
+    <ClCompile Include="Classes\player.cpp" />
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon.cpp" />
     <ClCompile Include="Classes\Sprites\imp\imp.cpp" />
     <ClCompile Include="Classes\Sprites\imp\imp_projectile.cpp" />
@@ -1031,6 +1050,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\crosshair1.png" />
+    <Image Include="Resources\crosshair2.png" />
     <Image Include="Resources\faces\100f.png" />
     <Image Include="Resources\faces\100l.png" />
     <Image Include="Resources\faces\100r.png" />
@@ -1038,6 +1059,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <Image Include="Resources\weapons\pistol\pistol1.png" />
     <Image Include="Resources\weapons\pistol\shoot1.png" />
     <Image Include="Resources\weapons\pistol\shoot2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\audio\music\la_grange.mp3" />
+    <Media Include="Resources\audio\music\la_grange.wav" />
+    <Media Include="Resources\audio\music\running_from_evil.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

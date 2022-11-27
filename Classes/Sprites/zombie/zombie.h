@@ -10,6 +10,7 @@
 class zombie : public entity, colider, draw_obj{
 private:
 	better_sprite* sprite;
+	better_sprite* death_s;
 
 	float x, y;
 
@@ -22,8 +23,13 @@ private:
 	bool aim = 0;
 	bool shooting = 0;
 	bool damaged = 0;
+	bool dying = 0;
+
+	int animation_frame=0;
 
 	bool alive = 1;
+
+	int hp = 100;
 
 public:
 	zombie(float x, float y);
@@ -33,10 +39,13 @@ public:
 	void animator(); //Controls entity animations
 
 	//Collision related stuff
-	cocos2d::Vec4 get_pos();
+	cocos2d::Vec3 get_pos();
+	cocos2d::Vec2 get_rect();
+
 	void handle_collision(float damage);
 
 	better_sprite* get_sprite();
 
-	bool is_alive();
+	bool is_visible();
+	bool is_solid();
 };
