@@ -77,7 +77,7 @@ bool TestScene::init() {
 	update_list.push_back((entity*)imp1);
 	update_list.push_back((entity*)impp1);
 
-	//solid_obj_list.push_back((colider*)zombie1);
+	solid_obj_list.push_back((colider*)zombie1);
 	solid_obj_list.push_back((colider*)cdemon1);
 	solid_obj_list.push_back((colider*)imp1);
 	solid_obj_list.push_back((colider*)barrel1);
@@ -471,6 +471,7 @@ void TestScene::draw_world() {
 
 void TestScene::handle_input(float dt) {
     float wdist = .2;
+	float sdist = 0;
 
 	if (key_states[UP_ARROW_KEY]) {
 		float c = cos(player_data.angle);
@@ -479,8 +480,8 @@ void TestScene::handle_input(float dt) {
 		float dx = c * player_data.speed * dt;
 		float dy = s * player_data.speed * dt;
 
-		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * .4)] == 0) player_data.x += dx;
-		if (world_map[(int)(player_data.y - dy - s * .4)][(int)player_data.x] == 0) player_data.y -= dy;
+		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * .4)] == 0 && get_objs(player_data.x + dx, player_data.y, 0, .3).size() < 2) player_data.x += dx;
+		if (world_map[(int)(player_data.y - dy - s * .4)][(int)player_data.x] == 0 && get_objs(player_data.x, player_data.y - dy, 0, .3).size() < 2) player_data.y -= dy;
 	}
 	if (key_states[DOWN_ARROW_KEY]) {
 		float c = cos(player_data.angle);
@@ -489,8 +490,8 @@ void TestScene::handle_input(float dt) {
 		float dx = c * player_data.speed * dt;
 		float dy = s * player_data.speed * dt;
 
-		if (world_map[(int)player_data.y][(int)(player_data.x - dx - c * wdist)] == 0) player_data.x -= dx;
-		if (world_map[(int)(player_data.y + dy + s * wdist)][(int)player_data.x] == 0) player_data.y += dy;
+		if (world_map[(int)player_data.y][(int)(player_data.x - dx - c * wdist)] == 0 && get_objs(player_data.x - dx, player_data.y, 0, .3).size()<2) player_data.x -= dx;
+		if (world_map[(int)(player_data.y + dy + s * wdist)][(int)player_data.x] == 0 && get_objs(player_data.x, player_data.y + dy, 0, .3).size() < 2) player_data.y += dy;
 	}
 	if (key_states[RIGHT_ARROW_KEY]) {
 		float c = cos(player_data.angle - P2);
@@ -499,8 +500,8 @@ void TestScene::handle_input(float dt) {
 		float dx = c * player_data.speed * dt;
 		float dy = s * player_data.speed * dt;
 
-		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * wdist)] == 0) player_data.x += dx;
-		if (world_map[(int)(player_data.y - dy - s * wdist)][(int)player_data.x] == 0) player_data.y -= dy;
+		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * wdist)] == 0 && get_objs(player_data.x + dx, player_data.y, 0, .3).size() < 2) player_data.x += dx;
+		if (world_map[(int)(player_data.y - dy - s * wdist)][(int)player_data.x] == 0 && get_objs(player_data.x, player_data.y - dy, 0, .3).size() < 2) player_data.y -= dy;
 	}
 	if (key_states[LEFT_ARROW_KEY]) {
 		float c = cos(player_data.angle + P2);
@@ -509,8 +510,8 @@ void TestScene::handle_input(float dt) {
 		float dx = c * player_data.speed * dt;
 		float dy = s * player_data.speed * dt;
 
-		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * wdist)] == 0)player_data.x += dx;
-		if (world_map[(int)(player_data.y - dy - s * wdist)][(int)player_data.x] == 0)player_data.y -= dy;
+		if (world_map[(int)player_data.y][(int)(player_data.x + dx + c * wdist)] == 0 && get_objs(player_data.x + dx, player_data.y, 0, .3).size() < 2)player_data.x += dx;
+		if (world_map[(int)(player_data.y - dy - s * wdist)][(int)player_data.x] == 0 && get_objs(player_data.x, player_data.y - dy, 0, .3).size() < 2)player_data.y -= dy;
 	}
 
 	/*if (key_states[Q_KEY]) {
@@ -583,8 +584,8 @@ void TestScene::draw_sprite(float dist, float a, better_sprite* sprite) {
 
 	float unit_size = (screen_size.height) / (dist * cospa);
 
-	float swidth = min(sprite->get_sx() * unit_size, screen_size.width);
-	float sheight = min(sprite->get_sy() * unit_size, screen_size.height);
+	float swidth = sprite->get_sx() * unit_size;
+	float sheight = sprite->get_sy() * unit_size;
 
 	Vec2 point_buffer[2000];
 	Color4F color_buffer[2000];
@@ -785,7 +786,7 @@ std::priority_queue<target_entity> TestScene::get_targets(float x, float y, floa
 
 		ewidth = obj->get_rect().x * size;
 
-		if (dist > .5 && abs(a-ea)<P2 &&  dist < wall_d && abs(dist * sinpa) < obj->get_rect().x / 2 * .8) {
+		if (dist > .2 && abs(a-ea)<P2 &&  dist < wall_d && abs(dist * sinpa) < obj->get_rect().x / 2 * .8) {
 			target_list.push(target_entity(obj, dist));
 		}
 	}
@@ -841,32 +842,42 @@ std::vector<colider*> TestScene::get_objs(float x, float y, float z, float radiu
 	int inc = 1;
 	for (auto obj = solid_obj_list.begin(); obj != solid_obj_list.end(); obj += inc) {
 		if (inc == 0) inc = 1;
-		if (!(*obj)->is_solid()) obj = solid_obj_list.erase(obj), inc = 0;
+		if (!(*obj)->is_solid()) {
+			obj = solid_obj_list.erase(obj), inc = 0;
+			log("obj removed from solids list!");
+		}
 	}
 
 	float radius2 = radius*radius;
 
 	cocos2d::Vec3 pos;
-	float dx, dy, dist, d;
+	cocos2d::Vec2 rect;
+	float dx, dy, dz, dist, d;
 
 	std::vector<colider*>  obj_list;
 
 	for (auto obj : solid_obj_list) {
 		pos = obj->get_pos();
+		rect = obj->get_rect();
 
 		dx = x - pos.x;
 		dy = y - pos.y;
 
 		dist = dx * dx + dy * dy;
 
-		if (dist <= radius) {
-			if (abs(dy) < radius + obj->get_rect().y / 2) {
+
+
+		if (dist <= radius2 + rect.x* rect.x / 4) {
+			dz = z+radius - (pos.z + rect.y/2);
+
+			if (abs(dz) < radius + rect.y / 2) {
 				obj_list.push_back(obj);
 			}
 		}
 
-		return obj_list;
 	}
+
+	return obj_list;
 }
 
 void TestScene::handle_explosion(float x, float y, float z, float radius, int damage) {
