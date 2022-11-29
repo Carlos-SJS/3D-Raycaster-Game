@@ -270,7 +270,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\cocos2d\external\unzip\ioapi_mem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\ZERO_CHECK.vcxproj">
+    <ProjectReference Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\ZERO_CHECK.proj">
       <Project>{97AA40D4-D1DC-36B1-A149-D85CF94E9BA6}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>

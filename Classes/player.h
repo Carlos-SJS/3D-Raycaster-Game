@@ -52,4 +52,10 @@ class game_manager {
 public:
 	virtual std::vector<colider*> get_objs(float x, float y, float z, float radius) = 0;
 	virtual void handle_explosion(float x, float y, float z, float radius, int damage) = 0;
+
+	//type 0-> hp, 1 -> shield
+	virtual void handle_healing(int type, int ammount) = 0;
+	virtual void handle_weapon(int type) = 0;
+	//type -1 -> all, 1 -> pistol, 2->shotgun, 3->macjinegun?
+	virtual void handle_ammo(int type, int amount) = 0;
 };

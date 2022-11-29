@@ -10,3 +10,8 @@
 
 //Objects
 #include "misc/ebarrel.h"
+
+//Items
+#include "items/ammo_item.h"
+#include "items/healing_item.h"
+#include "items/weapon_item.h"

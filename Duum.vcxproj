@@ -845,6 +845,19 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="Classes\Sprites\imp\walk2.h" />
     <ClInclude Include="Classes\Sprites\imp\walk3.h" />
     <ClInclude Include="Classes\Sprites\imp\walk4.h" />
+    <ClInclude Include="Classes\Sprites\items\ammo_box.h" />
+    <ClInclude Include="Classes\Sprites\items\ammo_item.h" />
+    <ClInclude Include="Classes\Sprites\items\bandages.h" />
+    <ClInclude Include="Classes\Sprites\items\bullets.h" />
+    <ClInclude Include="Classes\Sprites\items\healing_item.h" />
+    <ClInclude Include="Classes\Sprites\items\medkit.h" />
+    <ClInclude Include="Classes\Sprites\items\shells.h" />
+    <ClInclude Include="Classes\Sprites\items\shield1.h" />
+    <ClInclude Include="Classes\Sprites\items\shield2.h" />
+    <ClInclude Include="Classes\Sprites\items\weapon_item.h" />
+    <ClInclude Include="Classes\Sprites\items\witem_1.h" />
+    <ClInclude Include="Classes\Sprites\items\witem_2.h" />
+    <ClInclude Include="Classes\Sprites\items\witem_3.h" />
     <ClInclude Include="Classes\Sprites\misc\ebarrel.h" />
     <ClInclude Include="Classes\Sprites\misc\ebarrel_texture.h" />
     <ClInclude Include="Classes\Sprites\misc\eb_explosion1.h" />
@@ -970,6 +983,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon.cpp" />
     <ClCompile Include="Classes\Sprites\imp\imp.cpp" />
     <ClCompile Include="Classes\Sprites\imp\imp_projectile.cpp" />
+    <ClCompile Include="Classes\Sprites\items\ammo_item.cpp" />
+    <ClCompile Include="Classes\Sprites\items\healing_item.cpp" />
+    <ClCompile Include="Classes\Sprites\items\weapon_item.cpp" />
     <ClCompile Include="Classes\Sprites\misc\ebarrel.cpp" />
     <ClCompile Include="Classes\Sprites\zombie\zombie.cpp" />
     <ClCompile Include="Classes\TestScene.cpp" />
@@ -1074,6 +1090,18 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{E4E66D9E-103B-3065-BCB6-C644F526A8DA}</Project>
       <Name>external</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\weapons\fist\normal.png" />
+    <Image Include="Resources\weapons\fist\punch1.png" />
+    <Image Include="Resources\weapons\fist\punch2.png" />
+    <Image Include="Resources\weapons\fist\punch3.png" />
+    <Image Include="Resources\weapons\shotgun\sgun1.png" />
+    <Image Include="Resources\weapons\shotgun\shot1.png" />
+    <Image Include="Resources\weapons\shotgun\shot2.png" />
+    <Image Include="Resources\weapons\shotgun\shot3.png" />
+    <Image Include="Resources\weapons\shotgun\shot4.png" />
+    <Image Include="Resources\weapons\shotgun\shot5.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

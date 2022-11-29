@@ -22,9 +22,6 @@
     <ClCompile Include="Classes\player.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\TestScene.cpp">
-      <Filter>Source Files\Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon.cpp">
       <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
     </ClCompile>
@@ -39,6 +36,18 @@
     </ClCompile>
     <ClCompile Include="Classes\Sprites\misc\ebarrel.cpp">
       <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\TestScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Sprites\items\ammo_item.cpp">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Sprites\items\healing_item.cpp">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Sprites\items\weapon_item.cpp">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,9 +175,6 @@
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="Classes\player.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\TestScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Textures\texture_1.h">
@@ -609,6 +615,48 @@
     <ClInclude Include="Classes\Sprites\sprites.h">
       <Filter>Source Files\Classes\Sprites</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\TestScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\ammo_box.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\ammo_item.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\bandages.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\bullets.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\healing_item.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\medkit.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\shells.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\shield1.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\shield2.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\weapon_item.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\witem_1.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\witem_2.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\items\witem_3.h">
+      <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\CMakeLists.txt" />
@@ -673,5 +721,46 @@
     <Filter Include="Source Files\Classes\Sprites\misc">
       <UniqueIdentifier>{f67a0048-9bf1-4338-99b8-250a8a302119}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classes\Sprites\items">
+      <UniqueIdentifier>{aac8af3a-bdcb-4b40-a3b3-4eb399630d15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\weapons\shotgun">
+      <UniqueIdentifier>{e5ae2108-33cc-40d2-b8d4-03a399724748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\weapons\fist">
+      <UniqueIdentifier>{bd0f9026-6490-426c-942d-880de36e72b3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\weapons\shotgun\sgun1.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </Image>
+    <Image Include="Resources\weapons\shotgun\shot1.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </Image>
+    <Image Include="Resources\weapons\shotgun\shot2.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </Image>
+    <Image Include="Resources\weapons\shotgun\shot3.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </Image>
+    <Image Include="Resources\weapons\shotgun\shot4.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </Image>
+    <Image Include="Resources\weapons\shotgun\shot5.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </Image>
+    <Image Include="Resources\weapons\fist\normal.png">
+      <Filter>Resources\weapons\fist</Filter>
+    </Image>
+    <Image Include="Resources\weapons\fist\punch1.png">
+      <Filter>Resources\weapons\fist</Filter>
+    </Image>
+    <Image Include="Resources\weapons\fist\punch2.png">
+      <Filter>Resources\weapons\fist</Filter>
+    </Image>
+    <Image Include="Resources\weapons\fist\punch3.png">
+      <Filter>Resources\weapons\fist</Filter>
+    </Image>
   </ItemGroup>
 </Project>

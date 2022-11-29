@@ -140,11 +140,21 @@ private:
 
 	int crosshair_mode = 0;
 
-	std::vector<std::vector<std::string>> weapon_textures{ {}, {"weapons/pistol/shoot1.png", "weapons/pistol/shoot2.png", "weapons/pistol/pistol1.png"}};
-	std::vector<std::vector<float>> weapon_f_time{ {},{.23, .18, 0} };
-	std::vector<int> w_ammo{-1, 100};
+	std::vector<std::vector<std::string>> weapon_textures{ 
+		{"weapons/fist/punch1.png", "weapons/fist/punch2.png", "weapons/fist/punch3.png"},
+		{"weapons/pistol/shoot1.png", "weapons/pistol/shoot2.png", "weapons/pistol/pistol1.png"}, 
+		{"weapons/shotgun/shot1.png", "weapons/shotgun/shot2.png", "weapons/shotgun/shot3.png", "weapons/shotgun/shot4.png", "weapons/shotgun/shot5.png"}
+	};
+	std::vector<std::vector<float>> weapon_f_time{
+		{.15, .15, .18},
+		{.15, .18, 0},
+		{.15,.15,.12,.12,.12}
+	};
+	std::vector<int> w_ammo{-1, 45, 25};
 
-	std::vector<int> weapon_damage {20, 30};
+	std::vector<int> weapon_damage {20, 30, 105};
+
+	std::vector<bool> weapon_unlocked {1, 1, 0};
 
 	
 	std::priority_queue<target_entity> targets;
@@ -186,6 +196,10 @@ public:
 	std::priority_queue<target_entity> get_targets(float x, float y, float a);
 	std::vector<colider*> get_objs(float x, float y, float z, float radius);
 	void handle_explosion(float x, float y, float z, float radius, int damage);
+
+	void handle_ammo(int type, int amount);
+	void handle_healing(int type, int amount);
+	void handle_weapon(int type);
 
 	CREATE_FUNC(TestScene);
 };

@@ -85,7 +85,26 @@ bool TestScene::init() {
 	solid_obj_list.push_back((colider*)barrel1);
 	solid_obj_list.push_back((colider*)&player_data);
 
+	healing_item* shield1 = healing_item::create(3.5, 5.5, 3, this);
+	healing_item* shield2 = healing_item::create(3.5, 3.5, 2, this);
+	healing_item* medkit = healing_item::create(3.5, 4.5, 1, this);
 
+	update_list.push_back((entity*) shield1);
+	update_list.push_back((entity*) shield2);
+	update_list.push_back((entity*) medkit);
+
+	draw_list.push_back((draw_obj*)shield1);
+	draw_list.push_back((draw_obj*)shield2);
+	draw_list.push_back((draw_obj*)medkit);
+
+	ammo_item* general_ammo = ammo_item::create(4.5, 7.5, 0, 30, this);
+	ammo_item* bullet_ammo = ammo_item::create(8.5, 1.5, 1, 10, this);
+
+	update_list.push_back((entity*)general_ammo);
+	update_list.push_back((entity*)bullet_ammo);
+
+	draw_list.push_back((draw_obj*)general_ammo);
+	draw_list.push_back((draw_obj*)bullet_ammo);
 
 	depth_map.resize(screen_size.width/PIXEL_SIZE);
 
@@ -716,7 +735,7 @@ void TestScene::draw_sprite(float dist, float a, better_sprite* sprite) {
 						point_count++;
 					}
 				}
-				if (point_count > 2000 - screen_size.height) {
+				if (point_count > 1990 - screen_size.height) {
 					dNodeS->drawPoints(point_buffer, point_count, (float)PIXEL_SIZE, color_buffer);
 					point_count = 0;
 				}
@@ -1035,4 +1054,20 @@ void TestScene::update_armor_text() {
 	}
 
 	armor_tv = player_data.armor;
+}
+
+void TestScene::handle_ammo(int type, int amount) {
+	if (type == -1) {
+		for (int i = 0; i < w_ammo.size(); i++)w_ammo[i] += amount;
+	}
+	else w_ammo[type] += amount;
+}
+
+void TestScene::handle_healing(int type, int amount) {
+	if (type == 0) player_data.health += amount;
+	else player_data.armor += amount;
+}
+
+void TestScene::handle_weapon(int type) {
+	weapon_unlocked[type-1] = 1;
 }
