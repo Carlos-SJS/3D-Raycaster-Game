@@ -24,7 +24,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1120AF7F-992A-34B6-83E2-CA1D82799D5E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
     <Platform>Win32</Platform>
     <ProjectName>ext_tinyxml2</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
@@ -268,7 +268,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\cocos2d\external\tinyxml2\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\ZERO_CHECK.proj">
+    <ProjectReference Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\ZERO_CHECK.vcxproj">
       <Project>{97AA40D4-D1DC-36B1-A149-D85CF94E9BA6}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
