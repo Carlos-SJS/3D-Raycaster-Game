@@ -17,6 +17,8 @@ Scene* TestScene::createScene(){
 bool TestScene::init() {
 	if (!Scene::init()) return false;
 
+	Director::getInstance()->setDisplayStats(false);
+
 	//AudioEngine::uncacheAll();
 	//AudioEngine::preload("audio/music/la_grange.wav");
 	//AudioEngine::play2d("audio/music/la_grange.mp3");
@@ -107,12 +109,87 @@ bool TestScene::init() {
 	face_s = Sprite::create("faces/100f.png");
 	face_s->setScale(sX, sY);
 	face_s->setAnchorPoint(Vec2(0, 0));
-	face_s->setPosition(Vec2(0.63 * SCREEN_WIDTH, 0.025*UI_HEIGHT));
+	face_s->setPosition(Vec2(0.475 * SCREEN_WIDTH, 0.025*UI_HEIGHT));
 	this->addChild(face_s, 15);
 
 	crosshair = Sprite::create("crosshair1.png");
 	crosshair->setPosition(Vec2(SCREEN_WIDTH/2, UI_HEIGHT + GAME_HEIGHT/2));
 	this->addChild(crosshair, 10);
+
+	weapon_slot = Sprite::create("weapons/weapon2.png");
+	weapon_slot->setScale(sX, sY);
+	weapon_slot->setPosition(.682	*SCREEN_WIDTH, UI_HEIGHT*.63);
+	this->addChild(weapon_slot, 15);
+
+	//AMMO
+	float yp = UI_HEIGHT*.54;
+	float st = SCREEN_WIDTH * .035;
+	float sp = SCREEN_WIDTH * .06;
+	float tsY = sY * .9;
+	float tsX = sX * .9;
+
+	ammo_text[0] = Sprite::create("fonts/s0.png");
+	ammo_text[0]->setScale(tsX, tsY);
+	ammo_text[0]->setPosition(st, yp);
+	this->addChild(ammo_text[0], 15);
+
+	ammo_text[1] = Sprite::create("fonts/s0.png");
+	ammo_text[1]->setScale(tsX, tsY);
+	ammo_text[1]->setPosition(st + 1*sp, yp);
+	this->addChild(ammo_text[1], 15);
+
+	ammo_text[2] = Sprite::create("fonts/s0.png");
+	ammo_text[2]->setScale(tsX, tsY);
+	ammo_text[2]->setPosition(st + 2 * sp, yp);
+	this->addChild(ammo_text[2], 15);
+
+	//HP TEXT
+	yp = UI_HEIGHT * .54;
+	st = SCREEN_WIDTH * .24;
+	sp = SCREEN_WIDTH * .055;
+
+	hp_text[0] = Sprite::create("fonts/s0.png");
+	hp_text[0]->setScale(tsX, tsY);
+	hp_text[0]->setPosition(st, yp);
+	this->addChild(hp_text[0], 15);
+	
+	hp_text[1] = Sprite::create("fonts/s0.png");
+	hp_text[1]->setScale(tsX, tsY);
+	hp_text[1]->setPosition(st + 1 * sp, yp);
+	this->addChild(hp_text[1], 15);
+	
+	hp_text[2] = Sprite::create("fonts/s0.png");
+	hp_text[2]->setScale(tsX, tsY);
+	hp_text[2]->setPosition(st + 2 * sp, yp);
+	this->addChild(hp_text[2], 15);
+	
+	hp_text[3] = Sprite::create("fonts/s%.png");
+	hp_text[3]->setScale(tsX, tsY);
+	hp_text[3]->setPosition(st + 3 * sp, yp);
+	this->addChild(hp_text[3], 15);
+
+	//Armor text
+	st = SCREEN_WIDTH * .8;
+
+	armor_text[0] = Sprite::create("fonts/s0.png");
+	armor_text[0]->setScale(tsX, tsY);
+	armor_text[0]->setPosition(st, yp);
+	this->addChild(armor_text[0], 15);
+
+	armor_text[1] = Sprite::create("fonts/s0.png");
+	armor_text[1]->setScale(tsX, tsY);
+	armor_text[1]->setPosition(st + 1 * sp, yp);
+	this->addChild(armor_text[1], 15);
+
+	armor_text[2] = Sprite::create("fonts/s0.png");
+	armor_text[2]->setScale(tsX, tsY);
+	armor_text[2]->setPosition(st + 2 * sp, yp);
+	this->addChild(armor_text[2], 15);
+
+	armor_text[3] = Sprite::create("fonts/s%.png");
+	armor_text[3]->setScale(tsX, tsY);
+	armor_text[3]->setPosition(st + 3 * sp, yp);
+	this->addChild(armor_text[3], 15);
 
 	this->scheduleUpdate();
 
@@ -578,11 +655,14 @@ void TestScene::draw_sprite(float dist, float a, better_sprite* sprite) {
 	pa = angle_util::fix(pa);
 
 	//float cospa = cos(angle_util::fix(player_data.angle - a));
+
 	float cospa = cos(angle_util::fix(a-player_data.angle));
 
 	//if (dist < .74) return;
 
 	float unit_size = (screen_size.height) / (dist * cospa);
+
+	if (unit_size > 3000 && dist > .8) return;
 
 	float swidth = sprite->get_sx() * unit_size;
 	float sheight = sprite->get_sy() * unit_size;
@@ -651,6 +731,8 @@ void TestScene::handle_sprites() {
 
 }
 
+
+
 void TestScene::update(float dt) {
 	//Player movement
 	handle_input(dt);
@@ -680,8 +762,13 @@ void TestScene::update(float dt) {
 		else sp = draw_list.erase(sp), inc=0;
 	}
 
+	update_hp_text();
+	update_ammo_text();
+	update_armor_text();
 
 	draw_sprites();
+
+
 
 	//Draw world
 	draw_world();
@@ -820,19 +907,29 @@ void TestScene::player_animator(float dt) {
 
 void TestScene::handle_player_shot() {
 	if (!weapon_cooldown) {
-		weapon_cooldown = 1;
-		weapon_anim_timer = 0;
-		weapon_frame = 0;
-
-		weapon_s->setTexture(weapon_textures[weapon_id][0]);
-
-		if (targets.empty()) return;
-
 		if (weapon_id == 0) {
+			weapon_cooldown = 1;
+			weapon_anim_timer = 0;
+			weapon_frame = 0;
+
+			weapon_s->setTexture(weapon_textures[weapon_id][0]);
+
 
 		}
 		else if (weapon_id == 1) {
-			targets.top().obj->handle_collision(weapon_damage[weapon_id]);
+			if (w_ammo[1] > 0) {
+				if(!targets.empty()) targets.top().obj->handle_collision(weapon_damage[weapon_id]);
+				w_ammo[1]--;
+
+				weapon_cooldown = 1;
+				weapon_anim_timer = 0;
+				weapon_frame = 0;
+
+				weapon_s->setTexture(weapon_textures[weapon_id][0]);
+			}
+			else {
+				//Change weapon
+			}
 		}
 
 	}
@@ -885,4 +982,57 @@ void TestScene::handle_explosion(float x, float y, float z, float radius, int da
 	for (auto obj : objs) {
 		obj -> handle_collision(damage);
 	}
+}
+
+void TestScene::update_hp_text() {
+	if (hp_tv == player_data.health) return;
+	hp_tv = min(999, player_data.health);
+	
+	for (int i = 0; i < 3; i++) {
+		if (hp_tv == 0 && i > 0) hp_text[2 - i]->setVisible(0);
+		else {
+			hp_text[2 - i]->setTexture("fonts/s" + to_string(hp_tv % 10) + ".png");
+			hp_text[2 - i]->setVisible(1);
+			hp_tv /= 10;
+		}		
+	}
+
+	hp_tv = player_data.health;
+}
+
+void TestScene::update_ammo_text() {
+	if (ammo_tv == player_data.health) return;
+	ammo_tv = min(999, w_ammo[weapon_id]);
+
+	if (ammo_tv == -1) {
+		for (int i = 0; i < 3; i++) ammo_text[i]->setVisible(0);
+		return;
+	}
+
+	for (int i = 0; i < 3; i++) {
+		if (ammo_tv == 0 && i > 0) ammo_text[2 - i]->setVisible(0);
+		else {
+			ammo_text[2 - i]->setTexture("fonts/s" + to_string(ammo_tv % 10) + ".png");
+			ammo_text[2 - i]->setVisible(1);
+			ammo_tv /= 10;
+		}
+	}
+
+	hp_tv = w_ammo[weapon_id];
+}
+
+void TestScene::update_armor_text() {
+	if (armor_tv == player_data.armor) return;
+	armor_tv = min(999, player_data.armor);
+
+	for (int i = 0; i < 3; i++) {
+		if (armor_tv == 0 && i > 0) armor_text[2 - i]->setVisible(0);
+		else {
+			armor_text[2 - i]->setTexture("fonts/s" + to_string(armor_tv % 10) + ".png");
+			armor_text[2 - i]->setVisible(1);
+			armor_tv /= 10;
+		}
+	}
+
+	armor_tv = player_data.armor;
 }

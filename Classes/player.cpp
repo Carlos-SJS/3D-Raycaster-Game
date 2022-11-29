@@ -1,7 +1,7 @@
 #include "player.h"
 
 bool operator<(const target_entity& t1, const target_entity& t2) {
-	return t1.dist < t2.dist;
+	return -t1.dist < -t2.dist;
 }
 
 

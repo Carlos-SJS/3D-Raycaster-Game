@@ -79,6 +79,16 @@ private:
 	cocos2d::Sprite* weapon_s;
 	cocos2d::Sprite* face_s;
 	cocos2d::Sprite* crosshair;
+	cocos2d::Sprite* weapon_slot;
+
+	cocos2d::Sprite* ammo_text[3];
+	cocos2d::Sprite* hp_text[4];
+	cocos2d::Sprite* armor_text[4];
+
+	int hp_tv = 0;
+	int ammo_tv = 0;
+	int armor_tv = 5;
+
 
 	std::vector<draw_obj*> draw_list;
 	std::vector<entity*> update_list;
@@ -132,11 +142,16 @@ private:
 
 	std::vector<std::vector<std::string>> weapon_textures{ {}, {"weapons/pistol/shoot1.png", "weapons/pistol/shoot2.png", "weapons/pistol/pistol1.png"}};
 	std::vector<std::vector<float>> weapon_f_time{ {},{.23, .18, 0} };
+	std::vector<int> w_ammo{-1, 100};
 
 	std::vector<int> weapon_damage {20, 30};
 
 	
 	std::priority_queue<target_entity> targets;
+
+	void update_hp_text();
+	void update_ammo_text();
+	void update_armor_text();
 
 
 public:

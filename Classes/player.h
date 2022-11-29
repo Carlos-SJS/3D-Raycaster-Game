@@ -34,6 +34,7 @@ struct player : public colider{
 	float speed;
 
 	int health = 100;
+	int armor = 0;
 
 	void handle_collision(float damage);
 	cocos2d::Vec3 get_pos();

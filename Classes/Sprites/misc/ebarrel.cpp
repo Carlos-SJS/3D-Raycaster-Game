@@ -38,7 +38,7 @@ cocos2d::Vec2 ebarrel::get_rect() {
 void ebarrel::handle_collision(float damage) {
 	state = 1;
 
-	manager->handle_explosion(x, y, 0, .5, 60);
+	manager->handle_explosion(x, y, 0, 1.2 , 60);
 }
 
 better_sprite* ebarrel::get_sprite() {

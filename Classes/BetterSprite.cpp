@@ -37,8 +37,6 @@ void better_sprite::set_texture(int* t) {
 }
 
 better_sprite* better_sprite::create(int* t, int t_width, int t_height, float scaleX, float scaleY, float x, float y, float z) {
-	cocos2d::log("Size of the texture array is %d", (int)sizeof(t));
-
 	better_sprite* sp = new better_sprite(t, t_width, t_height, scaleX, scaleY, x, y, z);
 	
 	return sp;

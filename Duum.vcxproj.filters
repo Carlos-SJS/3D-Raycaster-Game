@@ -624,6 +624,39 @@
     <Image Include="Resources\crosshair2.png">
       <Filter>Resources</Filter>
     </Image>
+    <Image Include="Resources\fonts\s%.png">
+      <Filter>Resources\fonts</Filter>
+    </Image>
+    <Image Include="Resources\fonts\s0.png">
+      <Filter>Resources\fonts</Filter>
+    </Image>
+    <Image Include="Resources\fonts\s1.png">
+      <Filter>Resources\fonts</Filter>
+    </Image>
+    <Image Include="Resources\fonts\s2.png">
+      <Filter>Resources\fonts</Filter>
+    </Image>
+    <Image Include="Resources\fonts\s3.png">
+      <Filter>Resources\fonts</Filter>
+    </Image>
+    <Image Include="Resources\fonts\s4.png">
+      <Filter>Resources\fonts</Filter>
+    </Image>
+    <Image Include="Resources\fonts\s5.png">
+      <Filter>Resources\fonts</Filter>
+    </Image>
+    <Image Include="Resources\fonts\s6.png">
+      <Filter>Resources\fonts</Filter>
+    </Image>
+    <Image Include="Resources\fonts\s7.png">
+      <Filter>Resources\fonts</Filter>
+    </Image>
+    <Image Include="Resources\fonts\s8.png">
+      <Filter>Resources\fonts</Filter>
+    </Image>
+    <Image Include="Resources\fonts\s9.png">
+      <Filter>Resources\fonts</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Resources\audio\music\la_grange.mp3">

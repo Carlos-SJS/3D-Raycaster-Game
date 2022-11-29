@@ -1055,6 +1055,17 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <Image Include="Resources\faces\100f.png" />
     <Image Include="Resources\faces\100l.png" />
     <Image Include="Resources\faces\100r.png" />
+    <Image Include="Resources\fonts\s%.png" />
+    <Image Include="Resources\fonts\s0.png" />
+    <Image Include="Resources\fonts\s1.png" />
+    <Image Include="Resources\fonts\s2.png" />
+    <Image Include="Resources\fonts\s3.png" />
+    <Image Include="Resources\fonts\s4.png" />
+    <Image Include="Resources\fonts\s5.png" />
+    <Image Include="Resources\fonts\s6.png" />
+    <Image Include="Resources\fonts\s7.png" />
+    <Image Include="Resources\fonts\s8.png" />
+    <Image Include="Resources\fonts\s9.png" />
     <Image Include="Resources\ui_main_bar.png" />
     <Image Include="Resources\weapons\pistol\pistol1.png" />
     <Image Include="Resources\weapons\pistol\shoot1.png" />
