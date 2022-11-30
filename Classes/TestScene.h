@@ -133,6 +133,10 @@ private:
 	
 	float weapon_anim_timer = 0;
 	bool weapon_cooldown = 0;
+	bool pending_damage = 0;
+	float weapon_swapping = 0;
+	int weapon_s_state = 0; //o: lowering, 1:rising
+	float weapon_speed = 400;
 
 	// 0 -> fist?, 1 -> shity gun
 	int weapon_id = 1;
@@ -141,14 +145,14 @@ private:
 	int crosshair_mode = 0;
 
 	std::vector<std::vector<std::string>> weapon_textures{ 
-		{"weapons/fist/punch1.png", "weapons/fist/punch2.png", "weapons/fist/punch3.png"},
+		{"weapons/fist/punch1.png", "weapons/fist/punch2.png", "weapons/fist/punch3.png", "weapons/fist/punch2.png", "weapons/fist/punch1.png", "weapons/fist/normal.png"},
 		{"weapons/pistol/shoot1.png", "weapons/pistol/shoot2.png", "weapons/pistol/pistol1.png"}, 
-		{"weapons/shotgun/shot1.png", "weapons/shotgun/shot2.png", "weapons/shotgun/shot3.png", "weapons/shotgun/shot4.png", "weapons/shotgun/shot5.png"}
+		{"weapons/shotgun/shot1.png", "weapons/shotgun/shot2.png", "weapons/shotgun/shot3.png", "weapons/shotgun/shot4.png", "weapons/shotgun/shot5.png", "weapons/shotgun/shot4.png", "weapons/shotgun/shot3.png", "weapons/shotgun/sgun1.png"}
 	};
 	std::vector<std::vector<float>> weapon_f_time{
-		{.15, .15, .18},
+		{.09, .09, .15, .08, .08, 0},
 		{.15, .18, 0},
-		{.15,.15,.12,.12,.12}
+		{.1,.1,.15,.15,.15, .12, 0}
 	};
 	std::vector<int> w_ammo{-1, 45, 25};
 
@@ -163,6 +167,11 @@ private:
 	void update_ammo_text();
 	void update_armor_text();
 
+
+	cocos2d::Vec2 point_buffer[3000];
+	cocos2d::Color4F color_buffer[3000];
+
+	void swap_weapon(int weapon);
 
 public:
 	std::vector<std::vector<int>> world_map 

@@ -106,6 +106,11 @@ bool TestScene::init() {
 	draw_list.push_back((draw_obj*)general_ammo);
 	draw_list.push_back((draw_obj*)bullet_ammo);
 
+	auto shotgun = weapon_item::create(6.5, 5.5, 2, this);
+
+	draw_list.push_back((draw_obj*) shotgun);
+	update_list.push_back((entity*) shotgun);
+
 	depth_map.resize(screen_size.width/PIXEL_SIZE);
 
 	//UI Shit
@@ -121,6 +126,7 @@ bool TestScene::init() {
 
 	weapon_s = Sprite::create("weapons/pistol/pistol1.png");
 	weapon_s->setScale(0.2*(float)SCREEN_WIDTH / weapon_s->getContentSize().width, 0.2 * (float)SCREEN_HEIGHT / weapon_s->getContentSize().height);
+	weapon_s->setTexture(weapon_textures[weapon_id][weapon_textures[weapon_id].size() - 1]);
 	weapon_s->setAnchorPoint(Vec2(.5, 0));
 	weapon_s->setPosition(Vec2(SCREEN_WIDTH/2.0, UI_HEIGHT));
 	this->addChild(weapon_s, 10);
@@ -135,7 +141,7 @@ bool TestScene::init() {
 	crosshair->setPosition(Vec2(SCREEN_WIDTH/2, UI_HEIGHT + GAME_HEIGHT/2));
 	this->addChild(crosshair, 10);
 
-	weapon_slot = Sprite::create("weapons/weapon2.png");
+	weapon_slot = Sprite::create("weapons/wicon" + to_string(weapon_id) + ".png");
 	weapon_slot->setScale(sX, sY);
 	weapon_slot->setPosition(.682	*SCREEN_WIDTH, UI_HEIGHT*.63);
 	this->addChild(weapon_slot, 15);
@@ -239,6 +245,22 @@ void TestScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event){
 		case EventKeyboard::KeyCode::KEY_E:
 			key_states[E_KEY] = 1;
 			break;
+		case EventKeyboard::KeyCode::KEY_1:
+			//Try and swap to fist
+			swap_weapon(0);
+
+			break;
+		case EventKeyboard::KeyCode::KEY_2:
+			//Try and swap to pistol
+			swap_weapon(1);
+
+			break;
+		case EventKeyboard::KeyCode::KEY_3:
+			//Try and swap to shotgun
+			swap_weapon(2);
+
+			break;
+
 	}
 }
 
@@ -686,8 +708,6 @@ void TestScene::draw_sprite(float dist, float a, better_sprite* sprite) {
 	float swidth = sprite->get_sx() * unit_size;
 	float sheight = sprite->get_sy() * unit_size;
 
-	Vec2 point_buffer[2000];
-	Color4F color_buffer[2000];
 	int point_count = 0;
 
 	//if (a > pa) a -= 2*PI;
@@ -922,23 +942,72 @@ void TestScene::player_animator(float dt) {
 		crosshair_mode = 1;
 		crosshair->setTexture("crosshair2.png");
 	}
+
+	if (weapon_id == 0 && pending_damage && weapon_frame >= 2) {
+		if (!targets.empty() && targets.top().dist <= .7) targets.top().obj->handle_collision(weapon_damage[weapon_id]);
+		pending_damage = 0;
+	}
+
+	if (weapon_swapping) {
+
+		if (weapon_s_state == 0) {
+			weapon_s->setPositionY(weapon_s->getPositionY() - weapon_speed * dt);
+			if (weapon_s->getPositionY() <= UI_HEIGHT - 100) {
+				weapon_s_state = 1;
+
+				weapon_slot->setTexture("weapons/wicon" + to_string(weapon_id) + ".png");
+				weapon_s->setTexture(weapon_textures[weapon_id][weapon_textures[weapon_id].size() - 1]);
+			
+			}
+		}
+		else {
+			weapon_s->setPositionY(weapon_s->getPositionY() + weapon_speed * dt);
+			if (weapon_s->getPositionY() >= UI_HEIGHT) {
+				weapon_s->setPositionY(UI_HEIGHT);
+				weapon_swapping = 0;
+			}
+		}
+	}
 }
 
 void TestScene::handle_player_shot() {
+	if (weapon_swapping) return;
+
 	if (!weapon_cooldown) {
 		if (weapon_id == 0) {
 			weapon_cooldown = 1;
 			weapon_anim_timer = 0;
 			weapon_frame = 0;
+			pending_damage = 1;
 
 			weapon_s->setTexture(weapon_textures[weapon_id][0]);
-
 
 		}
 		else if (weapon_id == 1) {
 			if (w_ammo[1] > 0) {
 				if(!targets.empty()) targets.top().obj->handle_collision(weapon_damage[weapon_id]);
 				w_ammo[1]--;
+
+				weapon_cooldown = 1;
+				weapon_anim_timer = 0;
+				weapon_frame = 0;
+
+				weapon_s->setTexture(weapon_textures[weapon_id][0]);
+			}
+			else {
+				//Change weapon
+			}
+		}
+		else if (weapon_id == 2) {
+			if (w_ammo[2] > 0) {
+				if (!targets.empty()) { targets.top().obj->handle_collision(weapon_damage[weapon_id]); targets.pop();}
+
+				while (!targets.empty() && targets.top().dist < 5) {
+					targets.top().obj->handle_collision(weapon_damage[weapon_id]);
+					targets.pop();
+				}
+
+				w_ammo[2]--;
 
 				weapon_cooldown = 1;
 				weapon_anim_timer = 0;
@@ -1058,7 +1127,7 @@ void TestScene::update_armor_text() {
 
 void TestScene::handle_ammo(int type, int amount) {
 	if (type == -1) {
-		for (int i = 0; i < w_ammo.size(); i++)w_ammo[i] += amount;
+		for (int i = 1; i < w_ammo.size(); i++) if(weapon_unlocked[i]) w_ammo[i] += amount;
 	}
 	else w_ammo[type] += amount;
 }
@@ -1069,5 +1138,14 @@ void TestScene::handle_healing(int type, int amount) {
 }
 
 void TestScene::handle_weapon(int type) {
-	weapon_unlocked[type-1] = 1;
+	weapon_unlocked[type] = 1;
+}
+
+void TestScene::swap_weapon(int id) {
+	if (weapon_id != id && !weapon_cooldown && !weapon_swapping && weapon_unlocked[id]) {
+		weapon_swapping = 1;
+		weapon_id = id;
+
+		weapon_s_state = 0;
+	}
 }

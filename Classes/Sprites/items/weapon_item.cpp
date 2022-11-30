@@ -9,7 +9,7 @@ namespace weapon_data {
 };
 
 weapon_item::weapon_item(float x, float y, int type, game_manager* manager) {
-	this->sprite = better_sprite::create(weapon_data::sprites[type-1], 28, 16, .6, .228, x, y, 0);
+	this->sprite = better_sprite::create(weapon_data::sprites[type-1], 63, 16, .7, .178, x, y, 0);
 	this->type = type;
 
 	this->x = x;

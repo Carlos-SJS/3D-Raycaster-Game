@@ -1024,9 +1024,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\pistol\pistol1.png" />
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\pistol\shoot1.png" />
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\pistol\shoot2.png" />
-    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\weapon1.png" />
-    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\weapon2.png" />
-    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\weapon3.png" />
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\cocos2d\cocos\precheader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -1102,6 +1099,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <Image Include="Resources\weapons\shotgun\shot3.png" />
     <Image Include="Resources\weapons\shotgun\shot4.png" />
     <Image Include="Resources\weapons\shotgun\shot5.png" />
+    <Image Include="Resources\weapons\wicon0.png" />
+    <Image Include="Resources\weapons\wicon1.png" />
+    <Image Include="Resources\weapons\wicon2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

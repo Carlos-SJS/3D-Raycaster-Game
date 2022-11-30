@@ -156,15 +156,6 @@
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\pistol\shoot2.png">
       <Filter>Resources\weapons\pistol</Filter>
     </ClInclude>
-    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\weapon1.png">
-      <Filter>Resources\weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\weapon2.png">
-      <Filter>Resources\weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\weapon3.png">
-      <Filter>Resources\weapons</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\AngleUtil.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
@@ -501,21 +492,6 @@
     <ClInclude Include="Classes\Sprites\imp\aim.h">
       <Filter>Source Files\Classes\Sprites\imp</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\death1.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\death2.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\death3.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\death4.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\death5.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Sprites\imp\explode1.h">
       <Filter>Source Files\Classes\Sprites\imp</Filter>
     </ClInclude>
@@ -657,6 +633,21 @@
     <ClInclude Include="Classes\Sprites\items\witem_3.h">
       <Filter>Source Files\Classes\Sprites\items</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death1.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death2.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death3.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death4.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death5.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\CMakeLists.txt" />
@@ -761,6 +752,15 @@
     </Image>
     <Image Include="Resources\weapons\fist\punch3.png">
       <Filter>Resources\weapons\fist</Filter>
+    </Image>
+    <Image Include="Resources\weapons\wicon0.png">
+      <Filter>Resources\weapons</Filter>
+    </Image>
+    <Image Include="Resources\weapons\wicon1.png">
+      <Filter>Resources\weapons</Filter>
+    </Image>
+    <Image Include="Resources\weapons\wicon2.png">
+      <Filter>Resources\weapons</Filter>
     </Image>
   </ItemGroup>
 </Project>
