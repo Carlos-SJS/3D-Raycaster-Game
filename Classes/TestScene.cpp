@@ -5,7 +5,7 @@
 #include "Sprites/sprites.h"
 #include "GameData.h"
 
-//	#include "AudioEngine.h"
+#include "AudioEngine.h"
 
 USING_NS_CC;
 
@@ -20,7 +20,7 @@ bool TestScene::init() {
 	Director::getInstance()->setDisplayStats(false);
 
 	//AudioEngine::uncacheAll();
-	//AudioEngine::preload("audio/music/la_grange.wav");
+	//AudioEngine::preload("audio/music/la_grange.mp3");
 	//AudioEngine::play2d("audio/music/la_grange.mp3");
 
 	auto screen_size = Director::getInstance()->getVisibleSize();
@@ -217,6 +217,29 @@ bool TestScene::init() {
 	this->addChild(armor_text[3], 15);
 
 	this->scheduleUpdate();
+	AudioEngine::preload("audio/music/la_grange.mp3");
+
+	AudioEngine::preload("audio/misc/barrel.mp3");
+
+	AudioEngine::preload("audio/weapon/punch.mp3");
+	AudioEngine::preload("audio/weapon/punch_fail.mp3");
+	AudioEngine::preload("audio/weapon/pistol.mp3");
+	AudioEngine::preload("audio/weapon/shotgun.mp3");
+
+	AudioEngine::preload("audio/item/item.mp3");
+	AudioEngine::preload("audio/item/weaon.mp3");
+
+	AudioEngine::preload("audio/monster/zombie_near.mp3");
+	AudioEngine::preload("audio/monster/zombie_hurt.mp3");
+	AudioEngine::preload("audio/monster/zombie_near.mp3");
+	AudioEngine::preload("audio/monster/imp_death.mp3");
+	AudioEngine::preload("audio/monster/imp_hurt.mp3");
+	AudioEngine::preload("audio/monster/imp_death.mp3");
+	AudioEngine::preload("audio/monster/cacodemon_hurt.mp3");
+	AudioEngine::preload("audio/monster/cacodemon_death.mp3");
+
+	AudioEngine::setMaxAudioInstance(30);
+	AudioEngine::play2d("audio/music/la_grange.mp3", 0, .6);
 
 	return true;
 }
@@ -258,7 +281,6 @@ void TestScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event){
 		case EventKeyboard::KeyCode::KEY_3:
 			//Try and swap to shotgun
 			swap_weapon(2);
-
 			break;
 
 	}
@@ -944,7 +966,14 @@ void TestScene::player_animator(float dt) {
 	}
 
 	if (weapon_id == 0 && pending_damage && weapon_frame >= 2) {
-		if (!targets.empty() && targets.top().dist <= .7) targets.top().obj->handle_collision(weapon_damage[weapon_id]);
+		if (!targets.empty() && targets.top().dist <= .7) {
+			targets.top().obj->handle_collision(weapon_damage[weapon_id]);
+
+			AudioEngine::play2d("audio/weapon/punch.mp3");
+		}else AudioEngine::play2d("audio/weapon/punch_fail.mp3");
+
+		
+
 		pending_damage = 0;
 	}
 
@@ -988,6 +1017,8 @@ void TestScene::handle_player_shot() {
 				if(!targets.empty()) targets.top().obj->handle_collision(weapon_damage[weapon_id]);
 				w_ammo[1]--;
 
+				AudioEngine::play2d("audio/weapon/pistol.mp3");
+
 				weapon_cooldown = 1;
 				weapon_anim_timer = 0;
 				weapon_frame = 0;
@@ -1008,6 +1039,8 @@ void TestScene::handle_player_shot() {
 				}
 
 				w_ammo[2]--;
+
+				AudioEngine::play2d("audio/weapon/shotgun.mp3");
 
 				weapon_cooldown = 1;
 				weapon_anim_timer = 0;
@@ -1130,15 +1163,21 @@ void TestScene::handle_ammo(int type, int amount) {
 		for (int i = 1; i < w_ammo.size(); i++) if(weapon_unlocked[i]) w_ammo[i] += amount;
 	}
 	else w_ammo[type] += amount;
+
+	AudioEngine::play2d("audio/item/item.mp3");
 }
 
 void TestScene::handle_healing(int type, int amount) {
 	if (type == 0) player_data.health += amount;
 	else player_data.armor += amount;
+
+	AudioEngine::play2d("audio/item/item.mp3");
 }
 
 void TestScene::handle_weapon(int type) {
 	weapon_unlocked[type] = 1;
+
+	AudioEngine::play2d("audio/item/weapon.mp3");
 }
 
 void TestScene::swap_weapon(int id) {

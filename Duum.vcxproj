@@ -59,7 +59,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\bin\Duum\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\carlo\Desktop\Duum\Debug</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Duum.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Duum</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
@@ -1102,6 +1102,32 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <Image Include="Resources\weapons\wicon0.png" />
     <Image Include="Resources\weapons\wicon1.png" />
     <Image Include="Resources\weapons\wicon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\audio\item\item.mp3" />
+    <Media Include="Resources\audio\item\item.wav" />
+    <Media Include="Resources\audio\item\weapon.mp3" />
+    <Media Include="Resources\audio\item\weapon.wav" />
+    <Media Include="Resources\audio\misc\barrel.mp3" />
+    <Media Include="Resources\audio\misc\barrel.wav" />
+    <Media Include="Resources\audio\monster\cacodemon_death.mp3" />
+    <Media Include="Resources\audio\monster\cacodemon_hurt.mp3" />
+    <Media Include="Resources\audio\monster\imp_attack.mp3" />
+    <Media Include="Resources\audio\monster\imp_death.mp3" />
+    <Media Include="Resources\audio\monster\imp_hurt.mp3" />
+    <Media Include="Resources\audio\monster\imp_near.mp3" />
+    <Media Include="Resources\audio\monster\zombie_death.mp3" />
+    <Media Include="Resources\audio\monster\zombie_hurt.mp3" />
+    <Media Include="Resources\audio\monster\zombie_near.mp3" />
+    <Media Include="Resources\audio\music\Race to Mars.mp3" />
+    <Media Include="Resources\audio\player\hurt.wav" />
+    <Media Include="Resources\audio\weapon\pistol.mp3" />
+    <Media Include="Resources\audio\weapon\pistol.wav" />
+    <Media Include="Resources\audio\weapon\punch.mp3" />
+    <Media Include="Resources\audio\weapon\punch.wav" />
+    <Media Include="Resources\audio\weapon\punch_fail.mp3" />
+    <Media Include="Resources\audio\weapon\shotgun.mp3" />
+    <Media Include="Resources\audio\weapon\shotgun.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

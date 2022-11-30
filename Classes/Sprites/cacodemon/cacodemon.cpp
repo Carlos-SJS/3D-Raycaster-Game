@@ -1,5 +1,7 @@
 #include "cacodemon.h"
 
+#include "AudioEngine.h"
+
 namespace cacodemon_data {
 	#include "normal.h"
 
@@ -89,12 +91,16 @@ void cacodemon::handle_collision(float damage) {
 	hp -= damage;
 
 	if (hp > 0) {
+		cocos2d::AudioEngine::play2d("audio/monster/cacodemon_hurt.mp3");
+
 		sprite->set_texture(cacodemon_data::hurt);
 
 		damaged = 1;
 		animator_time = 0;
 	}
 	else {
+		cocos2d::AudioEngine::play2d("audio/monster/cacodemon_death.mp3");
+
 		animator_time = 0;
 		dying = 1;
 		sz = (z+.1) * 3.33;

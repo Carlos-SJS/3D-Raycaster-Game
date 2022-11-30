@@ -1,4 +1,5 @@
 #include "ebarrel.h"
+#include "AudioEngine.h"
 
 namespace ebarrel_data {
 	#include "ebarrel_texture.h"
@@ -39,6 +40,8 @@ void ebarrel::handle_collision(float damage) {
 	state = 1;
 
 	manager->handle_explosion(x, y, 0, 1.2 , 60);
+
+	cocos2d::AudioEngine::play2d("audio/misc/barrel.mp3");
 }
 
 better_sprite* ebarrel::get_sprite() {

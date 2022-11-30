@@ -1,5 +1,7 @@
 #include "imp.h"
 
+#include "AudioEngine.h"
+
 namespace imp_data {
 	#include "walk1.h"
 	#include "walk2.h"
@@ -99,6 +101,9 @@ void imp::handle_collision(float damage){
 	animation_time = 0;
 
 	this->sprite->set_texture(imp_data::hurt);
+
+	if (hp > 0) cocos2d::AudioEngine::play2d("audio/monster/imp_hurt.mp3");
+	else cocos2d::AudioEngine::play2d("audio/monster/imp_death.mp3");
 }
 
 cocos2d::Vec3 imp::get_pos() {

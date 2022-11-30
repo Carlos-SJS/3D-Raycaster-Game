@@ -721,6 +721,21 @@
     <Filter Include="Resources\weapons\fist">
       <UniqueIdentifier>{bd0f9026-6490-426c-942d-880de36e72b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\audio\player">
+      <UniqueIdentifier>{0db9039e-56f1-45b8-8a6e-34240b851a00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\audio\weapon">
+      <UniqueIdentifier>{f080ccc2-e409-4cd7-993c-259b85808d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\audio\item">
+      <UniqueIdentifier>{80f0e132-446f-46c7-9047-6a2e3f6af035}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\audio\misc">
+      <UniqueIdentifier>{2944f6cc-7a94-45d1-89e1-0417cb4295f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\audio\monster">
+      <UniqueIdentifier>{2270ecd7-e15c-4679-853a-2986dda4497a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\weapons\shotgun\sgun1.png">
@@ -762,5 +777,79 @@
     <Image Include="Resources\weapons\wicon2.png">
       <Filter>Resources\weapons</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\audio\item\item.wav">
+      <Filter>Resources\audio\item</Filter>
+    </Media>
+    <Media Include="Resources\audio\item\weapon.wav">
+      <Filter>Resources\audio\item</Filter>
+    </Media>
+    <Media Include="Resources\audio\weapon\pistol.wav">
+      <Filter>Resources\audio\weapon</Filter>
+    </Media>
+    <Media Include="Resources\audio\weapon\punch.wav">
+      <Filter>Resources\audio\weapon</Filter>
+    </Media>
+    <Media Include="Resources\audio\weapon\shotgun.wav">
+      <Filter>Resources\audio\weapon</Filter>
+    </Media>
+    <Media Include="Resources\audio\player\hurt.wav">
+      <Filter>Resources\audio\player</Filter>
+    </Media>
+    <Media Include="Resources\audio\misc\barrel.wav">
+      <Filter>Resources\audio\misc</Filter>
+    </Media>
+    <Media Include="Resources\audio\item\item.mp3">
+      <Filter>Resources\audio\item</Filter>
+    </Media>
+    <Media Include="Resources\audio\item\weapon.mp3">
+      <Filter>Resources\audio\item</Filter>
+    </Media>
+    <Media Include="Resources\audio\misc\barrel.mp3">
+      <Filter>Resources\audio\misc</Filter>
+    </Media>
+    <Media Include="Resources\audio\music\Race to Mars.mp3">
+      <Filter>Resources\audio\music</Filter>
+    </Media>
+    <Media Include="Resources\audio\weapon\pistol.mp3">
+      <Filter>Resources\audio\weapon</Filter>
+    </Media>
+    <Media Include="Resources\audio\weapon\punch.mp3">
+      <Filter>Resources\audio\weapon</Filter>
+    </Media>
+    <Media Include="Resources\audio\weapon\shotgun.mp3">
+      <Filter>Resources\audio\weapon</Filter>
+    </Media>
+    <Media Include="Resources\audio\monster\cacodemon_death.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </Media>
+    <Media Include="Resources\audio\monster\cacodemon_hurt.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </Media>
+    <Media Include="Resources\audio\monster\imp_attack.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </Media>
+    <Media Include="Resources\audio\monster\imp_death.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </Media>
+    <Media Include="Resources\audio\monster\imp_hurt.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </Media>
+    <Media Include="Resources\audio\monster\imp_near.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </Media>
+    <Media Include="Resources\audio\monster\zombie_death.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </Media>
+    <Media Include="Resources\audio\monster\zombie_hurt.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </Media>
+    <Media Include="Resources\audio\monster\zombie_near.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </Media>
+    <Media Include="Resources\audio\weapon\punch_fail.mp3">
+      <Filter>Resources\audio\weapon</Filter>
+    </Media>
   </ItemGroup>
 </Project>

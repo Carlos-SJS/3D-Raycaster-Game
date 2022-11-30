@@ -1,4 +1,6 @@
 #include "zombie.h"
+#include "AudioEngine.h"
+
 
 namespace zombie_data {
 	#include "walk1.h"
@@ -135,6 +137,9 @@ cocos2d::Vec2 zombie::get_rect() {
 
 void zombie::handle_collision(float damage) {
 	hp -= damage;
+
+	if (hp > 0) cocos2d::AudioEngine::play2d("audio/monster/zombie_hurt.mp3");
+	else cocos2d::AudioEngine::play2d("audio/monster/zombie_death.mp3");
 
 	sprite->set_texture(zombie_data::hurt);
 

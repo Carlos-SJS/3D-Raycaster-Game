@@ -1,4 +1,5 @@
 #include "player.h"
+#include "AudioEngine.h"
 
 bool operator<(const target_entity& t1, const target_entity& t2) {
 	return -t1.dist < -t2.dist;
@@ -7,6 +8,8 @@ bool operator<(const target_entity& t1, const target_entity& t2) {
 
 void player::handle_collision(float damage) {
 	health -= damage;
+
+	cocos2d::AudioEngine::play2d("audio/player/hurt.mp3");
 }
 
 cocos2d::Vec3 player::get_pos() {
