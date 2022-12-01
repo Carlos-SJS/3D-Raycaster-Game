@@ -49,6 +49,9 @@
     <ClCompile Include="Classes\TestScene.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Sprites\cacodemon\cacodemon_projectile.cpp">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.h">
@@ -780,6 +783,24 @@
     <ClInclude Include="Classes\Sprites\imp\walk2_r.h">
       <Filter>Source Files\Classes\Sprites\imp</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\cacodemon_projectile.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\explode1.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\explode2.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\explode3.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\normalp1.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\normalp2.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\CMakeLists.txt" />
@@ -868,5 +889,10 @@
     <Filter Include="Source Files\Classes\Sprites\items">
       <UniqueIdentifier>{61ad34f2-c029-4d23-b2e5-5104a8410e63}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\audio\monster\impp_explode.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </Media>
   </ItemGroup>
 </Project>

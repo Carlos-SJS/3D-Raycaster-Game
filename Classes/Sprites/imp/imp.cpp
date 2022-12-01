@@ -183,6 +183,7 @@ void imp::animator(float dt) {
 			shooting = 1;
 
 			auto proj = imp_projectile::create(x, y, .4, angle_to_player, manager);
+			cocos2d::AudioEngine::play2d("audio/monster/imp_attack.mp3");
 
 			manager->add_to_draw((draw_obj*) proj);
 			manager->add_to_update((entity*) proj);

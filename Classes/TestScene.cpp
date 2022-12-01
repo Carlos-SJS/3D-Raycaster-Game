@@ -62,7 +62,7 @@ bool TestScene::init() {
 	//Sprites
 	barrel1 = ebarrel::create(1.5, 1.5, (game_manager*)this);
 
-	cdemon1 = cacodemon::create(8.5, 8.5, .15);
+	cdemon1 = cacodemon::create(8.5, 8.5, .15, this);
 	zombie1 = zombie::create(1.5, 8.5, this);
 	imp1 = imp::create(6.5, 3.5, this);
 	impp1 = imp_projectile::create(1.5, 8.5, .5, P2, this);
@@ -234,9 +234,12 @@ bool TestScene::init() {
 	AudioEngine::preload("audio/monster/zombie_near.mp3");
 	AudioEngine::preload("audio/monster/imp_death.mp3");
 	AudioEngine::preload("audio/monster/imp_hurt.mp3");
-	AudioEngine::preload("audio/monster/imp_death.mp3");
+	AudioEngine::preload("audio/monster/imp_attack.mp3");
+	AudioEngine::preload("audio/monster/impp_explode.mp3");
 	AudioEngine::preload("audio/monster/cacodemon_hurt.mp3");
 	AudioEngine::preload("audio/monster/cacodemon_death.mp3");
+	AudioEngine::preload("audio/monster/cacodemon_attack.mp3");
+	AudioEngine::preload("audio/monster/cproj_explode.mp3");
 
 	AudioEngine::setMaxAudioInstance(30);
 	AudioEngine::play2d("audio/music/la_grange.mp3", 0, .6);

@@ -23,7 +23,7 @@ private:
 
 	bool alive = 1;
 
-	int hp = 100;
+	int hp = 120;
 
 	float animation_time = 0;
 

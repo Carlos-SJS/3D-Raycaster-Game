@@ -1,5 +1,7 @@
 #include "imp_projectile.h"
 
+#include "AudioEngine.h"
+
 namespace imp_proj_data {
 	#include "projectile1.h"
 	#include "projectile2.h"
@@ -82,6 +84,7 @@ void imp_projectile::handle_explotion(float dt) {
 	this->state = 1;
 	this->e_sprite->set_position(this->x, this->y);
 
+	cocos2d::AudioEngine::play2d("audio/monster/impp_explode.mp3");
 	manager->handle_explosion(x, y, z, .15, 20);
 }
 

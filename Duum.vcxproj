@@ -814,14 +814,20 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="Classes\GameData.h" />
     <ClInclude Include="Classes\player.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\cacodemon.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\cacodemon_projectile.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\death1.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\death2.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\death3.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\death4.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\death5.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\death6.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\explode1.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\explode2.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\explode3.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\hurt.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\normal.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\normalp1.h" />
+    <ClInclude Include="Classes\Sprites\cacodemon\normalp2.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\shoot1.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\shoot2.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\shoot3.h" />
@@ -987,6 +993,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="Classes\BetterSprite.cpp" />
     <ClCompile Include="Classes\player.cpp" />
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon.cpp" />
+    <ClCompile Include="Classes\Sprites\cacodemon\cacodemon_projectile.cpp" />
     <ClCompile Include="Classes\Sprites\imp\imp.cpp" />
     <ClCompile Include="Classes\Sprites\imp\imp_projectile.cpp" />
     <ClCompile Include="Classes\Sprites\items\ammo_item.cpp" />
@@ -1131,6 +1138,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{E4E66D9E-103B-3065-BCB6-C644F526A8DA}</Project>
       <Name>external</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\audio\monster\impp_explode.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

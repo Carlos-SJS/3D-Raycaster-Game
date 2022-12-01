@@ -17,16 +17,29 @@ private:
 	bool dying = 0;
 	bool alive = 1;
 
-	int hp = 140;
+	int hp = 200;
 
 	float animator_time = 0;
 	int animator_frame = 0;
 
+	float cooldown = 1;
+
 	float sz = 0;
 
+	bool aiming = 0;
+
+	float angle_to_player = 0;
+
+	bool player_sight = 0;
+
+	float life_time = 0;
+	float oz;
+
+	game_manager* manager;
+
 public:
-	cacodemon(float x, float y, float z);
-	static cacodemon* create(float x, float y, float z);
+	cacodemon(float x, float y, float z, game_manager* manager);
+	static cacodemon* create(float x, float y, float z, game_manager* manager);
 
 	bool update(float dt, player* padta, std::vector<std::vector<int>>& map);
 
