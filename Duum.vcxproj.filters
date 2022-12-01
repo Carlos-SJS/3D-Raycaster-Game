@@ -762,6 +762,24 @@
     <ClInclude Include="Classes\TestScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk1_b.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk1_l.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk1_r.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk2_b.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk2_l.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk2_r.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\CMakeLists.txt" />

@@ -173,7 +173,7 @@ bool zombie::update(float dt, player* pdata, std::vector<std::vector<int>> &map)
 void zombie::animator() {
 	if (walking) {
 		if (animator_timer >= .3) {
-			wsc++; wsc = wsc %= 2;
+			wsc++; wsc %= 2;
 
 			animator_timer = 0;
 

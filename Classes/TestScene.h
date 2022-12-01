@@ -210,5 +210,9 @@ public:
 	void handle_healing(int type, int amount);
 	void handle_weapon(int type);
 
+	void add_to_solid(colider* obj);
+	void add_to_draw(draw_obj* obj);
+	void add_to_update(entity* obj);
+
 	CREATE_FUNC(TestScene);
 };

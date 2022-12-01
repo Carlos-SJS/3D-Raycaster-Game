@@ -19,6 +19,8 @@ private:
 	float animator_time = 0;
 	int texture_index = 0;
 
+	float life_time = 0;
+
 	better_sprite* sprite;
 	better_sprite* e_sprite;
 	

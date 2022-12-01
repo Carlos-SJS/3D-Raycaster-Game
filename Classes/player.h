@@ -60,4 +60,9 @@ public:
 	virtual void handle_weapon(int type) = 0;
 	//type -1 -> all, 1 -> pistol, 2->shotgun, 3->macjinegun?
 	virtual void handle_ammo(int type, int amount) = 0;
+
+	virtual void add_to_solid(colider* obj) = 0;
+	virtual void add_to_draw(draw_obj* obj) = 0;
+	virtual void add_to_update(entity* obj) = 0;
+
 };

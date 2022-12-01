@@ -22,8 +22,8 @@ imp_projectile::imp_projectile(float x, float y, float z, float angle, game_mana
 
 	this->angle = angle;
 	
-	this->dx = 2.0*cos(angle);
-	this->dy = 2.0*sin(angle);
+	this->dx = 3*cos(angle);
+	this->dy = 3*sin(angle);
 
 	this->sprite = better_sprite::create(imp_proj_data::projectile1, 15, 15, .3, .3, x, y, z);
 	this->e_sprite = better_sprite::create(imp_proj_data::explode1, 50, 44, .6, .528, 0, 0, z);
@@ -37,6 +37,8 @@ imp_projectile* imp_projectile::create(float x, float y, float z, float angle, g
 
 //Returns 0 if projectile exploded
 bool imp_projectile::update(float dt, player* padta, std::vector<std::vector<int>>& map) {
+	life_time += dt;
+
 	if (this->state == 0) {
 		if (map[y - dt*dy][x + dt*dx] == 0) {
 			this->x += dt*this->dx;
@@ -44,7 +46,7 @@ bool imp_projectile::update(float dt, player* padta, std::vector<std::vector<int
 
 			sprite->set_position(x,y);
 
-			if (!manager->get_objs(x, y, z, .15).empty()) this->handle_explotion(dt);
+			if(life_time > .2) if (!manager->get_objs(x, y, z, .2).empty()) this->handle_explotion(dt);
 		}
 		else {
 			this->handle_explotion(dt);

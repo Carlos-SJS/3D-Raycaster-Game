@@ -9,8 +9,8 @@ bool operator<(const target_entity& t1, const target_entity& t2) {
 
 
 void player::handle_collision(float damage) {
-	int protect = min(armor, damage/2);
-	health -= damage - protect;
+	int protect = min(armor, damage/2.0);
+	health -= (damage - protect);
 	armor -= protect;
 
 	cocos2d::AudioEngine::play2d("audio/player/hurt.mp3");

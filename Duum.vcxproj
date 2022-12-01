@@ -842,7 +842,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="Classes\Sprites\imp\projectile2.h" />
     <ClInclude Include="Classes\Sprites\imp\shoot.h" />
     <ClInclude Include="Classes\Sprites\imp\walk1.h" />
+    <ClInclude Include="Classes\Sprites\imp\walk1_b.h" />
+    <ClInclude Include="Classes\Sprites\imp\walk1_l.h" />
+    <ClInclude Include="Classes\Sprites\imp\walk1_r.h" />
     <ClInclude Include="Classes\Sprites\imp\walk2.h" />
+    <ClInclude Include="Classes\Sprites\imp\walk2_b.h" />
+    <ClInclude Include="Classes\Sprites\imp\walk2_l.h" />
+    <ClInclude Include="Classes\Sprites\imp\walk2_r.h" />
     <ClInclude Include="Classes\Sprites\imp\walk3.h" />
     <ClInclude Include="Classes\Sprites\imp\walk4.h" />
     <ClInclude Include="Classes\Sprites\items\ammo_box.h" />

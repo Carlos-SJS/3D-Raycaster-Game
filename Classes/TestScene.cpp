@@ -64,7 +64,7 @@ bool TestScene::init() {
 
 	cdemon1 = cacodemon::create(8.5, 8.5, .15);
 	zombie1 = zombie::create(1.5, 8.5, this);
-	imp1 = imp::create(6.5, 3.5);
+	imp1 = imp::create(6.5, 3.5, this);
 	impp1 = imp_projectile::create(1.5, 8.5, .5, P2, this);
 
 	draw_list.push_back((draw_obj*)barrel1);
@@ -778,7 +778,7 @@ void TestScene::draw_sprite(float dist, float a, better_sprite* sprite) {
 					}
 				}
 				if (point_count > 1990 - screen_size.height) {
-					dNodeS->drawPoints(point_buffer, point_count, (float)PIXEL_SIZE, color_buffer);
+					if(point_count < 4000) dNodeS->drawPoints(point_buffer, point_count, (float)PIXEL_SIZE, color_buffer);
 					point_count = 0;
 				}
 			}
@@ -1213,4 +1213,16 @@ void TestScene::swap_weapon(int id) {
 
 		weapon_s_state = 0;
 	}
+}
+
+void TestScene::add_to_solid(colider* obj) {
+	solid_obj_list.push_back(obj);
+}
+
+void TestScene::add_to_draw(draw_obj* obj) {
+	draw_list.push_back(obj);
+}
+
+void TestScene::add_to_update(entity* obj) {
+	update_list.push_back(obj);
 }
