@@ -13,6 +13,12 @@
     <ClCompile Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\cocos2d\cocos\precheader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Sprites\imp\imp.cpp">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Sprites\imp\imp_projectile.cpp">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClCompile>
     <ClCompile Include="Classes\AngleUtil.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
@@ -23,22 +29,13 @@
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon.cpp">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Sprites\imp\imp.cpp">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Sprites\imp\imp_projectile.cpp">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Sprites\zombie\zombie.cpp">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Sprites\misc\ebarrel.cpp">
       <Filter>Source Files\Classes\Sprites\misc</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\TestScene.cpp">
-      <Filter>Source Files\Classes</Filter>
+    <ClCompile Include="Classes\Sprites\zombie\zombie.cpp">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Sprites\items\ammo_item.cpp">
       <Filter>Source Files\Classes\Sprites\items</Filter>
@@ -48,6 +45,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Sprites\items\weapon_item.cpp">
       <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\TestScene.cpp">
+      <Filter>Source Files\Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +78,54 @@
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\Textures\wall_1.ppm">
       <Filter>Resources\Textures</Filter>
     </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\item\item.mp3">
+      <Filter>Resources\audio\item</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\item\item.wav">
+      <Filter>Resources\audio\item</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\item\weapon.mp3">
+      <Filter>Resources\audio\item</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\item\weapon.wav">
+      <Filter>Resources\audio\item</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\misc\barrel.mp3">
+      <Filter>Resources\audio\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\misc\barrel.wav">
+      <Filter>Resources\audio\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\monster\cacodemon_death.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\monster\cacodemon_hurt.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\monster\imp_attack.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\monster\imp_death.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\monster\imp_hurt.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\monster\imp_near.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\monster\zombie_death.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\monster\zombie_hurt.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\monster\zombie_near.mp3">
+      <Filter>Resources\audio\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\music\Race to Mars.mp3">
+      <Filter>Resources\audio\music</Filter>
+    </ClInclude>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\music\la_grange.mp3">
       <Filter>Resources\audio\music</Filter>
     </ClInclude>
@@ -86,6 +134,33 @@
     </ClInclude>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\music\running_from_evil.mp3">
       <Filter>Resources\audio\music</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\player\hurt.mp3">
+      <Filter>Resources\audio\player</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\player\hurt.wav">
+      <Filter>Resources\audio\player</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\weapon\pistol.mp3">
+      <Filter>Resources\audio\weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\weapon\pistol.wav">
+      <Filter>Resources\audio\weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\weapon\punch.mp3">
+      <Filter>Resources\audio\weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\weapon\punch.wav">
+      <Filter>Resources\audio\weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\weapon\punch_fail.mp3">
+      <Filter>Resources\audio\weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\weapon\shotgun.mp3">
+      <Filter>Resources\audio\weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\audio\weapon\shotgun.wav">
+      <Filter>Resources\audio\weapon</Filter>
     </ClInclude>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\crosshair1.png">
       <Filter>Resources</Filter>
@@ -147,6 +222,18 @@
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\ui_main_bar.png">
       <Filter>Resources</Filter>
     </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\fist\normal.png">
+      <Filter>Resources\weapons\fist</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\fist\punch1.png">
+      <Filter>Resources\weapons\fist</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\fist\punch2.png">
+      <Filter>Resources\weapons\fist</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\fist\punch3.png">
+      <Filter>Resources\weapons\fist</Filter>
+    </ClInclude>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\pistol\pistol1.png">
       <Filter>Resources\weapons\pistol</Filter>
     </ClInclude>
@@ -155,6 +242,96 @@
     </ClInclude>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\pistol\shoot2.png">
       <Filter>Resources\weapons\pistol</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\shotgun\sgun1.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\shotgun\shot1.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\shotgun\shot2.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\shotgun\shot3.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\shotgun\shot4.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\shotgun\shot5.png">
+      <Filter>Resources\weapons\shotgun</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\wicon0.png">
+      <Filter>Resources\weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\wicon1.png">
+      <Filter>Resources\weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Resources\weapons\wicon2.png">
+      <Filter>Resources\weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\entities.h">
+      <Filter>Source Files\Classes\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\sprites.h">
+      <Filter>Source Files\Classes\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\aim.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death1.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death2.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death3.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death4.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\death5.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\explode1.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\explode2.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\explode3.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\hurt.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\imp.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\imp_projectile.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\projectile1.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\projectile2.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\shoot.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk1.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk2.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk3.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\imp\walk4.h">
+      <Filter>Source Files\Classes\Sprites\imp</Filter>
     </ClInclude>
     <ClInclude Include="Classes\AngleUtil.h">
       <Filter>Source Files\Classes</Filter>
@@ -167,6 +344,96 @@
     </ClInclude>
     <ClInclude Include="Classes\player.h">
       <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\cacodemon.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death1.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death2.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death3.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death4.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death5.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\death6.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\hurt.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\normal.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\shoot1.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\shoot2.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\cacodemon\shoot3.h">
+      <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\misc\eb_explosion1.h">
+      <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\misc\eb_explosion2.h">
+      <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\misc\eb_explosion3.h">
+      <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\misc\ebarrel.h">
+      <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\misc\ebarrel_texture.h">
+      <Filter>Source Files\Classes\Sprites\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\aim.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\dying1.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\dying2.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\dying3.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\dying4.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\dying5.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\hurt.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\shoot.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\walk1.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\walk2.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\walk3.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\walk4.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprites\zombie\zombie.h">
+      <Filter>Source Files\Classes\Sprites\zombie</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Textures\texture_1.h">
       <Filter>Source Files\Classes\Textures</Filter>
@@ -453,147 +720,6 @@
     <ClInclude Include="Classes\Textures\textures.h">
       <Filter>Source Files\Classes\Textures</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\cacodemon.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\death1.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\death2.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\death3.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\death4.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\death5.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\death6.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\hurt.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\normal.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\shoot1.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\shoot2.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\cacodemon\shoot3.h">
-      <Filter>Source Files\Classes\Sprites\cacodemon</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\aim.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\explode1.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\explode2.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\explode3.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\hurt.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\imp.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\imp_projectile.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\projectile1.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\projectile2.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\shoot.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\walk1.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\walk2.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\walk3.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\walk4.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\aim.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\dying1.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\dying2.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\dying3.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\dying4.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\dying5.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\hurt.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\shoot.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\walk1.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\walk2.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\walk3.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\walk4.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\zombie\zombie.h">
-      <Filter>Source Files\Classes\Sprites\zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\misc\eb_explosion1.h">
-      <Filter>Source Files\Classes\Sprites\misc</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\misc\eb_explosion2.h">
-      <Filter>Source Files\Classes\Sprites\misc</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\misc\eb_explosion3.h">
-      <Filter>Source Files\Classes\Sprites\misc</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\misc\ebarrel.h">
-      <Filter>Source Files\Classes\Sprites\misc</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\misc\ebarrel_texture.h">
-      <Filter>Source Files\Classes\Sprites\misc</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\entities.h">
-      <Filter>Source Files\Classes\Sprites</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\sprites.h">
-      <Filter>Source Files\Classes\Sprites</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\TestScene.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Sprites\items\ammo_box.h">
       <Filter>Source Files\Classes\Sprites\items</Filter>
     </ClInclude>
@@ -633,20 +759,8 @@
     <ClInclude Include="Classes\Sprites\items\witem_3.h">
       <Filter>Source Files\Classes\Sprites\items</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\death1.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\death2.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\death3.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\death4.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Sprites\imp\death5.h">
-      <Filter>Source Files\Classes\Sprites\imp</Filter>
+    <ClInclude Include="Classes\TestScene.h">
+      <Filter>Source Files\Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -667,8 +781,23 @@
     <Filter Include="Resources\audio">
       <UniqueIdentifier>{5A60CCAD-A5A1-3278-A070-D93EC9660FA7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\audio\item">
+      <UniqueIdentifier>{3C6E0214-E981-3795-9790-A6BFF71BD16F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\audio\misc">
+      <UniqueIdentifier>{94796802-8C09-31F3-9C19-2012E92CCDD4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\audio\monster">
+      <UniqueIdentifier>{C45E4D10-E3DF-3BCE-BBC7-C296C10C8B83}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Resources\audio\music">
       <UniqueIdentifier>{2750A4A8-5DAD-32A0-8F92-63D573F6BE6E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\audio\player">
+      <UniqueIdentifier>{74E824F5-027B-3C45-B84D-110F1520AFE8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\audio\weapon">
+      <UniqueIdentifier>{51E46644-4311-3B64-BE99-B9506F05F0A9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\faces">
       <UniqueIdentifier>{03F7717E-437E-36AE-993F-9003387BD6B6}</UniqueIdentifier>
@@ -682,8 +811,14 @@
     <Filter Include="Resources\weapons">
       <UniqueIdentifier>{BACEF742-507F-3B5D-B1DF-30948A15FFCC}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\weapons\fist">
+      <UniqueIdentifier>{C568290F-862C-3A7B-854F-AF18BEB655DB}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Resources\weapons\pistol">
       <UniqueIdentifier>{08475538-BE7F-31B3-9E17-C335E731FB65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\weapons\shotgun">
+      <UniqueIdentifier>{720C6776-EF94-36A2-A6E1-48342BADABB7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{085C36B1-B9E4-366B-A514-4A0B6B49D9C7}</UniqueIdentifier>
@@ -694,162 +829,26 @@
     <Filter Include="Source Files\proj.win32">
       <UniqueIdentifier>{9385A07B-BB2C-3D65-B43D-9EB342E73857}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Classes\Textures">
-      <UniqueIdentifier>{3eae4512-85f1-46aa-b69f-f8ff838ec638}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Classes\Sprites">
-      <UniqueIdentifier>{4cfa50d7-4988-4737-bd09-b59c073c7737}</UniqueIdentifier>
+      <UniqueIdentifier>{baa8ebe0-e2be-439b-9d42-8d296ab7e157}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Classes\Sprites\cacodemon">
-      <UniqueIdentifier>{c77595b9-57c3-4cea-8798-08bb3222fbf2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Classes\Sprites\imp">
-      <UniqueIdentifier>{842b80b8-dfaf-45c7-8d2c-83165a685a65}</UniqueIdentifier>
+    <Filter Include="Source Files\Classes\Sprites\cacdodemon">
+      <UniqueIdentifier>{9fbae92d-ee25-4342-bca9-8373bc274037}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Classes\Sprites\zombie">
-      <UniqueIdentifier>{c9305c22-8194-42ed-b82f-f541feca1959}</UniqueIdentifier>
+      <UniqueIdentifier>{bf022a2c-7a57-4a5a-b96e-d7ce0baedc1b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Classes\Sprites\misc">
-      <UniqueIdentifier>{f67a0048-9bf1-4338-99b8-250a8a302119}</UniqueIdentifier>
+      <UniqueIdentifier>{b6628e8b-1d3f-4257-8474-c89f10a14546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\Sprites\imp">
+      <UniqueIdentifier>{42080970-5774-42a5-b70d-dd5c703cf2f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\Textures">
+      <UniqueIdentifier>{05568648-c8dd-465b-a87d-59083d3c4706}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Classes\Sprites\items">
-      <UniqueIdentifier>{aac8af3a-bdcb-4b40-a3b3-4eb399630d15}</UniqueIdentifier>
+      <UniqueIdentifier>{61ad34f2-c029-4d23-b2e5-5104a8410e63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\weapons\shotgun">
-      <UniqueIdentifier>{e5ae2108-33cc-40d2-b8d4-03a399724748}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\weapons\fist">
-      <UniqueIdentifier>{bd0f9026-6490-426c-942d-880de36e72b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\audio\player">
-      <UniqueIdentifier>{0db9039e-56f1-45b8-8a6e-34240b851a00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\audio\weapon">
-      <UniqueIdentifier>{f080ccc2-e409-4cd7-993c-259b85808d2b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\audio\item">
-      <UniqueIdentifier>{80f0e132-446f-46c7-9047-6a2e3f6af035}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\audio\misc">
-      <UniqueIdentifier>{2944f6cc-7a94-45d1-89e1-0417cb4295f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\audio\monster">
-      <UniqueIdentifier>{2270ecd7-e15c-4679-853a-2986dda4497a}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\weapons\shotgun\sgun1.png">
-      <Filter>Resources\weapons\shotgun</Filter>
-    </Image>
-    <Image Include="Resources\weapons\shotgun\shot1.png">
-      <Filter>Resources\weapons\shotgun</Filter>
-    </Image>
-    <Image Include="Resources\weapons\shotgun\shot2.png">
-      <Filter>Resources\weapons\shotgun</Filter>
-    </Image>
-    <Image Include="Resources\weapons\shotgun\shot3.png">
-      <Filter>Resources\weapons\shotgun</Filter>
-    </Image>
-    <Image Include="Resources\weapons\shotgun\shot4.png">
-      <Filter>Resources\weapons\shotgun</Filter>
-    </Image>
-    <Image Include="Resources\weapons\shotgun\shot5.png">
-      <Filter>Resources\weapons\shotgun</Filter>
-    </Image>
-    <Image Include="Resources\weapons\fist\normal.png">
-      <Filter>Resources\weapons\fist</Filter>
-    </Image>
-    <Image Include="Resources\weapons\fist\punch1.png">
-      <Filter>Resources\weapons\fist</Filter>
-    </Image>
-    <Image Include="Resources\weapons\fist\punch2.png">
-      <Filter>Resources\weapons\fist</Filter>
-    </Image>
-    <Image Include="Resources\weapons\fist\punch3.png">
-      <Filter>Resources\weapons\fist</Filter>
-    </Image>
-    <Image Include="Resources\weapons\wicon0.png">
-      <Filter>Resources\weapons</Filter>
-    </Image>
-    <Image Include="Resources\weapons\wicon1.png">
-      <Filter>Resources\weapons</Filter>
-    </Image>
-    <Image Include="Resources\weapons\wicon2.png">
-      <Filter>Resources\weapons</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="Resources\audio\item\item.wav">
-      <Filter>Resources\audio\item</Filter>
-    </Media>
-    <Media Include="Resources\audio\item\weapon.wav">
-      <Filter>Resources\audio\item</Filter>
-    </Media>
-    <Media Include="Resources\audio\weapon\pistol.wav">
-      <Filter>Resources\audio\weapon</Filter>
-    </Media>
-    <Media Include="Resources\audio\weapon\punch.wav">
-      <Filter>Resources\audio\weapon</Filter>
-    </Media>
-    <Media Include="Resources\audio\weapon\shotgun.wav">
-      <Filter>Resources\audio\weapon</Filter>
-    </Media>
-    <Media Include="Resources\audio\player\hurt.wav">
-      <Filter>Resources\audio\player</Filter>
-    </Media>
-    <Media Include="Resources\audio\misc\barrel.wav">
-      <Filter>Resources\audio\misc</Filter>
-    </Media>
-    <Media Include="Resources\audio\item\item.mp3">
-      <Filter>Resources\audio\item</Filter>
-    </Media>
-    <Media Include="Resources\audio\item\weapon.mp3">
-      <Filter>Resources\audio\item</Filter>
-    </Media>
-    <Media Include="Resources\audio\misc\barrel.mp3">
-      <Filter>Resources\audio\misc</Filter>
-    </Media>
-    <Media Include="Resources\audio\music\Race to Mars.mp3">
-      <Filter>Resources\audio\music</Filter>
-    </Media>
-    <Media Include="Resources\audio\weapon\pistol.mp3">
-      <Filter>Resources\audio\weapon</Filter>
-    </Media>
-    <Media Include="Resources\audio\weapon\punch.mp3">
-      <Filter>Resources\audio\weapon</Filter>
-    </Media>
-    <Media Include="Resources\audio\weapon\shotgun.mp3">
-      <Filter>Resources\audio\weapon</Filter>
-    </Media>
-    <Media Include="Resources\audio\monster\cacodemon_death.mp3">
-      <Filter>Resources\audio\monster</Filter>
-    </Media>
-    <Media Include="Resources\audio\monster\cacodemon_hurt.mp3">
-      <Filter>Resources\audio\monster</Filter>
-    </Media>
-    <Media Include="Resources\audio\monster\imp_attack.mp3">
-      <Filter>Resources\audio\monster</Filter>
-    </Media>
-    <Media Include="Resources\audio\monster\imp_death.mp3">
-      <Filter>Resources\audio\monster</Filter>
-    </Media>
-    <Media Include="Resources\audio\monster\imp_hurt.mp3">
-      <Filter>Resources\audio\monster</Filter>
-    </Media>
-    <Media Include="Resources\audio\monster\imp_near.mp3">
-      <Filter>Resources\audio\monster</Filter>
-    </Media>
-    <Media Include="Resources\audio\monster\zombie_death.mp3">
-      <Filter>Resources\audio\monster</Filter>
-    </Media>
-    <Media Include="Resources\audio\monster\zombie_hurt.mp3">
-      <Filter>Resources\audio\monster</Filter>
-    </Media>
-    <Media Include="Resources\audio\monster\zombie_near.mp3">
-      <Filter>Resources\audio\monster</Filter>
-    </Media>
-    <Media Include="Resources\audio\weapon\punch_fail.mp3">
-      <Filter>Resources\audio\weapon</Filter>
-    </Media>
   </ItemGroup>
 </Project>

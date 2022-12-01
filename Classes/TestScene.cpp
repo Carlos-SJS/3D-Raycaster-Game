@@ -63,7 +63,7 @@ bool TestScene::init() {
 	barrel1 = ebarrel::create(1.5, 1.5, (game_manager*)this);
 
 	cdemon1 = cacodemon::create(8.5, 8.5, .15);
-	zombie1 = zombie::create(1.5, 8.5);
+	zombie1 = zombie::create(1.5, 8.5, this);
 	imp1 = imp::create(6.5, 3.5);
 	impp1 = imp_projectile::create(1.5, 8.5, .5, P2, this);
 
@@ -438,7 +438,7 @@ void TestScene::draw_world() {
 		dx = -dy / at;
 
 		if (cangle != P2 && cangle != P3) {
-			while (inside(cx, cy)) {
+			while (inside((int)cx, (int)cy)) {
 				if (world_map[(int)cy][(int)cx] > 0) {
 					hz = Vec2(cx, cy);
 
@@ -835,7 +835,7 @@ void TestScene::update(float dt) {
 	draw_world();
 }
 
-std::priority_queue<target_entity> TestScene::get_targets(float x, float y, float a) {
+std::priority_queue<target_entity> TestScene::get_targets(float x, float y, float a, bool player_only) {
 	float at = tan(a);
 	float dx, dy, cx, cy, wall_d = 5000000;
 
@@ -917,6 +917,32 @@ std::priority_queue<target_entity> TestScene::get_targets(float x, float y, floa
 	Vec3 pos;
 
 	std::priority_queue<target_entity> target_list;
+
+	if (player_only) {
+		auto obj = (colider*) &player_data;
+
+		pos = obj->get_pos();
+		dx = pos.x - x, dy = y - pos.y;
+
+		ea = angle_util::get_angle(dx, dy);
+
+		sinpa = sin(angle_util::fix(a - ea));
+		//cospa = cos(angle_util::fix(a - ea));
+		cospa = cos(angle_util::fix(ea - a));
+
+		dist = sqrt(dx * dx + dy * dy);
+
+		size = 1 / (dist * cospa);
+
+		ewidth = obj->get_rect().x * size;
+
+		if (dist > .2 && abs(a - ea) < P2 && dist < wall_d && abs(dist * sinpa) < obj->get_rect().x / 2 * .8) {
+			target_list.push(target_entity(obj, dist));
+		}
+
+
+		return target_list;
+	}
 
 	for (auto obj : solid_obj_list) {
 		pos = obj->get_pos();

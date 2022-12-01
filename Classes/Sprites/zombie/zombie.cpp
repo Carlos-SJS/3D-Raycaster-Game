@@ -1,5 +1,7 @@
 #include "zombie.h"
 #include "AudioEngine.h"
+#include "AngleUtil.h"
+
 
 
 namespace zombie_data {
@@ -37,7 +39,7 @@ namespace zombie_data {
 	};
 }
 
-zombie::zombie(float x, float y) {
+zombie::zombie(float x, float y, game_manager* manager) {
 	this->x = x;
 	this->y = y;
 
@@ -45,17 +47,110 @@ zombie::zombie(float x, float y) {
 	this->death_s = better_sprite::create(zombie_data::dying1, 50, 60, .54, .65, x, y, 0);
 
 	this->animator_timer = 0;
+
+	this->manager = manager;
+
+	srand(time(NULL));
 }
 
-zombie* zombie::create(float x, float y) {
-	return new zombie(x, y);
+zombie* zombie::create(float x, float y, game_manager* manager) {
+	return new zombie(x, y, manager);
 }
 
 bool zombie::update(float dt, player* pdata, std::vector<std::vector<int>> &map){
 	if (!alive) return 0;
 
-	
-	if (walking) {
+	/*
+	Idle untill it sees the player for the first time
+	Follows the player when is not in sight
+
+	Can move pseudo randomly when player is in sight and within a distance
+
+	when player is in sigt can try to aim anx`d shot the player if possible
+
+	*/
+
+	float dx = pdata->x - x;
+	float dy = y - pdata->y;
+
+	angle_to_player = angle_util::get_angle(dx, dy);
+
+	auto target = manager->get_targets(x, y, angle_to_player, 1);
+
+	if (weapon_cooldown > 0) weapon_cooldown -= dt;
+
+	if (dying || damaged) goto ignore_stuff;
+
+	if (!shooting) {
+		if (!target.empty()) {  //Player is in view
+			lplayery = pdata->y;
+			lplayerx = pdata->x;
+
+			player_sight_counter += dt;
+
+			if (aim) {
+				aim_counter += dt;
+				if (aim_counter > .5) {
+					target = manager->get_targets(x, y, angle_to_player);
+					if (!target.empty() && target.top().obj == this) target.pop();
+					if(!target.empty()) target.top().obj->handle_collision(dmg);
+
+					cocos2d::AudioEngine::play2d("audio/weapon/pistol.mp3");
+
+					sprite->set_texture(zombie_data::shoot);
+
+					aim = 0;
+					shooting = 1;
+					walking = 0;
+					aim_counter = 0;
+					animator_timer = 0;
+				}
+
+				goto ignore_stuff;
+
+			}
+			if ((!aim && !shooting) && (target.top().dist > 10 || (player_sight_counter < 1 && target.top().dist > (float)(rand()&3000)/1000.0) )) {
+				float dx = x - lplayerx;
+				float dy = y - lplayery;
+
+				walking = 1;
+
+				if (map[(int)y][(int)(x - 1.4 * dt * (dx / (abs(dx) + abs(dy))))] == 0) x -= 1.0 * dt * (dx / (abs(dx) + abs(dy)));
+				if (map[(int)(y - 1.4 * dt * (dy / (abs(dx) + abs(dy))))][(int)x] == 0) y -= 1.0 * dt * (dy / (abs(dx) + abs(dy)));
+
+				sprite->set_position(x, y);
+			}
+			else if (weapon_cooldown <= 0 && !aim) {
+				aim_counter = 0, aim = 1, walking = 0;
+
+				sprite->set_texture(zombie_data::aim);
+			}
+			else player_sight_counter = (float)(rand()%700)/1000.0;
+		}
+		else {
+			walking = 1;
+			aim = 0;
+
+			player_sight_counter = 0;
+
+			float dx = x - lplayerx;
+			float dy = y - lplayery;
+
+			//Move zombie to follow 
+			if (dx * dx + dy * dy > 0.01) {
+				//cocos2d::log("this is a test, map[0][0] = %d, map[9][9] = %d", map[0][0], map[9][9]);
+				if (map[(int)y][(int)(x - 1.4 * dt * (dx / (abs(dx) + abs(dy))))] == 0) x -= 1.0 * dt * (dx / (abs(dx) + abs(dy)));
+				if (map[(int)(y - 1.4 * dt * (dy / (abs(dx) + abs(dy))))][(int)x] == 0) y -= 1.0 * dt * (dy / (abs(dx) + abs(dy)));
+
+				sprite->set_position(x, y);
+			}
+			else walking = 0;
+		}
+	}
+
+	ignore_stuff:
+
+	/*if (walking) {
 		float dx = x - pdata->x;
 		float dy = y - pdata->y;
 
@@ -67,7 +162,7 @@ bool zombie::update(float dt, player* pdata, std::vector<std::vector<int>> &map)
 
 			sprite->set_position(x, y);
 		}
-	}
+	}*/
 
 	animator_timer += dt;
 	this->animator();
@@ -85,11 +180,18 @@ void zombie::animator() {
 			sprite->set_texture(zombie_data::walk_s[1+wsc]);
 		}
 	}
-	else if (aim) {
-		//Handle aiming anmimation
-	}
 	else if (shooting) {
 		//Handling shooting animation
+		if (animator_timer > .2) {
+			shooting = 0;
+			if(rand() % 2) player_sight_counter = 0;
+			weapon_cooldown = 1 + (float)(rand()%60)/10.0;
+
+			animator_timer = 0;
+
+			sprite->set_texture(zombie_data::walk_s[0]);
+		}
+
 	}
 	else if (damaged) {
 		if (animator_timer > .2) {
@@ -144,8 +246,12 @@ void zombie::handle_collision(float damage) {
 	sprite->set_texture(zombie_data::hurt);
 
 	damaged = 1;
+
 	walking = 0;
+	aim = 0;
+	shooting = 0;
 	animator_timer = 0;
+	aim_counter = 0;
 }
 
 bool zombie::is_solid() {

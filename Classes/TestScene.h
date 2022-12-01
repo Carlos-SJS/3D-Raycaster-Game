@@ -168,8 +168,8 @@ private:
 	void update_armor_text();
 
 
-	cocos2d::Vec2 point_buffer[3000];
-	cocos2d::Color4F color_buffer[3000];
+	cocos2d::Vec2 point_buffer[4000];
+	cocos2d::Color4F color_buffer[4000];
 
 	void swap_weapon(int weapon);
 
@@ -202,7 +202,7 @@ public:
 	void onMouseDown(cocos2d::EventMouse*);
 
 	//Stuff for shots, damage and collisions
-	std::priority_queue<target_entity> get_targets(float x, float y, float a);
+	std::priority_queue<target_entity> get_targets(float x, float y, float a, bool player_only = 0);
 	std::vector<colider*> get_objs(float x, float y, float z, float radius);
 	void handle_explosion(float x, float y, float z, float radius, int damage);
 

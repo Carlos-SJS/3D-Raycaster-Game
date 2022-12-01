@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "BetterSprite.h"
 #include <vector>
+#include <queue>
 
 class colider {
 public:
@@ -52,6 +53,7 @@ class game_manager {
 public:
 	virtual std::vector<colider*> get_objs(float x, float y, float z, float radius) = 0;
 	virtual void handle_explosion(float x, float y, float z, float radius, int damage) = 0;
+	virtual std::priority_queue<target_entity> get_targets(float x, float y, float a, bool player_only = 0) = 0;
 
 	//type 0-> hp, 1 -> shield
 	virtual void handle_healing(int type, int ammount) = 0;

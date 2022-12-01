@@ -1,13 +1,17 @@
 #include "player.h"
 #include "AudioEngine.h"
 
+#define min(a,b) (a<b?a:b)
+
 bool operator<(const target_entity& t1, const target_entity& t2) {
 	return -t1.dist < -t2.dist;
 }
 
 
 void player::handle_collision(float damage) {
-	health -= damage;
+	int protect = min(armor, damage/2);
+	health -= damage - protect;
+	armor -= protect;
 
 	cocos2d::AudioEngine::play2d("audio/player/hurt.mp3");
 }
