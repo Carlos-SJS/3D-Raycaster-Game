@@ -206,5 +206,5 @@ bool cacodemon::is_solid() {
 }
 
 bool cacodemon::is_visible() {
-	return alive;
+	return 1;
 }

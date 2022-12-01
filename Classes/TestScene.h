@@ -80,6 +80,7 @@ private:
 	cocos2d::Sprite* face_s;
 	cocos2d::Sprite* crosshair;
 	cocos2d::Sprite* weapon_slot;
+	cocos2d::Sprite* death_effect;
 
 	cocos2d::Sprite* ammo_text[3];
 	cocos2d::Sprite* hp_text[4];
@@ -93,6 +94,7 @@ private:
 	std::vector<draw_obj*> draw_list;
 	std::vector<entity*> update_list;
 	std::vector<colider*> solid_obj_list;
+	std::vector<interactable*> interactable_list;
 
 	imp_projectile* impp1;
 
@@ -176,17 +178,18 @@ private:
 public:
 	std::vector<std::vector<int>> world_map 
 					   { { 1, 1, 7,21,13,12,13, 7, 1, 1},
-						 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+						 { 1, 0, 0,96, 0, 0, 0, 0, 0, 1},
 						 { 1, 0, 0, 1, 1, 0, 0, 0, 0, 1},
 						 { 3, 0, 0, 0, 1, 1, 0, 0, 0, 1},
 						 { 1, 0, 0, 0, 1, 1, 0, 0, 0, 1},
 						 { 1, 0, 0, 0, 1, 1, 0, 0, 0, 1},
 						 { 1, 0, 1, 1, 1, 1, 1, 0, 0, 1},
 						 { 1, 0, 1, 1, 0, 1, 1, 0, 0, 1},
-						 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+						 { 1, 0, 0, 0, 0, 0, 0, 0, 0,33},
 						 { 1, 1, 2, 1, 4, 1, 1, 1, 4, 1}
 	};
 
+	bool target_reched = 0;
 
 	static cocos2d::Scene* createScene();
 

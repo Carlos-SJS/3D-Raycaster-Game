@@ -52,6 +52,12 @@
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon_projectile.cpp">
       <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Interactables\door.cpp">
+      <Filter>Source Files\Classes\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Interactables\terminal.cpp">
+      <Filter>Source Files\Classes\Interactables</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.h">
@@ -801,6 +807,12 @@
     <ClInclude Include="Classes\Sprites\cacodemon\normalp2.h">
       <Filter>Source Files\Classes\Sprites\cacdodemon</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Interactables\door.h">
+      <Filter>Source Files\Classes\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Interactables\terminal.h">
+      <Filter>Source Files\Classes\Interactables</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\CMakeLists.txt" />
@@ -888,6 +900,9 @@
     </Filter>
     <Filter Include="Source Files\Classes\Sprites\items">
       <UniqueIdentifier>{61ad34f2-c029-4d23-b2e5-5104a8410e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\Interactables">
+      <UniqueIdentifier>{a99b4c7c-db65-4530-983a-c41cde4ff83a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

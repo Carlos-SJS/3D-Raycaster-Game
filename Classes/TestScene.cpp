@@ -5,6 +5,9 @@
 #include "Sprites/sprites.h"
 #include "GameData.h"
 
+#include "Interactables/door.h"
+#include "Interactables/terminal.h"
+
 #include "AudioEngine.h"
 
 USING_NS_CC;
@@ -131,6 +134,13 @@ bool TestScene::init() {
 	weapon_s->setPosition(Vec2(SCREEN_WIDTH/2.0, UI_HEIGHT));
 	this->addChild(weapon_s, 10);
 
+	death_effect = Sprite::create("death.png");
+	death_effect->setScale((float)SCREEN_WIDTH / death_effect->getContentSize().width, (float)GAME_HEIGHT / death_effect->getContentSize().height);
+	death_effect->setAnchorPoint(Vec2(0, 0));
+	death_effect->setPosition(Vec2(0, UI_HEIGHT));
+	death_effect->setVisible(0);
+	this->addChild(death_effect, 10);
+
 	face_s = Sprite::create("faces/100f.png");
 	face_s->setScale(sX, sY);
 	face_s->setAnchorPoint(Vec2(0, 0));
@@ -220,6 +230,8 @@ bool TestScene::init() {
 	AudioEngine::preload("audio/music/la_grange.mp3");
 
 	AudioEngine::preload("audio/misc/barrel.mp3");
+	AudioEngine::preload("audio/misc/door_open.mp3");
+	AudioEngine::preload("audio/misc/target.mp3");
 
 	AudioEngine::preload("audio/weapon/punch.mp3");
 	AudioEngine::preload("audio/weapon/punch_fail.mp3");
@@ -241,8 +253,16 @@ bool TestScene::init() {
 	AudioEngine::preload("audio/monster/cacodemon_attack.mp3");
 	AudioEngine::preload("audio/monster/cproj_explode.mp3");
 
+	AudioEngine::preload("audio/player/hurt .mp3");
+	AudioEngine::preload("audio/player/death.mp3");
+
 	AudioEngine::setMaxAudioInstance(30);
 	AudioEngine::play2d("audio/music/la_grange.mp3", 0, .6);
+
+	//Interactables
+	interactable_list.push_back((interactable*)door::create(3, 1, &world_map, 0));
+	interactable_list.push_back((interactable*) terminal::create(9, 8, &world_map, &target_reched));
+
 
 	return true;
 }
@@ -314,6 +334,11 @@ void TestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	case EventKeyboard::KeyCode::KEY_E:
 		key_states[E_KEY] = 0;
 		break;
+	case EventKeyboard::KeyCode::KEY_SPACE:
+		for (auto obj : interactable_list) {
+			if (obj->active()) obj->check(player_data.x, player_data.y, player_data.red_key, player_data.blue_key);
+		}
+		break;
 	}
 }
 
@@ -347,6 +372,8 @@ bool TestScene::inside(float x, float y) {
 }
 
 void TestScene::draw_world() {
+	if (world_map.size() != MAP_HEIGHT) return;
+
 	auto screen_size = Director::getInstance()->getVisibleSize();
 	screen_size.height = GAME_HEIGHT;
 	screen_size.height /= PIXEL_SIZE;
@@ -613,7 +640,9 @@ void TestScene::draw_world() {
 }
 
 void TestScene::handle_input(float dt) {
-    float wdist = .2;
+	if (player_data.health <= 0) return;
+	
+	float wdist = .2;
 	float sdist = 0;
 
 	if (key_states[UP_ARROW_KEY]) {
@@ -791,6 +820,7 @@ void TestScene::draw_sprite(float dist, float a, better_sprite* sprite) {
 	}
 }
 
+
 void TestScene::handle_sprites() {
 
 }
@@ -801,6 +831,7 @@ void TestScene::update(float dt) {
 	//Player movement
 	handle_input(dt);
 
+	
 	//Update entities
 	int inc=1;
 	for (auto sp = update_list.begin(); sp != update_list.end(); sp+=inc) {
@@ -809,6 +840,11 @@ void TestScene::update(float dt) {
 			sp = update_list.erase(sp);
 			inc = 0;
 		}
+	}
+
+	if (player_data.health <= 0) {
+		death_effect->setVisible(1);
+		weapon_s->setVisible(0);
 	}
 
 	targets = get_targets(player_data.x, player_data.y, player_data.angle);
@@ -923,6 +959,7 @@ std::priority_queue<target_entity> TestScene::get_targets(float x, float y, floa
 
 	if (player_only) {
 		auto obj = (colider*) &player_data;
+		if (!obj->is_solid()) return target_list;
 
 		pos = obj->get_pos();
 		dx = pos.x - x, dy = y - pos.y;

@@ -812,6 +812,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="Classes\AngleUtil.h" />
     <ClInclude Include="Classes\BetterSprite.h" />
     <ClInclude Include="Classes\GameData.h" />
+    <ClInclude Include="Classes\Interactables\door.h" />
+    <ClInclude Include="Classes\Interactables\terminal.h" />
     <ClInclude Include="Classes\player.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\cacodemon.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\cacodemon_projectile.h" />
@@ -991,6 +993,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\proj.win32\resource.h" />
     <ClCompile Include="Classes\AngleUtil.cpp" />
     <ClCompile Include="Classes\BetterSprite.cpp" />
+    <ClCompile Include="Classes\Interactables\door.cpp" />
+    <ClCompile Include="Classes\Interactables\terminal.cpp" />
     <ClCompile Include="Classes\player.cpp" />
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon.cpp" />
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon_projectile.cpp" />

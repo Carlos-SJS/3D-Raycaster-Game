@@ -37,6 +37,9 @@ struct player : public colider{
 	int health = 100;
 	int armor = 0;
 
+	bool red_key = 0;
+	bool blue_key = 0;
+
 	void handle_collision(float damage);
 	cocos2d::Vec3 get_pos();
 	cocos2d::Vec2 get_rect();
@@ -65,4 +68,10 @@ public:
 	virtual void add_to_draw(draw_obj* obj) = 0;
 	virtual void add_to_update(entity* obj) = 0;
 
+};
+
+class interactable {
+public:
+	virtual void check(float x, float y, bool rk, bool bk) = 0;
+	virtual bool active() = 0;
 };

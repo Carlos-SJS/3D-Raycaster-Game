@@ -94,6 +94,10 @@
 #include "texture_92.h"
 #include "texture_93.h"
 #include "texture_94.h"
+#include "texture_95.h"
+#include "texture_96.h"
+#include "texture_97.h"
+#include "texture_98.h"
 
 int* textures[] = {
 	texture_1,
@@ -189,5 +193,9 @@ int* textures[] = {
 	texture_91,
 	texture_92,
 	texture_93,
-	texture_94
+	texture_94,
+	texture_95,
+	texture_96,
+	texture_97,
+	texture_98
 };

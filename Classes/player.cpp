@@ -13,7 +13,8 @@ void player::handle_collision(float damage) {
 	health -= (damage - protect);
 	armor -= protect;
 
-	cocos2d::AudioEngine::play2d("audio/player/hurt.mp3");
+	if(health > 0) cocos2d::AudioEngine::play2d("audio/player/hurt.mp3");
+	else  cocos2d::AudioEngine::play2d("audio/player/death.mp3");
 }
 
 cocos2d::Vec3 player::get_pos() {
@@ -25,5 +26,5 @@ cocos2d::Vec2 player::get_rect() {
 }
 
 bool player::is_solid() {
-	return 1;
+	return health>0;
 }
