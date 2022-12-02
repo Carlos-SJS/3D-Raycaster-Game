@@ -16,4 +16,4 @@ Music and sounds:
 - Enmey - Imagine Dragons 8 bits (Darnu-Pop): https://www.youtube.com/watch?v=6a7sWzK-d5M&t=111s
 - Running from evil - Domm II (8 Bit Universe): https://www.youtube.com/watch?v=ClUTe6w4LCU
 
-You can find a video with a short explanation and some gameplay here: (Spanish)(LINK)
+You can find a video with a short explanation and some gameplay here: (Spanish) https://drive.google.com/file/d/1dEO7JQspExNbwHV4cotvmWAHcWe9xGjx/view?usp=share_link
