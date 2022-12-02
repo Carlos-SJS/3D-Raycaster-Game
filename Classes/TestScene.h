@@ -217,5 +217,7 @@ public:
 	void add_to_draw(draw_obj* obj);
 	void add_to_update(entity* obj);
 
+	void add_kill();
+
 	CREATE_FUNC(TestScene);
 };

@@ -68,6 +68,7 @@ public:
 	virtual void add_to_draw(draw_obj* obj) = 0;
 	virtual void add_to_update(entity* obj) = 0;
 
+	virtual void add_kill() = 0;
 };
 
 class interactable {

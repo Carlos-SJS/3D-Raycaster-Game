@@ -349,6 +349,61 @@ bool level_1::init() {
 	armor_text[3]->setPosition(st + 3 * sp, yp);
 	this->addChild(armor_text[3], 15);
 
+	//Kills text
+	yp = 7*SCREEN_HEIGHT/10;
+	st = 5*SCREEN_WIDTH/8;
+	sp = SCREEN_WIDTH * .055;
+
+	kills_text[0] = Sprite::create("fonts/s0.png");
+	kills_text[0]->setScale(tsX, tsY);
+	kills_text[0]->setPosition(st, yp);
+	this->addChild(kills_text[0], 20);
+
+	kills_text[1] = Sprite::create("fonts/s0.png");
+	kills_text[1]->setScale(tsX, tsY);
+	kills_text[1]->setPosition(st + 1 * sp, yp);
+	this->addChild(kills_text[1], 20);
+
+	kills_text[2] = Sprite::create("fonts/s0.png");
+	kills_text[2]->setScale(tsX, tsY);
+	kills_text[2]->setPosition(st + 2 * sp, yp);
+	this->addChild(kills_text[2], 20);
+
+	kills_text[3] = Sprite::create("fonts/s%.png");
+	kills_text[3]->setScale(tsX, tsY);
+	kills_text[3]->setPosition(st + 3 * sp, yp);
+	this->addChild(kills_text[3], 20);
+
+	//items text
+	yp = 5 * SCREEN_HEIGHT / 10;
+	st = 5 * SCREEN_WIDTH / 8;
+	sp = SCREEN_WIDTH * .055;
+
+	items_text[0] = Sprite::create("fonts/s0.png");
+	items_text[0]->setScale(tsX, tsY);
+	items_text[0]->setPosition(st, yp);
+	this->addChild(items_text[0], 20);
+
+	items_text[1] = Sprite::create("fonts/s0.png");
+	items_text[1]->setScale(tsX, tsY);
+	items_text[1]->setPosition(st + 1 * sp, yp);
+	this->addChild(items_text[1], 20);
+
+	items_text[2] = Sprite::create("fonts/s0.png");
+	items_text[2]->setScale(tsX, tsY);
+	items_text[2]->setPosition(st + 2 * sp, yp);
+	this->addChild(items_text[2], 20);
+
+	items_text[3] = Sprite::create("fonts/s%.png");
+	items_text[3]->setScale(tsX, tsY);
+	items_text[3]->setPosition(st + 3 * sp, yp);
+	this->addChild(items_text[3], 20);
+
+	for (int i = 0; i < 4; i++) {
+		kills_text[i]->setVisible(0);
+		items_text[i]->setVisible(0);
+	}
+
 	auto resume = MenuItemImage::create("menu/resume.png", "menu/resume_s.png", CC_CALLBACK_1(level_1::resume_callback, this));
 	resume->setPosition(screen_size.width / 2, 7 * screen_size.height / 10);
 
@@ -418,16 +473,17 @@ void level_1::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event){
 			swap_weapon(2);
 			break;
 		case EventKeyboard::KeyCode::KEY_ESCAPE:
-			if (!paused) {
+			if (!paused && player_data.health > 0 && !target_reached) {
 				handle_pause();
 				//dysplay pause menu
 				pause_effect->setVisible(1);
 				menu->setVisible(1);
 			}
-			else handle_unpause();
+			else if(player_data.health > 0 && !target_reached) handle_unpause();
 			break;
-			
-
+		case EventKeyboard::KeyCode::KEY_LEFT_SHIFT:
+			player_data.speed = 2;
+			break;
 	}
 }
 
@@ -477,6 +533,9 @@ void level_1::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 		for (auto obj : interactable_list) {
 			if (obj->active()) obj->check(player_data.x, player_data.y, player_data.red_key, player_data.blue_key);
 		}
+		break;
+	case EventKeyboard::KeyCode::KEY_LEFT_SHIFT:
+		player_data.speed = 1;
 		break;
 	}
 }
@@ -786,6 +845,15 @@ void level_1::handle_input(float dt) {
 	float wdist = .2;
 	float sdist = 0;
 
+	float normalspeed = player_data.speed;
+	int c = 0;
+	if(key_states[UP_ARROW_KEY]) c++;
+	if(key_states[LEFT_ARROW_KEY]) c++;
+	if(key_states[DOWN_ARROW_KEY]) c++;
+	if(key_states[RIGHT_ARROW_KEY]) c++;
+	
+	player_data.speed /= max(c/2, 1);
+
 	if (key_states[UP_ARROW_KEY]) {
 		float c = cos(player_data.angle);
 		float s = sin(player_data.angle);
@@ -827,6 +895,8 @@ void level_1::handle_input(float dt) {
 		if (world_map[(int)(player_data.y - dy - s * wdist)][(int)player_data.x] == 0 && get_objs(player_data.x, player_data.y - dy, 0, .3).size() < 2)player_data.y -= dy;
 	}
 
+	player_data.speed = normalspeed;
+
 	/*if (key_states[Q_KEY]) {
 		player_data.angle += 1 * dt;
 		if (player_data.angle >= 2 * PI) player_data.angle -= 2 * PI;
@@ -836,14 +906,21 @@ void level_1::handle_input(float dt) {
 		if (player_data.angle < 0.0) player_data.angle += 2 * PI;
 	}*/
 
+	std::string fn = "faces/";
+
+	if (player_data.health > 75) fn += "100";
+	else if (player_data.health > 50) fn += "75";
+	else if (player_data.health > 25) fn += "50";
+	else fn += "25";
+
 	if (abs(delta_mouse) > 7) {
-		if (delta_mouse > 0) face_s->setTexture("faces/100l.png");
-		else face_s->setTexture("faces/100r.png");
+		if (delta_mouse > 0) face_s->setTexture(fn + "l.png");
+		else face_s->setTexture(fn + "r.png");
 		face_cooldown = .1;
 	}
 	else {
 		if (face_cooldown > 0) face_cooldown -= dt;
-		else face_s->setTexture("faces/100f.png");
+		else face_s->setTexture(fn + "f.png");
 	}
 
 	if (delta_mouse != 0.0) {
@@ -988,6 +1065,10 @@ void level_1::update(float dt) {
 	if (player_data.health <= 0) {
 		death_effect->setVisible(1);
 		weapon_s->setVisible(0);
+
+		show_defeat_menu();
+
+		paused = 1;
 	}
 
 	targets = get_targets(player_data.x, player_data.y, player_data.angle);
@@ -1011,7 +1092,11 @@ void level_1::update(float dt) {
 
 	draw_sprites();
 
+	if (target_reached) {
+		paused = 1;
 
+		show_stat_menu();
+	}
 
 	//Draw world
 	draw_world();
@@ -1368,6 +1453,8 @@ void level_1::update_armor_text() {
 }
 
 void level_1::handle_ammo(int type, int amount) {
+	items_collected++;
+
 	if (type == -1) {
 		for (int i = 1; i < w_ammo.size(); i++) if(weapon_unlocked[i]) w_ammo[i] += amount;
 	}
@@ -1377,6 +1464,8 @@ void level_1::handle_ammo(int type, int amount) {
 }
 
 void level_1::handle_healing(int type, int amount) {
+	items_collected++;
+
 	if (type == 0) player_data.health += amount;
 	else player_data.armor += amount;
 
@@ -1384,6 +1473,8 @@ void level_1::handle_healing(int type, int amount) {
 }
 
 void level_1::handle_weapon(int type) {
+	items_collected++;
+
 	weapon_unlocked[type] = 1;
 
 	AudioEngine::play2d("audio/item/weapon.mp3");
@@ -1408,4 +1499,88 @@ void level_1::add_to_draw(draw_obj* obj) {
 
 void level_1::add_to_update(entity* obj) {
 	update_list.push_back(obj);
+}
+
+void level_1::show_stat_menu() {
+	float killsp = (float)player_kills / (float)total_kills * 100;
+	float itemp = (float)items_collected / (float)total_items * 100;
+
+	int kp = (int)round(killsp);
+	int ip = (int) round(itemp);
+
+	for (int i = 2; i >= 0; i--) {
+		kills_text[i]->setTexture("fonts/s" + to_string(kp % 10) + ".png");
+		items_text[i]->setTexture("fonts/s" + to_string(ip%10) + ".png");
+		
+		kp /= 10; ip /= 10;
+	}
+
+	auto next = MenuItemImage::create("menu/next_level.png", "menu/next_level_s.png", [](Ref* psender) {
+		//Go to next level :)
+
+		AudioEngine::play2d("audio/item/item.mp3");
+	});
+	next->setScale(.5, .5);
+	next->setPosition(6*SCREEN_WIDTH/8, SCREEN_HEIGHT/4);
+
+	auto bm = MenuItemImage::create("menu/main_menu.png", "menu/main_menu_s.png", [](Ref* psender) {
+		Director::getInstance()->replaceScene(MainMenu::create());
+
+		AudioEngine::play2d("audio/item/item.mp3");
+	});
+	bm->setScale(.5, .5);
+	bm->setPosition(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4);
+
+
+	auto m = Menu::create(next, bm, NULL);
+	m->setPosition(Vec2::ZERO);
+	this->addChild(m, 20);
+
+	for (int i = 0; i < 4; i++) {
+		kills_text[i]->setVisible(1);
+		items_text[i]->setVisible(1);
+	}
+
+	auto kt = Sprite::create("menu/kills.png");
+	kt->setAnchorPoint(Vec2(0,.5));
+	kt->setPosition(SCREEN_WIDTH/4 ,7*SCREEN_HEIGHT/10);
+	kt->setScale(.6, .6);
+
+	this->addChild(kt, 20);
+
+	auto it = Sprite::create("menu/items.png");
+	it->setAnchorPoint(Vec2(0,.5));
+	it->setPosition(SCREEN_WIDTH / 4, 5 * SCREEN_HEIGHT / 10);
+	it->setScale(.6, .6);
+
+	this->addChild(it, 20);
+
+	pause_effect->setVisible(1);
+
+	GLViewImpl* gl_view = (GLViewImpl*)Director::getInstance()->getOpenGLView();
+	gl_view->set_raw_input(false);
+}
+
+void level_1::show_defeat_menu() {
+	auto retry = MenuItemImage::create("menu/retry.png", "menu/retry_s.png", [](Ref* psender) {
+		Director::getInstance()->replaceScene(level_1::create());
+
+		AudioEngine::play2d("audio/item/item.mp3");
+	});
+	retry->setPosition(SCREEN_WIDTH / 2, 7 * SCREEN_HEIGHT / 10);
+
+	auto main_menu = MenuItemImage::create("menu/main_menu.png", "menu/main_menu_s.png", CC_CALLBACK_1(level_1::menu_callback, this));
+	main_menu->setPosition(SCREEN_WIDTH/ 2, 4 * SCREEN_HEIGHT / 10);
+
+
+	auto m = Menu::create(retry, main_menu, NULL);
+	m -> setPosition(Vec2::ZERO);
+	this->addChild(m, 20);
+
+	GLViewImpl* gl_view = (GLViewImpl*)Director::getInstance()->getOpenGLView();
+	gl_view->set_raw_input(false);
+}
+
+void level_1::add_kill() {
+	player_kills++;
 }

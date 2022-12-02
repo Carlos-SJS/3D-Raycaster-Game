@@ -1266,3 +1266,7 @@ void TestScene::add_to_draw(draw_obj* obj) {
 void TestScene::add_to_update(entity* obj) {
 	update_list.push_back(obj);
 }
+
+void TestScene::add_kill() {
+
+}

@@ -243,7 +243,10 @@ void zombie::handle_collision(float damage) {
 	hp -= damage;
 
 	if (hp > 0) cocos2d::AudioEngine::play2d("audio/monster/zombie_hurt.mp3");
-	else cocos2d::AudioEngine::play2d("audio/monster/zombie_death.mp3");
+	else {
+		cocos2d::AudioEngine::play2d("audio/monster/zombie_death.mp3");
+		manager->add_kill();
+	}
 
 	sprite->set_texture(zombie_data::hurt);
 

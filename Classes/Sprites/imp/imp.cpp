@@ -222,8 +222,10 @@ void imp::handle_collision(float damage){
 	this->sprite->set_texture(imp_data::hurt);
 
 	if (hp > 0) cocos2d::AudioEngine::play2d("audio/monster/imp_hurt.mp3");
-	else cocos2d::AudioEngine::play2d("audio/monster/imp_death.mp3");
-
+	else {
+		cocos2d::AudioEngine::play2d("audio/monster/imp_death.mp3");
+		manager->add_kill();
+	}
 }
 
 cocos2d::Vec3 imp::get_pos() {

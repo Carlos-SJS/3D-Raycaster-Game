@@ -190,6 +190,8 @@ void cacodemon::handle_collision(float damage) {
 		sz = (z+.1) * 3.33;
 
 		death_s->set_position(x, y, z);
+
+		manager->add_kill();
 	}
 }
 
