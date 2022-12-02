@@ -816,6 +816,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="Classes\Interactables\terminal.h" />
     <ClInclude Include="Classes\player.h" />
     <ClInclude Include="Classes\Scenes\level_1.h" />
+    <ClInclude Include="Classes\Scenes\MainMenu.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\cacodemon.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\cacodemon_projectile.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\death1.h" />
@@ -1002,6 +1003,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="Classes\Interactables\terminal.cpp" />
     <ClCompile Include="Classes\player.cpp" />
     <ClCompile Include="Classes\Scenes\level_1.cpp" />
+    <ClCompile Include="Classes\Scenes\MainMenu.cpp" />
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon.cpp" />
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon_projectile.cpp" />
     <ClCompile Include="Classes\Sprites\imp\imp.cpp" />
@@ -1152,6 +1154,20 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Resources\audio\monster\impp_explode.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\menu\background.png" />
+    <Image Include="Resources\menu\exit.png" />
+    <Image Include="Resources\menu\exit_s.png" />
+    <Image Include="Resources\menu\LOGO.png" />
+    <Image Include="Resources\menu\main_menu.png" />
+    <Image Include="Resources\menu\main_menu_s.png" />
+    <Image Include="Resources\menu\play.png" />
+    <Image Include="Resources\menu\play_s.png" />
+    <Image Include="Resources\menu\resume.png" />
+    <Image Include="Resources\menu\resume_s.png" />
+    <Image Include="Resources\menu\retry.png" />
+    <Image Include="Resources\menu\retry_s.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

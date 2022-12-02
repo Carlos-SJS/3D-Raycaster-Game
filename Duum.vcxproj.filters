@@ -64,6 +64,9 @@
     <ClCompile Include="Classes\Textures\textures.cpp">
       <Filter>Source Files\Classes\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Scenes\MainMenu.cpp">
+      <Filter>Source Files\Classes\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.h">
@@ -834,6 +837,9 @@
     <ClInclude Include="Classes\Textures\texture_98.h">
       <Filter>Source Files\Classes\Textures</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Scenes\MainMenu.h">
+      <Filter>Source Files\Classes\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\CMakeLists.txt" />
@@ -928,10 +934,51 @@
     <Filter Include="Source Files\Classes\Scenes">
       <UniqueIdentifier>{2151f989-0efc-443e-aa31-008b8bade9ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\menu">
+      <UniqueIdentifier>{85600461-2cb1-4ceb-84f2-b8d99a863714}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Resources\audio\monster\impp_explode.mp3">
       <Filter>Resources\audio\monster</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\menu\background.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
+    <Image Include="Resources\menu\exit.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
+    <Image Include="Resources\menu\exit_s.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
+    <Image Include="Resources\menu\LOGO.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
+    <Image Include="Resources\menu\main_menu.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
+    <Image Include="Resources\menu\main_menu_s.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
+    <Image Include="Resources\menu\play.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
+    <Image Include="Resources\menu\play_s.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
+    <Image Include="Resources\menu\resume.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
+    <Image Include="Resources\menu\resume_s.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
+    <Image Include="Resources\menu\retry.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
+    <Image Include="Resources\menu\retry_s.png">
+      <Filter>Resources\menu</Filter>
+    </Image>
   </ItemGroup>
 </Project>
