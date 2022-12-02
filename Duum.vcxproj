@@ -816,6 +816,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="Classes\Interactables\terminal.h" />
     <ClInclude Include="Classes\player.h" />
     <ClInclude Include="Classes\Scenes\level_1.h" />
+    <ClInclude Include="Classes\Scenes\level_2.h" />
     <ClInclude Include="Classes\Scenes\MainMenu.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\cacodemon.h" />
     <ClInclude Include="Classes\Sprites\cacodemon\cacodemon_projectile.h" />
@@ -866,6 +867,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="Classes\Sprites\items\bandages.h" />
     <ClInclude Include="Classes\Sprites\items\bullets.h" />
     <ClInclude Include="Classes\Sprites\items\healing_item.h" />
+    <ClInclude Include="Classes\Sprites\items\key.h" />
     <ClInclude Include="Classes\Sprites\items\medkit.h" />
     <ClInclude Include="Classes\Sprites\items\shells.h" />
     <ClInclude Include="Classes\Sprites\items\shield1.h" />
@@ -1003,6 +1005,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="Classes\Interactables\terminal.cpp" />
     <ClCompile Include="Classes\player.cpp" />
     <ClCompile Include="Classes\Scenes\level_1.cpp" />
+    <ClCompile Include="Classes\Scenes\level_2.cpp" />
     <ClCompile Include="Classes\Scenes\MainMenu.cpp" />
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon.cpp" />
     <ClCompile Include="Classes\Sprites\cacodemon\cacodemon_projectile.cpp" />
@@ -1010,6 +1013,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="Classes\Sprites\imp\imp_projectile.cpp" />
     <ClCompile Include="Classes\Sprites\items\ammo_item.cpp" />
     <ClCompile Include="Classes\Sprites\items\healing_item.cpp" />
+    <ClCompile Include="Classes\Sprites\items\key.cpp" />
     <ClCompile Include="Classes\Sprites\items\weapon_item.cpp" />
     <ClCompile Include="Classes\Sprites\misc\ebarrel.cpp" />
     <ClCompile Include="Classes\Sprites\zombie\zombie.cpp" />

@@ -212,6 +212,7 @@ public:
 	void handle_ammo(int type, int amount);
 	void handle_healing(int type, int amount);
 	void handle_weapon(int type);
+	void handle_key(int type);
 
 	void add_to_solid(colider* obj);
 	void add_to_draw(draw_obj* obj);

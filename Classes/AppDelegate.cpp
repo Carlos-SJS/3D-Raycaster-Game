@@ -29,6 +29,7 @@
 #include "Scenes/MainMenu.h"
 
 #include "Scenes/level_1.h"
+#include "Scenes/level_2.h"
 
 #include "GameData.h"
 
@@ -117,7 +118,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = MainMenu::createScene();
+    auto scene = level_2::createScene();
 
     // run
     director->runWithScene(scene);

@@ -9,6 +9,8 @@ door::door(int x, int y, std::vector<std::vector<int>> *map, int r) {
 	this->x = (float) x + .5;
 	this->y = (float) y + .5;
 
+	this->key = r;
+
 	this->mp = map;
 }
 

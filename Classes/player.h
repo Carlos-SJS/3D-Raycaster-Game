@@ -63,6 +63,7 @@ public:
 	virtual void handle_weapon(int type) = 0;
 	//type -1 -> all, 1 -> pistol, 2->shotgun, 3->macjinegun?
 	virtual void handle_ammo(int type, int amount) = 0;
+	virtual void handle_key(int type) = 0;
 
 	virtual void add_to_solid(colider* obj) = 0;
 	virtual void add_to_draw(draw_obj* obj) = 0;
@@ -76,3 +77,13 @@ public:
 	virtual void check(float x, float y, bool rk, bool bk) = 0;
 	virtual bool active() = 0;
 };
+
+namespace save_d {
+	extern int phealth;
+	extern int parmor;
+
+	extern bool shot_gun;
+
+	extern int ammo_pistol;
+	extern int ammo_sgun;
+}

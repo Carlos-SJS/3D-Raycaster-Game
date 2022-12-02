@@ -1270,3 +1270,7 @@ void TestScene::add_to_update(entity* obj) {
 void TestScene::add_kill() {
 
 }
+
+void TestScene::handle_key(int type) {
+
+}

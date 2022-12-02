@@ -28,3 +28,11 @@ cocos2d::Vec2 player::get_rect() {
 bool player::is_solid() {
 	return health>0;
 }
+
+int save_d::parmor = 0;
+int save_d::phealth = 100;
+
+bool save_d::shot_gun = 0;
+
+int save_d::ammo_pistol = 30;
+int save_d::ammo_sgun = 25;

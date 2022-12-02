@@ -1,4 +1,4 @@
-#include "level_1.h"
+#include "level_2.h"
 //hi a
 //Textures
 #include "Textures/textures.h"
@@ -12,17 +12,14 @@
 
 #include "AudioEngine.h"
 
-#include "level_2.h"
-
-
 USING_NS_CC;
 
 
-Scene* level_1::createScene(){
-	return level_1::create();
+Scene* level_2::createScene(){
+	return level_2::create();
 }
 
-bool level_1::init() {
+bool level_2::init() {
 	if (!Scene::init()) return false;
 
 	Director::getInstance()->setDisplayStats(false);
@@ -48,21 +45,29 @@ bool level_1::init() {
 	dNodeS = DrawNode::create();
 	this->addChild(dNodeS, 1);
 
-	player_data.x = 2.3;
-	player_data.y = 4;
-	player_data.angle = P3;
+	player_data.x = 8.5;
+	player_data.y = 2.5;
+	player_data.angle = PI;
 	player_data.speed = 1.0;
 
+	player_data.armor = save_d::parmor;
+	player_data.health = save_d::phealth;
+
+	weapon_unlocked[2] = save_d::shot_gun;
+
+	w_ammo[1] = save_d::ammo_pistol;
+	w_ammo[2] = save_d::ammo_sgun;
+
 	auto listener = EventListenerKeyboard::create();
-	listener->onKeyPressed = CC_CALLBACK_2(level_1::onKeyPressed, this);
-	listener->onKeyReleased = CC_CALLBACK_2(level_1::onKeyReleased, this);
+	listener->onKeyPressed = CC_CALLBACK_2(level_2::onKeyPressed, this);
+	listener->onKeyReleased = CC_CALLBACK_2(level_2::onKeyReleased, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 
 	auto _mouseListener = EventListenerMouse::create();
-	_mouseListener->onMouseMove = CC_CALLBACK_1(level_1::onMouseMove, this);
-	_mouseListener->onMouseDown = CC_CALLBACK_1(level_1::onMouseDown, this);
+	_mouseListener->onMouseMove = CC_CALLBACK_1(level_2::onMouseMove, this);
+	_mouseListener->onMouseDown = CC_CALLBACK_1(level_2::onMouseDown, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
 
@@ -70,118 +75,160 @@ bool level_1::init() {
 	//Entities
 	solid_obj_list.push_back((colider*) &player_data);
 
-	interactable_list.push_back((interactable*)door::create(2, 6, &world_map, 0));
-	interactable_list.push_back((interactable*)door::create(4, 9, &world_map, 0));
-	interactable_list.push_back((interactable*)door::create(15, 12, &world_map, 0));
-	interactable_list.push_back((interactable*)door::create(6, 15, &world_map, 0));
+	interactable_list.push_back((interactable*)door::create(13, 4, &world_map, 0));
+	interactable_list.push_back((interactable*)door::create(7, 10, &world_map, 0));
+	interactable_list.push_back((interactable*)door::create(13, 16, &world_map, 0));
+	interactable_list.push_back((interactable*)door::create(6, 19, &world_map, 2));
+	interactable_list.push_back((interactable*)door::create(3, 15, &world_map, 2));
 
-	interactable_list.push_back((interactable*)terminal::create(18, 16, &world_map, &target_reached));
+	interactable_list.push_back((interactable*)terminal::create(3, 22, &world_map, &target_reached));
 
-	auto z = zombie::create(6.5, 1.5, this);
+	auto z = zombie::create(1.5, 3.5, this);
 	draw_list.push_back((draw_obj*) z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(6.5, 4.5, this);
+	z = zombie::create(1.5, 6.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(1.5, 5.5, this);
+	z = zombie::create(16.5, 21.5, this);
+	draw_list.push_back((draw_obj*)z);
+	update_list.push_back((entity*)z);
+	solid_obj_list.push_back((colider*)z);
+	
+	z = zombie::create(16.5, 17.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(18.5, 12.5, this);
+	z = zombie::create(14.5, 21.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(18.5, 13.5, this);
+	z = zombie::create(11.5, 18.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(17.5, 14.5, this);
+	z = zombie::create(4.5, 5.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(4.5, 12.5, this);
+	z = zombie::create(15.5, 2.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(16.5, 18.5, this);
+	z = zombie::create(13.5, 1.5, this);
+	draw_list.push_back((draw_obj*)z);
+	update_list.push_back((entity*)z);
+	solid_obj_list.push_back((colider*)z);
+	
+	z = zombie::create(18.5, 15.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(1.5, 17.5, this);
+	z = zombie::create(5.5, 14.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(12.5, 18.5, this);
+	z = zombie::create(2.5, 20.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(10.5, 9.5, this);
+	z = zombie::create(3.5, 17.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(11.5, 14.5, this);
+	z = zombie::create(4.5, 18.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(14.5, 6.5, this);
+	z = zombie::create(2.5, 2.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(14.5, 12.5, this);
+	z = zombie::create(4.5, 20.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	z = zombie::create(14.5, 1.5, this);
+	z = zombie::create(3.5, 21.5, this);
 	draw_list.push_back((draw_obj*)z);
 	update_list.push_back((entity*)z);
 	solid_obj_list.push_back((colider*)z);
 
-	auto i = imp::create(10.5, 1.5, this);
+	auto i = imp::create(1.5, 8.5, this);
 	draw_list.push_back((draw_obj*)i);
 	update_list.push_back((entity*)i);
 	solid_obj_list.push_back((colider*)i);
 
-	i = imp::create(13.5, 14.5, this);
+	i = imp::create(5.5, 8.5, this);
 	draw_list.push_back((draw_obj*)i);
 	update_list.push_back((entity*)i);
 	solid_obj_list.push_back((colider*)i);
 
-	i = imp::create(6.5, 14.5, this);
+	i = imp::create(3.5, 14.5, this);
 	draw_list.push_back((draw_obj*)i);
 	update_list.push_back((entity*)i);
 	solid_obj_list.push_back((colider*)i);
 
-	i = imp::create(18.5, 17.5, this);
+	i = imp::create(8.5, 21.5, this);
 	draw_list.push_back((draw_obj*)i);
 	update_list.push_back((entity*)i);
 	solid_obj_list.push_back((colider*)i);
 
-	i = imp::create(1.5, 15.5, this);
+	i = imp::create(18.5, 19.5, this);
 	draw_list.push_back((draw_obj*)i);
 	update_list.push_back((entity*)i);
 	solid_obj_list.push_back((colider*)i);
 
-	auto s1 = healing_item::create(6.5, 3.5, 2, this);
-	draw_list.push_back((draw_obj*)s1);
-	update_list.push_back((entity*)s1);
+	i = imp::create(8.5, 16.5, this);
+	draw_list.push_back((draw_obj*)i);
+	update_list.push_back((entity*)i);
+	solid_obj_list.push_back((colider*)i);
 
-	s1 = healing_item::create(8.5, 18.5, 2, this);
+	i = imp::create(10.5, 3.5, this);
+	draw_list.push_back((draw_obj*)i);
+	update_list.push_back((entity*)i);
+	solid_obj_list.push_back((colider*)i);
+
+	i = imp::create(16.5, 4.5, this);
+	draw_list.push_back((draw_obj*)i);
+	update_list.push_back((entity*)i);
+	solid_obj_list.push_back((colider*)i);
+
+	i = imp::create(4.5, 21.5, this);
+	draw_list.push_back((draw_obj*)i);
+	update_list.push_back((entity*)i);
+	solid_obj_list.push_back((colider*)i);
+
+	i = imp::create(1.5, 16.5, this);
+	draw_list.push_back((draw_obj*)i);
+	update_list.push_back((entity*)i);
+	solid_obj_list.push_back((colider*)i);
+
+	i = imp::create(6.5, 5.5, this);
+	draw_list.push_back((draw_obj*)i);
+	update_list.push_back((entity*)i);
+	solid_obj_list.push_back((colider*)i);
+
+	i = imp::create(13.5, 17.5, this);
+	draw_list.push_back((draw_obj*)i);
+	update_list.push_back((entity*)i);
+	solid_obj_list.push_back((colider*)i);
+
+	auto s1 = healing_item::create(14.5, 1.5, 2, this);
 	draw_list.push_back((draw_obj*)s1);
 	update_list.push_back((entity*)s1);
 
@@ -189,49 +236,97 @@ bool level_1::init() {
 	draw_list.push_back((draw_obj*)mk);
 	update_list.push_back((entity*)mk);
 
-	mk = healing_item::create(18.5, 14.5, 1, this);
+	mk = healing_item::create(13.5, 15.5, 1, this);
 	draw_list.push_back((draw_obj*)mk);
 	update_list.push_back((entity*)mk);
 
-	mk = healing_item::create(2.5, 18.5, 1, this);
+	mk = healing_item::create(2.5, 20.5, 1, this);
 	draw_list.push_back((draw_obj*)mk);
 	update_list.push_back((entity*)mk);
 
-	mk = healing_item::create(18.5, 17.5, 1, this);
+	mk = healing_item::create(18.5, 19.5, 1, this);
 	draw_list.push_back((draw_obj*)mk);
 	update_list.push_back((entity*)mk);
 
-	auto s2 = healing_item::create(1.5, 18.5, 3, this);
+	auto s2 = healing_item::create(5.5, 8.5, 3, this);
 	draw_list.push_back((draw_obj*)s2);
 	update_list.push_back((entity*)s2);
 
-	s2 = healing_item::create(14.5, 18.5, 3, this);
+	s2 = healing_item::create(18.5, 10.5, 3, this);
 	draw_list.push_back((draw_obj*)s2);
 	update_list.push_back((entity*)s2);
 
-	s2 = healing_item::create(1.5, 10.5, 3, this);
+	s2 = healing_item::create(3.5, 18.5, 3, this);
 	draw_list.push_back((draw_obj*)s2);
 	update_list.push_back((entity*)s2);
 
-	auto bl = ammo_item::create(7.5, 8.6, 1, 25, this);
+	auto bl = ammo_item::create(13.5, 1.6, 1, 33, this);
 	draw_list.push_back((draw_obj*)bl);
 	update_list.push_back((entity*)bl);
 
-	bl = ammo_item::create(2.5, 17.6, 1, 25, this);
-	draw_list.push_back((draw_obj*)bl);
-	update_list.push_back((entity*)bl);
-
-	bl = ammo_item::create(6.5, 1.6, 1, 25, this);
-	draw_list.push_back((draw_obj*)bl);
-	update_list.push_back((entity*)bl);
-
-	auto bg = healing_item::create(1.5, 5.5, 0, this);
+	auto bg = healing_item::create(1.5, 9.5, 0, this);
 	draw_list.push_back((draw_obj*)bg);
 	update_list.push_back((entity*)bg);
 
-	bg = healing_item::create(9.5, 17.5, 0, this);
+	bg = healing_item::create(12.5, 1.5, 0, this);
 	draw_list.push_back((draw_obj*)bg);
 	update_list.push_back((entity*)bg);
+
+	bg = healing_item::create(18.5, 6.5, 0, this);
+	draw_list.push_back((draw_obj*)bg);
+	update_list.push_back((entity*)bg);
+
+	bg = healing_item::create(5.5, 9.5, 0, this);
+	draw_list.push_back((draw_obj*)bg);
+	update_list.push_back((entity*)bg);
+
+	bg = healing_item::create(2.5, 2.5, 0, this);
+	draw_list.push_back((draw_obj*)bg);
+	update_list.push_back((entity*)bg);
+
+	auto k = key_item::create(13.5, 10.5, 0, this);
+	draw_list.push_back((draw_obj*)k);
+	update_list.push_back((entity*)k);
+
+	auto sh = ammo_item::create(1.5, 8.5, 2, 9, this);
+	draw_list.push_back((draw_obj*)sh);
+	update_list.push_back((entity*)sh);
+
+	sh = ammo_item::create(18.5, 1.5, 2, 13, this);
+	draw_list.push_back((draw_obj*)sh);
+	update_list.push_back((entity*)sh);
+
+	auto ab = ammo_item::create(13.5, 5.5, 0, 25, this);
+	draw_list.push_back((draw_obj*)ab);
+	update_list.push_back((entity*)ab);
+
+	ab = ammo_item::create(18.5, 15.5, 0, 25, this);
+	draw_list.push_back((draw_obj*)ab);
+	update_list.push_back((entity*)ab);
+
+	auto sg = weapon_item::create(1.5, 3.5, 2, this);
+	draw_list.push_back((draw_obj*)sg);
+	update_list.push_back((entity*)sg);
+
+	auto cd = cacodemon::create(11.5, 6.5, .3, this);
+	draw_list.push_back((draw_obj*)cd);
+	update_list.push_back((entity*)cd);
+	solid_obj_list.push_back((colider*)cd);
+
+	cd = cacodemon::create(11.5, 14.5, .25, this);
+	draw_list.push_back((draw_obj*)cd);
+	update_list.push_back((entity*)cd);
+	solid_obj_list.push_back((colider*)cd);
+
+	cd = cacodemon::create(17.5, 8.5, .35, this);
+	draw_list.push_back((draw_obj*)cd);
+	update_list.push_back((entity*)cd);
+	solid_obj_list.push_back((colider*)cd);
+
+	cd = cacodemon::create(17.5, 12.5, .3, this);
+	draw_list.push_back((draw_obj*)cd);
+	update_list.push_back((entity*)cd);
+	solid_obj_list.push_back((colider*)cd);
 
 	depth_map.resize(screen_size.width/PIXEL_SIZE);
 
@@ -407,10 +502,10 @@ bool level_1::init() {
 		items_text[i]->setVisible(0);
 	}
 
-	auto resume = MenuItemImage::create("menu/resume.png", "menu/resume_s.png", CC_CALLBACK_1(level_1::resume_callback, this));
+	auto resume = MenuItemImage::create("menu/resume.png", "menu/resume_s.png", CC_CALLBACK_1(level_2::resume_callback, this));
 	resume->setPosition(screen_size.width / 2, 7 * screen_size.height / 10);
 
-	auto main_menu = MenuItemImage::create("menu/main_menu.png", "menu/main_menu_s.png", CC_CALLBACK_1(level_1::menu_callback, this));
+	auto main_menu = MenuItemImage::create("menu/main_menu.png", "menu/main_menu_s.png", CC_CALLBACK_1(level_2::menu_callback, this));
 	main_menu->setPosition(screen_size.width / 2, 4 * screen_size.height / 10);
 
 
@@ -425,19 +520,19 @@ bool level_1::init() {
 	return true;
 }
 
-void level_1:: resume_callback(Ref* psender) {
+void level_2:: resume_callback(Ref* psender) {
 	handle_unpause();
 	AudioEngine::play2d("audio/item/item.mp3");
 
 }
 
-void level_1::menu_callback(Ref* psender) {
+void level_2::menu_callback(Ref* psender) {
 	Director::getInstance()->replaceScene(MainMenu::create());
 	AudioEngine::play2d("audio/item/item.mp3");
 
 }
 
-void level_1::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event){
+void level_2::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event){
 	switch (keyCode) {
 		case EventKeyboard::KeyCode::KEY_UP_ARROW:
 		case EventKeyboard::KeyCode::KEY_W:
@@ -490,14 +585,14 @@ void level_1::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event){
 	}
 }
 
-void level_1::handle_pause() {
+void level_2::handle_pause() {
 	GLViewImpl* gl_view = (GLViewImpl*)Director::getInstance()->getOpenGLView();
 	gl_view->set_raw_input(false);
 
 	paused = 1;
 }
 
-void level_1::handle_unpause() {
+void level_2::handle_unpause() {
 	GLViewImpl* gl_view = (GLViewImpl*)Director::getInstance()->getOpenGLView();
 	gl_view->set_raw_input(true);
 
@@ -507,7 +602,7 @@ void level_1::handle_unpause() {
 	paused = 0;
 }
 
-void level_1::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
+void level_2::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	//log("Key with keycode %d released", keyCode);
 	switch (keyCode) {
 	case EventKeyboard::KeyCode::KEY_UP_ARROW:
@@ -543,23 +638,23 @@ void level_1::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	}
 }
 
-void level_1::onMouseMove(EventMouse* e){
+void level_2::onMouseMove(EventMouse* e){
 	if (!paused)
 		delta_mouse -= e->getCursorX();
 }
 
-void level_1::onMouseDown(EventMouse* e) {
+void level_2::onMouseDown(EventMouse* e) {
 	if(!paused)
 		if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) handle_player_shot();
 }
 
-std::string level_1::to_string(float f) {
+std::string level_2::to_string(float f) {
 	std::ostringstream s;
 	s << f;
 	return s.str().c_str();
 }
 
-void level_1::draw_rect(float x, float y, float width, float height, Color4F color) {
+void level_2::draw_rect(float x, float y, float width, float height, Color4F color) {
 	Vec2 rectangle[4];
 
 	rectangle[0] = Vec2((int)x, (int)y);
@@ -570,11 +665,11 @@ void level_1::draw_rect(float x, float y, float width, float height, Color4F col
 	dNode->drawPolygon(rectangle, 4, color, 1, color);
 }
 
-bool level_1::inside(float x, float y) {
+bool level_2::inside(float x, float y) {
 	return x >= 0 && y >= 0 && x < MAP_WIDTH&& y < MAP_HEIGHT;
 }
 
-void level_1::draw_world() {
+void level_2::draw_world() {
 	if (world_map.size() != MAP_HEIGHT) return;
 
 	auto screen_size = Director::getInstance()->getVisibleSize();
@@ -842,7 +937,7 @@ void level_1::draw_world() {
 	//log("Done");
 }
 
-void level_1::handle_input(float dt) {
+void level_2::handle_input(float dt) {
 	if (player_data.health <= 0) return;
 	
 	float wdist = .2;
@@ -941,7 +1036,7 @@ void level_1::handle_input(float dt) {
 	return a;
 }*/
 
-void level_1::schedule_sprite(better_sprite* sprite) {
+void level_2::schedule_sprite(better_sprite* sprite) {
 	Vec2 pos = sprite->get_position();
 
 	float dx = (pos.x - player_data.x);
@@ -953,14 +1048,14 @@ void level_1::schedule_sprite(better_sprite* sprite) {
 	sprite_queue.push(buffered_sprite(dist, a, sprite));
 }
 
-void level_1::draw_sprites() {
+void level_2::draw_sprites() {
 	while (!sprite_queue.empty()) {
 		draw_sprite(sprite_queue.top().dist, sprite_queue.top().angle, sprite_queue.top().sprite);
 		sprite_queue.pop();
 	}
 }
 
-void level_1::draw_sprite(float dist, float a, better_sprite* sprite) {
+void level_2::draw_sprite(float dist, float a, better_sprite* sprite) {
 	auto screen_size = Director::getInstance()->getWinSize();	
 
 	screen_size.height = GAME_HEIGHT;
@@ -1042,13 +1137,13 @@ void level_1::draw_sprite(float dist, float a, better_sprite* sprite) {
 }
 
 
-void level_1::handle_sprites() {
+void level_2::handle_sprites() {
 
 }
 
 
 
-void level_1::update(float dt) {
+void level_2::update(float dt) {
 	//Player movement
 	if (paused) return;
 
@@ -1105,7 +1200,7 @@ void level_1::update(float dt) {
 	draw_world();
 }
 
-std::priority_queue<target_entity> level_1::get_targets(float x, float y, float a, bool player_only) {
+std::priority_queue<target_entity> level_2::get_targets(float x, float y, float a, bool player_only) {
 	float at = tan(a);
 	float dx, dy, cx, cy, wall_d = 5000000;
 
@@ -1239,7 +1334,7 @@ std::priority_queue<target_entity> level_1::get_targets(float x, float y, float 
 	return target_list;
 }
 
-void level_1::player_animator(float dt) {
+void level_2::player_animator(float dt) {
 	if (weapon_cooldown) {
 		weapon_anim_timer += dt;
 
@@ -1296,7 +1391,7 @@ void level_1::player_animator(float dt) {
 	}
 }
 
-void level_1::handle_player_shot() {
+void level_2::handle_player_shot() {
 	if (weapon_swapping) return;
 
 	if (!weapon_cooldown) {
@@ -1353,7 +1448,7 @@ void level_1::handle_player_shot() {
 	}
 }
 
-std::vector<colider*> level_1::get_objs(float x, float y, float z, float radius) {
+std::vector<colider*> level_2::get_objs(float x, float y, float z, float radius) {
 	int inc = 1;
 	for (auto obj = solid_obj_list.begin(); obj != solid_obj_list.end(); obj += inc) {
 		if (inc == 0) inc = 1;
@@ -1395,14 +1490,14 @@ std::vector<colider*> level_1::get_objs(float x, float y, float z, float radius)
 	return obj_list;
 }
 
-void level_1::handle_explosion(float x, float y, float z, float radius, int damage) {
+void level_2::handle_explosion(float x, float y, float z, float radius, int damage) {
 	std::vector<colider*> objs = get_objs(x, y, z, radius);
 	for (auto obj : objs) {
 		obj -> handle_collision(damage);
 	}
 }
 
-void level_1::update_hp_text() {
+void level_2::update_hp_text() {
 	if (hp_tv == player_data.health) return;
 	hp_tv = min(999, player_data.health);
 	
@@ -1418,7 +1513,7 @@ void level_1::update_hp_text() {
 	hp_tv = player_data.health;
 }
 
-void level_1::update_ammo_text() {
+void level_2::update_ammo_text() {
 	if (ammo_tv == player_data.health) return;
 	ammo_tv = min(999, w_ammo[weapon_id]);
 
@@ -1439,7 +1534,7 @@ void level_1::update_ammo_text() {
 	hp_tv = w_ammo[weapon_id];
 }
 
-void level_1::update_armor_text() {
+void level_2::update_armor_text() {
 	if (armor_tv == player_data.armor) return;
 	armor_tv = min(999, player_data.armor);
 
@@ -1455,7 +1550,7 @@ void level_1::update_armor_text() {
 	armor_tv = player_data.armor;
 }
 
-void level_1::handle_ammo(int type, int amount) {
+void level_2::handle_ammo(int type, int amount) {
 	items_collected++;
 
 	if (type == -1) {
@@ -1466,7 +1561,7 @@ void level_1::handle_ammo(int type, int amount) {
 	AudioEngine::play2d("audio/item/item.mp3");
 }
 
-void level_1::handle_healing(int type, int amount) {
+void level_2::handle_healing(int type, int amount) {
 	items_collected++;
 
 	if (type == 0) player_data.health += amount;
@@ -1475,7 +1570,7 @@ void level_1::handle_healing(int type, int amount) {
 	AudioEngine::play2d("audio/item/item.mp3");
 }
 
-void level_1::handle_weapon(int type) {
+void level_2::handle_weapon(int type) {
 	items_collected++;
 
 	weapon_unlocked[type] = 1;
@@ -1483,7 +1578,7 @@ void level_1::handle_weapon(int type) {
 	AudioEngine::play2d("audio/item/weapon.mp3");
 }
 
-void level_1::swap_weapon(int id) {
+void level_2::swap_weapon(int id) {
 	if (weapon_id != id && !weapon_cooldown && !weapon_swapping && weapon_unlocked[id]) {
 		weapon_swapping = 1;
 		weapon_id = id;
@@ -1492,28 +1587,19 @@ void level_1::swap_weapon(int id) {
 	}
 }
 
-void level_1::add_to_solid(colider* obj) {
+void level_2::add_to_solid(colider* obj) {
 	solid_obj_list.push_back(obj);
 }
 
-void level_1::add_to_draw(draw_obj* obj) {
+void level_2::add_to_draw(draw_obj* obj) {
 	draw_list.push_back(obj);
 }
 
-void level_1::add_to_update(entity* obj) {
+void level_2::add_to_update(entity* obj) {
 	update_list.push_back(obj);
 }
 
-void level_1::show_stat_menu() {
-	//Set up player data for next level
-	save_d::parmor = player_data.armor;
-	save_d::phealth = player_data.health;
-
-	save_d::shot_gun = weapon_unlocked[2];
-
-	save_d::ammo_pistol = w_ammo[1];
-	save_d::ammo_sgun = w_ammo[2];
-
+void level_2::show_stat_menu() {
 	float killsp = (float)player_kills / (float)total_kills * 100;
 	float itemp = (float)items_collected / (float)total_items * 100;
 
@@ -1528,7 +1614,7 @@ void level_1::show_stat_menu() {
 	}
 
 	auto next = MenuItemImage::create("menu/next_level.png", "menu/next_level_s.png", [](Ref* psender) {
-		Director::getInstance()->replaceScene(level_2::create());
+		//Go to next level :)
 
 		AudioEngine::play2d("audio/item/item.mp3");
 	});
@@ -1573,15 +1659,15 @@ void level_1::show_stat_menu() {
 	gl_view->set_raw_input(false);
 }
 
-void level_1::show_defeat_menu() {
+void level_2::show_defeat_menu() {
 	auto retry = MenuItemImage::create("menu/retry.png", "menu/retry_s.png", [](Ref* psender) {
-		Director::getInstance()->replaceScene(level_1::create());
+		Director::getInstance()->replaceScene(level_2::create());
 
 		AudioEngine::play2d("audio/item/item.mp3");
 	});
 	retry->setPosition(SCREEN_WIDTH / 2, 7 * SCREEN_HEIGHT / 10);
 
-	auto main_menu = MenuItemImage::create("menu/main_menu.png", "menu/main_menu_s.png", CC_CALLBACK_1(level_1::menu_callback, this));
+	auto main_menu = MenuItemImage::create("menu/main_menu.png", "menu/main_menu_s.png", CC_CALLBACK_1(level_2::menu_callback, this));
 	main_menu->setPosition(SCREEN_WIDTH/ 2, 4 * SCREEN_HEIGHT / 10);
 
 
@@ -1593,11 +1679,11 @@ void level_1::show_defeat_menu() {
 	gl_view->set_raw_input(false);
 }
 
-void level_1::add_kill() {
+void level_2::add_kill() {
 	player_kills++;
 }
 
-void level_1::handle_key(int type) {
-	if (type == 0) player_data.red_key;
-	else if (type == 1) player_data.blue_key;
+void level_2::handle_key(int type) {
+	if (type == 0) player_data.red_key = 1;
+	else if (type == 1) player_data.blue_key = 1;
 }
