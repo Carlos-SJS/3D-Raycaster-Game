@@ -233,10 +233,6 @@ bool level_3::init() {
 	draw_list.push_back((draw_obj*)k);
 	update_list.push_back((entity*)k);
 
-	k = key_item::create(2.5, 1.5, 0, this);
-	draw_list.push_back((draw_obj*)k);
-	update_list.push_back((entity*)k);
-
 	auto ab = ammo_item::create(18.5, 4.5, 0, 25, this);
 	draw_list.push_back((draw_obj*)ab);
 	update_list.push_back((entity*)ab);
