@@ -73,6 +73,9 @@
     <ClCompile Include="Classes\Sprites\items\key.cpp">
       <Filter>Source Files\Classes\Sprites\items</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Scenes\level_3.cpp">
+      <Filter>Source Files\Classes\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.h">
@@ -851,6 +854,9 @@
     </ClInclude>
     <ClInclude Include="Classes\Sprites\items\key.h">
       <Filter>Source Files\Classes\Sprites\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Scenes\level_3.h">
+      <Filter>Source Files\Classes\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

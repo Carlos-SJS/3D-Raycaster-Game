@@ -115,8 +115,8 @@ bool zombie::update(float dt, player* pdata, std::vector<std::vector<int>> &map)
 
 				walking = 1;
 
-				if (map[(int)y][(int)(x - 1.4 * dt * (dx / (abs(dx) + abs(dy))))] == 0) x -= 1.0 * dt * (dx / (abs(dx) + abs(dy)));
-				if (map[(int)(y - 1.4 * dt * (dy / (abs(dx) + abs(dy))))][(int)x] == 0) y -= 1.0 * dt * (dy / (abs(dx) + abs(dy)));
+				if (map[(int)y][(int)(x - 1.4 * dt * (dx / (abs(dx) + abs(dy))))] == 0 && manager->get_objs(x- 1.0 * dt * (dx / (abs(dx) + abs(dy))), y, 0, .5).size() == 1) x -= 1.0 * dt * (dx / (abs(dx) + abs(dy)));
+				if (map[(int)(y - 1.4 * dt * (dy / (abs(dx) + abs(dy))))][(int)x] == 0 && manager->get_objs(x, y- 1.0 * dt * (dy / (abs(dx) + abs(dy))), 0, .5).size() == 1) y -= 1.0 * dt * (dy / (abs(dx) + abs(dy)));
 
 				sprite->set_position(x, y);
 			}
