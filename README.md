@@ -9,6 +9,15 @@ The game has 3 different levels, with diferent types of monsters, and en each le
 You can download the game here: https://drive.google.com/file/d/1AcV3NxiTfHaIwCNfO6HLg4hjpgBfGnhH/view?usp=sharing
 To run the game, extraxt the zip file and run the Duum.exe file, and do not delete any of the files attached, since those are required by the game to work.
 
+Controls
+- WASD move arround
+- Mouse move camera
+- Mouse left click shoot/attack
+- 1 Fist
+- 2 Pistol
+- 3 Shotgun (when unlocked)
+- ESC pause
+
 Sprites:
 - Retro Texture Pack (little-martian): https://little-martian.itch.io/retro-texture-pack
 - DoomII sprites (Id software): http://www.wolfensteingoodies.com/archives/olddoom/music.htm
