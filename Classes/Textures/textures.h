@@ -99,7 +99,7 @@
 #include "texture_97.h"
 #include "texture_98.h"
 
-int* textures[] = {
+static int* textures[] = {
 	texture_1,
 	texture_2,
 	texture_3,

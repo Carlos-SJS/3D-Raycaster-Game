@@ -39,7 +39,7 @@ private:
 	float stun_time = 0;
 
 	float  angle_to_player = 0;
-	float lplayerx=0, lplayery=0;
+	float lplayerx=-1, lplayery=-1;
 
 	bool player_s = 0;
 	float player_sight_counter = 0;

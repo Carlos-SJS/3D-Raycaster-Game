@@ -179,7 +179,7 @@ void imp::animator(float dt) {
 		}
 	}
 	else if (aiming) {
-		if (animation_time > .2) {
+		if (animation_time > .1) {
 			shooting = 1;
 
 			auto proj = imp_projectile::create(x, y, .4, angle_to_player, manager);
@@ -197,7 +197,7 @@ void imp::animator(float dt) {
 	else if (shooting) {
 		if (animation_time > 1.6) {
 			shooting = 0;
-			cooldown = 3;
+			cooldown = 2.4;
 
 			sprite->set_texture(imp_data::walk1);
 		}

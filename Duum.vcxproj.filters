@@ -58,6 +58,12 @@
     <ClCompile Include="Classes\Interactables\terminal.cpp">
       <Filter>Source Files\Classes\Interactables</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Scenes\level_1.cpp">
+      <Filter>Source Files\Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Textures\textures.cpp">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\Classes\AppDelegate.h">
@@ -813,6 +819,21 @@
     <ClInclude Include="Classes\Interactables\terminal.h">
       <Filter>Source Files\Classes\Interactables</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Scenes\level_1.h">
+      <Filter>Source Files\Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_95.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_96.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_97.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Textures\texture_98.h">
+      <Filter>Source Files\Classes\Textures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="G:\Mi unidad\Up\Programacion Avanzada\Proyecto final\Duum\CMakeLists.txt" />
@@ -903,6 +924,9 @@
     </Filter>
     <Filter Include="Source Files\Classes\Interactables">
       <UniqueIdentifier>{a99b4c7c-db65-4530-983a-c41cde4ff83a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\Scenes">
+      <UniqueIdentifier>{2151f989-0efc-443e-aa31-008b8bade9ed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

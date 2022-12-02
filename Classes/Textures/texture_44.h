@@ -1,5 +1,5 @@
 #pragma once
-int texture_44[] = {
+static int texture_44[] = {
 59,
 41,
 33,

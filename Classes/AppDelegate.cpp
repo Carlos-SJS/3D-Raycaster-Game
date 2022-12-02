@@ -25,6 +25,7 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 #include "TestScene.h"
+#include "Scenes/level_1.h"
 
 #include "GameData.h"
 
@@ -113,7 +114,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = TestScene::createScene();
+    auto scene = level_1::createScene();
 
     // run
     director->runWithScene(scene);
@@ -126,7 +127,7 @@ void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 
 #if USE_AUDIO_ENGINE
-    //AudioEngine::pauseAll();
+    AudioEngine::pauseAll();
 #endif
 }
 
@@ -135,6 +136,6 @@ void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
 #if USE_AUDIO_ENGINE
-    //AudioEngine::resumeAll();
+    AudioEngine::resumeAll();
 #endif
 }

@@ -128,6 +128,8 @@ bool zombie::update(float dt, player* pdata, std::vector<std::vector<int>> &map)
 			else player_sight_counter = (float)(rand()%700)/1000.0;
 		}
 		else {
+			if (lplayerx == -1 || lplayery == -1) goto ignore_stuff;
+
 			walking = 1;
 			aim = 0;
 
