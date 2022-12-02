@@ -41,43 +41,49 @@ bool MainMenu::init()
     logo->setPosition(visibleSize.width/2, 3*visibleSize.height/4);
     this->addChild(logo, 0);
 
-    AudioEngine::preload("audio/music/la_grange.mp3");
+    
+    
+    if (AudioEngine::getPlayingAudioCount() == 0) {
+        AudioEngine::preload("audio/music/la_grange.mp3");
 
-    AudioEngine::preload("audio/misc/barrel.mp3");
-    AudioEngine::preload("audio/misc/door_open.mp3");
-    AudioEngine::preload("audio/misc/target.mp3");
+        AudioEngine::preload("audio/misc/barrel.mp3");
+        AudioEngine::preload("audio/misc/door_open.mp3");
+        AudioEngine::preload("audio/misc/target.mp3");
 
-    AudioEngine::preload("audio/weapon/punch.mp3");
-    AudioEngine::preload("audio/weapon/punch_fail.mp3");
-    AudioEngine::preload("audio/weapon/pistol.mp3");
-    AudioEngine::preload("audio/weapon/shotgun.mp3");
+        AudioEngine::preload("audio/weapon/punch.mp3");
+        AudioEngine::preload("audio/weapon/punch_fail.mp3");
+        AudioEngine::preload("audio/weapon/pistol.mp3");
+        AudioEngine::preload("audio/weapon/shotgun.mp3");
 
-    AudioEngine::preload("audio/item/item.mp3");
-    AudioEngine::preload("audio/item/weaon.mp3");
+        AudioEngine::preload("audio/item/item.mp3");
+        AudioEngine::preload("audio/item/weaon.mp3");
 
-    AudioEngine::preload("audio/monster/zombie_near.mp3");
-    AudioEngine::preload("audio/monster/zombie_hurt.mp3");
-    AudioEngine::preload("audio/monster/zombie_near.mp3");
-    AudioEngine::preload("audio/monster/imp_death.mp3");
-    AudioEngine::preload("audio/monster/imp_hurt.mp3");
-    AudioEngine::preload("audio/monster/imp_attack.mp3");
-    AudioEngine::preload("audio/monster/impp_explode.mp3");
-    AudioEngine::preload("audio/monster/cacodemon_hurt.mp3");
-    AudioEngine::preload("audio/monster/cacodemon_death.mp3");
-    AudioEngine::preload("audio/monster/cacodemon_attack.mp3");
-    AudioEngine::preload("audio/monster/cproj_explode.mp3");
+        AudioEngine::preload("audio/monster/zombie_near.mp3");
+        AudioEngine::preload("audio/monster/zombie_hurt.mp3");
+        AudioEngine::preload("audio/monster/zombie_near.mp3");
+        AudioEngine::preload("audio/monster/imp_death.mp3");
+        AudioEngine::preload("audio/monster/imp_hurt.mp3");
+        AudioEngine::preload("audio/monster/imp_attack.mp3");
+        AudioEngine::preload("audio/monster/impp_explode.mp3");
+        AudioEngine::preload("audio/monster/cacodemon_hurt.mp3");
+        AudioEngine::preload("audio/monster/cacodemon_death.mp3");
+        AudioEngine::preload("audio/monster/cacodemon_attack.mp3");
+        AudioEngine::preload("audio/monster/cproj_explode.mp3");
 
-    AudioEngine::preload("audio/player/hurt .mp3");
-    AudioEngine::preload("audio/player/death.mp3");
+        AudioEngine::preload("audio/player/hurt .mp3");
+        AudioEngine::preload("audio/player/death.mp3");
 
-    AudioEngine::setMaxAudioInstance(30);
-    int music_id = AudioEngine::play2d("audio/music/la_grange.mp3", 0, .6);
-    AudioEngine::setFinishCallback(music_id, [](int id, const std::string& s) {
-        int music_id = AudioEngine::play2d("audio/music/enemy.mp3", 0, .6);
+        AudioEngine::setMaxAudioInstance(30);
+
+        int music_id = AudioEngine::play2d("audio/music/la_grange.mp3", 0, .6);
         AudioEngine::setFinishCallback(music_id, [](int id, const std::string& s) {
-            AudioEngine::play2d("audio/music/running_from_evil.mp3", 0, .6);
+            int music_id = AudioEngine::play2d("audio/music/enemy.mp3", 0, .6);
+            AudioEngine::setFinishCallback(music_id, [](int id, const std::string& s) {
+                AudioEngine::play2d("audio/music/running_from_evil.mp3", 0, .6);
+            });
         });
-    });
+    }
+
 
     return true;
 }

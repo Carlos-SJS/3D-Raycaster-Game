@@ -5,6 +5,8 @@
 #include "Sprites/sprites.h"
 #include "GameData.h"
 
+#include "MainMenu.h"
+
 #include "Interactables/door.h"
 #include "Interactables/terminal.h"
 
@@ -255,6 +257,13 @@ bool level_1::init() {
 	death_effect->setVisible(0);
 	this->addChild(death_effect, 10);
 
+	pause_effect = Sprite::create("menu/dark_bg.png");
+	pause_effect->setScale((float)SCREEN_WIDTH / death_effect->getContentSize().width, (float)SCREEN_HEIGHT / death_effect->getContentSize().height);
+	pause_effect->setAnchorPoint(Vec2(0, 0));
+	pause_effect->setPosition(Vec2(0, 0));
+	pause_effect->setVisible(0);
+	this->addChild(pause_effect, 18);
+
 	face_s = Sprite::create("faces/100f.png");
 	face_s->setScale(sX, sY);
 	face_s->setAnchorPoint(Vec2(0, 0));
@@ -340,9 +349,34 @@ bool level_1::init() {
 	armor_text[3]->setPosition(st + 3 * sp, yp);
 	this->addChild(armor_text[3], 15);
 
+	auto resume = MenuItemImage::create("menu/resume.png", "menu/resume_s.png", CC_CALLBACK_1(level_1::resume_callback, this));
+	resume->setPosition(screen_size.width / 2, 7 * screen_size.height / 10);
+
+	auto main_menu = MenuItemImage::create("menu/main_menu.png", "menu/main_menu_s.png", CC_CALLBACK_1(level_1::menu_callback, this));
+	main_menu->setPosition(screen_size.width / 2, 4 * screen_size.height / 10);
+
+
+	menu = Menu::create(resume, main_menu, NULL);
+	menu->setPosition(Vec2::ZERO);
+	this->addChild(menu, 20);
+
+	menu->setVisible(0);
+
 	this->scheduleUpdate();
 	
 	return true;
+}
+
+void level_1:: resume_callback(Ref* psender) {
+	handle_unpause();
+	AudioEngine::play2d("audio/item/item.mp3");
+
+}
+
+void level_1::menu_callback(Ref* psender) {
+	Director::getInstance()->replaceScene(MainMenu::create());
+	AudioEngine::play2d("audio/item/item.mp3");
+
 }
 
 void level_1::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event){
@@ -383,8 +417,35 @@ void level_1::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event){
 			//Try and swap to shotgun
 			swap_weapon(2);
 			break;
+		case EventKeyboard::KeyCode::KEY_ESCAPE:
+			if (!paused) {
+				handle_pause();
+				//dysplay pause menu
+				pause_effect->setVisible(1);
+				menu->setVisible(1);
+			}
+			else handle_unpause();
+			break;
+			
 
 	}
+}
+
+void level_1::handle_pause() {
+	GLViewImpl* gl_view = (GLViewImpl*)Director::getInstance()->getOpenGLView();
+	gl_view->set_raw_input(false);
+
+	paused = 1;
+}
+
+void level_1::handle_unpause() {
+	GLViewImpl* gl_view = (GLViewImpl*)Director::getInstance()->getOpenGLView();
+	gl_view->set_raw_input(true);
+
+	menu->setVisible(0);
+	pause_effect->setVisible(0);
+
+	paused = 0;
 }
 
 void level_1::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
@@ -421,11 +482,13 @@ void level_1::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 }
 
 void level_1::onMouseMove(EventMouse* e){
-	delta_mouse -= e->getCursorX();
+	if (!paused)
+		delta_mouse -= e->getCursorX();
 }
 
 void level_1::onMouseDown(EventMouse* e) {
-	if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) handle_player_shot();
+	if(!paused)
+		if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) handle_player_shot();
 }
 
 std::string level_1::to_string(float f) {
@@ -907,6 +970,8 @@ void level_1::handle_sprites() {
 
 void level_1::update(float dt) {
 	//Player movement
+	if (paused) return;
+
 	handle_input(dt);
 
 	

@@ -99,6 +99,7 @@ private:
 	cocos2d::Sprite* crosshair;
 	cocos2d::Sprite* weapon_slot;
 	cocos2d::Sprite* death_effect;
+	cocos2d::Sprite* pause_effect;
 
 	cocos2d::Sprite* ammo_text[3];
 	cocos2d::Sprite* hp_text[4];
@@ -193,7 +194,16 @@ private:
 
 	void swap_weapon(int weapon);
 
+	bool paused = 0;
+
+	void handle_pause();
+	void handle_unpause();
+
+	cocos2d::Menu* menu;
+
 public:
+
+
 	std::vector<std::vector<int>> world_map {
 		{42,43,42,42,42,42,42,42, 0,29,24,29,24,23,29,24, 0, 0, 0, 0},
 		{42, 0, 0, 0, 0, 0, 0,42, 0,27, 0, 0, 0, 0, 0,29,23,29, 0, 0},
@@ -244,6 +254,9 @@ public:
 	void add_to_solid(colider* obj);
 	void add_to_draw(draw_obj* obj);
 	void add_to_update(entity* obj);
+
+	void resume_callback(Ref* psender);
+	void menu_callback(Ref* psdener);
 
 	CREATE_FUNC(level_1);
 };
