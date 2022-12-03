@@ -16,6 +16,7 @@ Controls
 - 1 Fist
 - 2 Pistol
 - 3 Shotgun (when unlocked)
+- Space interact with doors and the terminal
 - ESC pause
 
 Sprites:
