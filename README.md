@@ -6,7 +6,7 @@ This game is written in C++, using cocos2d-x game engine to help manage some stu
 
 The game has 3 different levels, with diferent types of monsters, and en each level you have to find a terminal to complete it and pass to the next level, but you have to be carefull not to lose all your hp while you are at it.
 
-You can download the game here: https://drive.google.com/file/d/1AcV3NxiTfHaIwCNfO6HLg4hjpgBfGnhH/view?usp=sharing
+You can download the game here [here](https://drive.google.com/file/d/14dcosHGsOrew1bLAXYNv7wkFBvESARvZ/view?usp=sharing).
 To run the game, extraxt the zip file and run the Duum.exe file, and do not delete any of the files attached, since those are required by the game to work.
 
 Controls
